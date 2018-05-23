@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Header(props) {
+function Header() {
   return (
     <header>
       <h1>watch</h1>
