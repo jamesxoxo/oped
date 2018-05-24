@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 class Search extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: ''
+      value: '',
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -18,6 +19,11 @@ class Search extends Component {
 
   handleSubmit(event) {
     this.props.onsearchSubmit(this.state.value);
+
+    if (this.props.location.pathname !== '/') {
+      this.props.history.push('/');
+    }
+
     event.preventDefault();
   }
 
@@ -39,7 +45,9 @@ class Search extends Component {
   }
 }
 Search.propTypes = {
-  onsearchSubmit: PropTypes.func.isRequired
+  onsearchSubmit: PropTypes.func.isRequired,
+  history: PropTypes.shape().isRequired,
+  location: PropTypes.shape().isRequired,
 };
 
-export default Search;
+export default withRouter(Search);

@@ -15,7 +15,7 @@ function Results({ items }) {
 }
 
 Results.propTypes = {
-  items: PropTypes.arrayOf(PropTypes.object).isRequired
+  items: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default Results;

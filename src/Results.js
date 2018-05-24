@@ -2,9 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import List from './List';
 
-function Results(props) {
-  const { error, loading, items } = props;
-
+function Results({ error, loading, items }) {
   if (loading) {
     return <div>Loading...</div>;
   } else if (error) {
@@ -15,15 +13,13 @@ function Results(props) {
 }
 
 Results.propTypes = {
-  error: PropTypes.shape({
-    error: PropTypes.string
-  }),
+  error: PropTypes.shape(),
   loading: PropTypes.bool.isRequired,
-  items: PropTypes.arrayOf(PropTypes.object).isRequired
+  items: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 Results.defaultProps = {
-  error: null
+  error: null,
 };
 
 export default Results;

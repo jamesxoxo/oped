@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Header from './Header';
 import Search from './Search';
 import Results from './Results';
+import Anime from './Anime';
 
 class App extends Component {
   constructor(props) {
@@ -10,7 +11,7 @@ class App extends Component {
     this.state = {
       error: null,
       loading: false,
-      items: []
+      items: [],
     };
 
     this.handleSearchSubmit = this.handleSearchSubmit.bind(this);
@@ -18,7 +19,7 @@ class App extends Component {
 
   handleSearchSubmit(value) {
     this.setState({
-      loading: true
+      loading: true,
     });
     fetch(`https://api.jikan.moe/search/anime/${value}/1`)
       .then(res => res.json())
@@ -26,15 +27,15 @@ class App extends Component {
         result => {
           this.setState({
             loading: false,
-            items: result.result
+            items: result.result,
           });
         },
         error => {
           this.setState({
             loading: false,
-            error
+            error,
           });
-        }
+        },
       );
   }
 
@@ -56,6 +57,7 @@ class App extends Component {
               />
             )}
           />
+          <Route path="/anime/:mal_id" component={Anime} />
         </div>
       </Router>
     );

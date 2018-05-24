@@ -7,17 +7,7 @@ function ListItem({ anime }) {
 }
 
 ListItem.propTypes = {
-  anime: PropTypes.shape({
-    mal_id: PropTypes.number,
-    url: PropTypes.string,
-    image_url: PropTypes.string,
-    title: PropTypes.string,
-    description: PropTypes.string,
-    type: PropTypes.string,
-    score: PropTypes.number,
-    episodes: PropTypes.number,
-    members: PropTypes.number
-  }).isRequired
+  anime: PropTypes.shape().isRequired,
 };
 
 export default ListItem;
