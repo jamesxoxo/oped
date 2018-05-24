@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import unescape from './unescape';
-import Tunes from './Tunes';
+import AnimeTunes from './AnimeTunes';
 
 function AnimeInfo({ anime, error }) {
   if (error) {
@@ -13,12 +13,12 @@ function AnimeInfo({ anime, error }) {
         <h3>{unescape(anime.title_japanese)}</h3>
         <div>
           <h4>Tunes</h4>
-          <Tunes
+          <AnimeTunes
             type="OP"
             tunes={anime.opening_theme}
             anime={{ english: anime.title, japanese: anime.title_japanese }}
           />
-          <Tunes
+          <AnimeTunes
             type="ED"
             tunes={anime.ending_theme}
             anime={{ english: anime.title, japanese: anime.title_japanese }}

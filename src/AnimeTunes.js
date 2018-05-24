@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import unescape from './unescape';
-import Tune from './Tune';
+import AnimeTune from './AnimeTune';
 
-function Tunes({ type, tunes, anime }) {
+function AnimeTunes({ type, tunes, anime }) {
   if (tunes.length) {
     return (
       <ul>
@@ -18,7 +18,7 @@ function Tunes({ type, tunes, anime }) {
 
           return (
             <li key={tune}>
-              <Tune
+              <AnimeTune
                 type={type}
                 number={index + 1}
                 title={title}
@@ -34,10 +34,10 @@ function Tunes({ type, tunes, anime }) {
   return <div>No {type}s found.</div>;
 }
 
-Tunes.propTypes = {
+AnimeTunes.propTypes = {
   type: PropTypes.string.isRequired,
   tunes: PropTypes.arrayOf(PropTypes.string).isRequired,
   anime: PropTypes.shape().isRequired,
 };
 
-export default Tunes;
+export default AnimeTunes;

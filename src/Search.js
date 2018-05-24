@@ -1,53 +1,57 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import SearchInput from './SearchInput';
 
 class Search extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      value: '',
-    };
 
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleSearchSubmit = this.handleSearchSubmit.bind(this);
   }
 
-  handleChange(event) {
-    this.setState({ value: event.target.value });
-  }
+  handleSearchSubmit(value) {
+    this.props.onSearchSubmit({
+      loading: true,
+    });
 
-  handleSubmit(event) {
-    this.props.onsearchSubmit(this.state.value);
+    fetch(`https://api.jikan.moe/search/anime/${value}/1`)
+      .then(res => res.json())
+      .then(
+        result => {
+          let state;
 
-    if (this.props.location.pathname !== '/') {
-      this.props.history.push('/');
-    }
+          if ('error' in result) {
+            state = {
+              loading: false,
+              error: {
+                message: result.error,
+              },
+            };
+          }
 
-    event.preventDefault();
+          state = {
+            loading: false,
+            items: result.result,
+          };
+
+          this.props.onSearchSubmit(state);
+        },
+        error => {
+          this.props.onSearchSubmit({
+            loading: false,
+            error,
+          });
+        },
+      );
   }
 
   render() {
-    return (
-      <form onSubmit={this.handleSubmit}>
-        <label htmlFor="search">
-          Search
-          <input
-            id="search"
-            type="text"
-            value={this.state.value}
-            onChange={this.handleChange}
-          />
-        </label>
-        <input type="submit" value="Submit" />
-      </form>
-    );
+    return <SearchInput onSearchSubmit={this.handleSearchSubmit} />;
   }
 }
+
 Search.propTypes = {
-  onsearchSubmit: PropTypes.func.isRequired,
-  history: PropTypes.shape().isRequired,
-  location: PropTypes.shape().isRequired,
+  onSearchSubmit: PropTypes.func.isRequired,
 };
 
-export default withRouter(Search);
+export default Search;

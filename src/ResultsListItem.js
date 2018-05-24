@@ -3,12 +3,12 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import unescape from './unescape';
 
-function ListItem({ anime }) {
+function ResultsListItem({ anime }) {
   return <Link to={`/anime/${anime.mal_id}`}>{unescape(anime.title)}</Link>;
 }
 
-ListItem.propTypes = {
+ResultsListItem.propTypes = {
   anime: PropTypes.shape().isRequired,
 };
 
-export default ListItem;
+export default ResultsListItem;

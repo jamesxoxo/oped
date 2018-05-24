@@ -17,35 +17,8 @@ class App extends Component {
     this.handleSearchSubmit = this.handleSearchSubmit.bind(this);
   }
 
-  handleSearchSubmit(value) {
-    this.setState({
-      loading: true,
-    });
-    fetch(`https://api.jikan.moe/search/anime/${value}/1`)
-      .then(res => res.json())
-      .then(
-        result => {
-          if ('error' in result) {
-            this.setState({
-              loading: false,
-              error: {
-                message: result.error,
-              },
-            });
-          } else {
-            this.setState({
-              loading: false,
-              items: result.result,
-            });
-          }
-        },
-        error => {
-          this.setState({
-            loading: false,
-            error,
-          });
-        },
-      );
+  handleSearchSubmit(state) {
+    this.setState(state);
   }
 
   render() {
@@ -53,7 +26,7 @@ class App extends Component {
       <Router>
         <div className="App">
           <Header />
-          <Search onsearchSubmit={this.handleSearchSubmit} />
+          <Search onSearchSubmit={this.handleSearchSubmit} />
           <Route
             exact
             path="/"

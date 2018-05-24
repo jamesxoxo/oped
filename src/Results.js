@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import List from './List';
+import ResultsList from './ResultsList';
 
 function Results({ error, loading, items }) {
   if (loading) {
@@ -9,7 +9,7 @@ function Results({ error, loading, items }) {
     return <div>Error: {error.message}</div>;
   }
 
-  return <List items={items} />;
+  return <ResultsList items={items} />;
 }
 
 Results.propTypes = {

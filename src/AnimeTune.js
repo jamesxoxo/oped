@@ -4,7 +4,7 @@ import youtubeSearch from 'youtube-search-promise';
 
 const API_KEY = 'AIzaSyDNS7Q_55JVp_k2lS85S36OIN1WuawqY84';
 
-class Tune extends Component {
+class AnimeTune extends Component {
   constructor(props) {
     super(props);
 
@@ -74,11 +74,11 @@ class Tune extends Component {
   }
 }
 
-Tune.propTypes = {
+AnimeTune.propTypes = {
   type: PropTypes.string.isRequired,
   number: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   anime: PropTypes.shape().isRequired,
 };
 
-export default Tune;
+export default AnimeTune;
