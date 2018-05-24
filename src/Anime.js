@@ -16,9 +16,17 @@ class Anime extends Component {
       .then(res => res.json())
       .then(
         result => {
-          this.setState({
-            anime: result,
-          });
+          if ('error' in result) {
+            this.setState({
+              error: {
+                message: result.error,
+              },
+            });
+          } else {
+            this.setState({
+              anime: result,
+            });
+          }
         },
         error => {
           this.setState({

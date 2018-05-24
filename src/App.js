@@ -25,10 +25,19 @@ class App extends Component {
       .then(res => res.json())
       .then(
         result => {
-          this.setState({
-            loading: false,
-            items: result.result,
-          });
+          if ('error' in result) {
+            this.setState({
+              loading: false,
+              error: {
+                message: result.error,
+              },
+            });
+          } else {
+            this.setState({
+              loading: false,
+              items: result.result,
+            });
+          }
         },
         error => {
           this.setState({

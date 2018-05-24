@@ -9,12 +9,20 @@ function AnimeInfo({ anime, error }) {
   } else if (anime) {
     return (
       <div>
-        <h2>{anime.title}</h2>
-        <h3>{anime.title_japanese}</h3>
+        <h2>{unescape(anime.title)}</h2>
+        <h3>{unescape(anime.title_japanese)}</h3>
         <div>
           <h4>Tunes</h4>
-          <Tunes type="OP" tunes={anime.opening_theme} anime={anime.title} />
-          <Tunes type="ED" tunes={anime.ending_theme} anime={anime.title} />
+          <Tunes
+            type="OP"
+            tunes={anime.opening_theme}
+            anime={{ english: anime.title, japanese: anime.title_japanese }}
+          />
+          <Tunes
+            type="ED"
+            tunes={anime.ending_theme}
+            anime={{ english: anime.title, japanese: anime.title_japanese }}
+          />
         </div>
         <p>{unescape(anime.synopsis)}</p>
         <dl>
@@ -24,9 +32,17 @@ function AnimeInfo({ anime, error }) {
           <dd>{anime.episodes}</dd>
           <dt>status</dt>
           <dd>{anime.status}</dd>
+          {/*
           <dt>aired</dt>
           <dd>
             {anime.aired.from} - {anime.aired.to}
+          </dd>
+          */}
+          <dt>aired</dt>
+          <dd>
+            {anime.aired.from !== anime.aired.to
+              ? `${anime.aired.from} - ${anime.aired.to}`
+              : anime.aired.from}
           </dd>
           <dt>duration</dt>
           <dd>{anime.duration}</dd>

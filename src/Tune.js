@@ -28,8 +28,29 @@ class Tune extends Component {
           return result;
         }
 
-        // Search for the OP/ED
-        return youtubeSearch(`${anime} ${type} ${number}`, options);
+        // Search for the top 3 OP/ED
+        return youtubeSearch(`"${anime.english}" ${type} ${number}`, {
+          ...options,
+          maxResults: 3,
+        });
+      })
+      .then(result => {
+        if (result.length > 1) {
+          // Find video titles that contain the name of the specific anime
+          const matched = result.filter(
+            video =>
+              video.title.toLowerCase().includes(anime.english.toLowerCase()) ||
+              video.title.toLowerCase().includes(anime.japanese.toLowerCase()),
+          );
+
+          if (matched.length) {
+            return matched;
+          }
+
+          return [result[0]];
+        }
+
+        return result;
       })
       .then(result => result[0].link)
       .then(result => {
@@ -56,7 +77,7 @@ Tune.propTypes = {
   type: PropTypes.string.isRequired,
   number: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
-  anime: PropTypes.string.isRequired,
+  anime: PropTypes.shape().isRequired,
 };
 
 export default Tune;
