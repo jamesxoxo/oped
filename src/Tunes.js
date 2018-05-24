@@ -11,8 +11,9 @@ function Tunes({ type, tunes, anime }) {
           const title = unescape(
             tune
               .replace(/#[0-9]+:? /, '')
-              .replace(/\(TV Broadcast:.*?\)/, '')
-              .replace(/\(eps? .*?\)/, ''),
+              .replace(/\(TV Broadcast[:;]?.*?\)/i, '')
+              .replace(/\(((TV|BD\/DVD): )?eps? .*?\)/i, '')
+              .replace(/\(Japanese version.*\)/i, ''),
           );
 
           return (

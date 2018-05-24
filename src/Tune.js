@@ -52,7 +52,7 @@ class Tune extends Component {
 
         return result;
       })
-      .then(result => result[0].link)
+      .then(result => result[0] && result[0].link)
       .then(result => {
         this.setState({ link: result });
       });
