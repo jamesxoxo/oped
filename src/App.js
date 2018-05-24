@@ -28,8 +28,7 @@ class App extends Component {
           <Header />
           <Search onSearchSubmit={this.handleSearchSubmit} />
           <Route
-            exact
-            path="/"
+            path="/results/:search"
             render={props => (
               <Results
                 {...props}

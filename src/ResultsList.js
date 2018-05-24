@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import ResultsListItem from './ResultsListItem';
 
 function ResultsList({ items }) {
+  // Todo: Maybe return null if no items
   return (
     <ul>
       {items.map(item => (

@@ -18,10 +18,13 @@ class SearchInput extends Component {
   }
 
   handleSubmit(event) {
-    this.props.onSearchSubmit(this.state.value);
+    const { value } = this.state;
+    const target = `/results/${value}`;
 
-    if (this.props.location.pathname !== '/') {
-      this.props.history.push('/');
+    this.props.onSearchSubmit(value);
+
+    if (this.props.location.pathname !== target) {
+      this.props.history.push(target);
     }
 
     event.preventDefault();
