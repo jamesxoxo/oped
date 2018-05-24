@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import unescape from './unescape';
 import Tunes from './Tunes';
 
 function AnimeInfo({ anime, error }) {
@@ -8,9 +9,14 @@ function AnimeInfo({ anime, error }) {
   } else if (anime) {
     return (
       <div>
-        <h2>{anime.title_english}</h2>
+        <h2>{anime.title}</h2>
         <h3>{anime.title_japanese}</h3>
-        <p dangerouslySetInnerHTML={{ __html: anime.synopsis }} />
+        <div>
+          <h4>Tunes</h4>
+          <Tunes type="OP" tunes={anime.opening_theme} anime={anime.title} />
+          <Tunes type="ED" tunes={anime.ending_theme} anime={anime.title} />
+        </div>
+        <p>{unescape(anime.synopsis)}</p>
         <dl>
           <dt>type</dt>
           <dd>{anime.type}</dd>
@@ -25,11 +31,6 @@ function AnimeInfo({ anime, error }) {
           <dt>duration</dt>
           <dd>{anime.duration}</dd>
         </dl>
-        <div>
-          <h4>Tunes</h4>
-          <Tunes type="OP" tunes={anime.opening_theme} />
-          <Tunes type="ED" tunes={anime.ending_theme} />
-        </div>
       </div>
     );
   }
