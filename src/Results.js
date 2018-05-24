@@ -5,10 +5,10 @@ import List from './List';
 function Results(props) {
   const { error, loading, items } = props;
 
-  if (error) {
-    return <div>Error: {error.message}</div>;
-  } else if (loading) {
+  if (loading) {
     return <div>Loading...</div>;
+  } else if (error) {
+    return <div>Error: {error.message}</div>;
   }
 
   return <List items={items} />;
