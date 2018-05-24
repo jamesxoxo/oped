@@ -19,6 +19,7 @@ class Tune extends Component {
       key: API_KEY,
       maxResults: 1,
       type: 'video',
+      videoEmbeddable: true,
     };
 
     // Search for the specific track title with artist

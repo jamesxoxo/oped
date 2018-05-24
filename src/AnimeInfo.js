@@ -32,12 +32,6 @@ function AnimeInfo({ anime, error }) {
           <dd>{anime.episodes}</dd>
           <dt>status</dt>
           <dd>{anime.status}</dd>
-          {/*
-          <dt>aired</dt>
-          <dd>
-            {anime.aired.from} - {anime.aired.to}
-          </dd>
-          */}
           <dt>aired</dt>
           <dd>
             {anime.aired.from !== anime.aired.to
