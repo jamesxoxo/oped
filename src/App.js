@@ -5,7 +5,7 @@ import Footer from './Footer';
 import Search from './Search';
 import Results from './Results';
 import Anime from './Anime';
-import Queue from './Queue';
+import Player from './Player';
 
 class App extends Component {
   constructor(props) {
@@ -69,7 +69,7 @@ class App extends Component {
               <Anime {...props} handleAddTune={this.handleAddTune} />
             )}
           />
-          <Queue queue={this.state.queue} />
+          <Player queue={this.state.queue} />
           <Footer />
         </div>
       </Router>
