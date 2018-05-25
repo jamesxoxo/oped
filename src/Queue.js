@@ -6,6 +6,7 @@ function Queue({ queue, handleRemove, handleSkipTo }) {
   return (
     <ul>
       {queue.map(tune => (
+        // Todo: Sort out better ids that actually work
         <li key={tune.id}>
           <QueueItem
             tune={tune}

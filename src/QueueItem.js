@@ -29,7 +29,7 @@ QueueItem.propTypes = {
 QueueItem.defaultProps = {
   tune: {
     image: 'http://via.placeholder.com/225x321',
-    anime: 'Nothing playing',
+    anime: '',
     title: 'Nothing playing',
   },
   controls: false,

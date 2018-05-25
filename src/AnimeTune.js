@@ -86,12 +86,12 @@ class AnimeTune extends Component {
     const text = `${this.props.type}${this.props.number}: ${this.props.title}`;
 
     if (!this.state.tune) {
-      return <span>{text}</span>;
+      return text;
     }
 
     return (
       <div>
-        <span>{text}</span>
+        <span title={this.state.tune.title}>{text}</span>
         <button onClick={this.handleAddAndPlayTune}>Play</button>
         <button onClick={this.handleAddTune}>Add</button>
       </div>
