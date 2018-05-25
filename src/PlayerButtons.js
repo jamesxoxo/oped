@@ -8,6 +8,7 @@ class PlayerButtons extends Component {
 
     this.handleClickPlay = this.handleClickPlay.bind(this);
     this.handleClickPause = this.handleClickPause.bind(this);
+    this.handleClickNext = this.handleClickNext.bind(this);
   }
 
   handleClickPlay() {
@@ -18,13 +19,17 @@ class PlayerButtons extends Component {
     this.props.handlePause();
   }
 
+  handleClickNext() {
+    this.props.handleNext();
+  }
+
   render() {
     return (
       <div>
         <button>Previous</button>
         <button onClick={this.handleClickPlay}>Play</button>
         <button onClick={this.handleClickPause}>Pause</button>
-        <button>Next</button>
+        <button onClick={this.handleClickNext}>Next</button>
       </div>
     );
   }
@@ -33,6 +38,7 @@ class PlayerButtons extends Component {
 PlayerButtons.propTypes = {
   handlePlay: PropTypes.func.isRequired,
   handlePause: PropTypes.func.isRequired,
+  handleNext: PropTypes.func.isRequired,
 };
 
 export default PlayerButtons;

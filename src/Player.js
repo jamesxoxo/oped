@@ -35,6 +35,7 @@ class Player extends Component {
         <PlayerControls
           handlePlay={this.handlePlay}
           handlePause={this.handlePause}
+          handleNext={this.props.handleNext}
         />
         <QueueItem tune={this.props.queue[0]} />
         <Queue queue={this.props.queue} />
@@ -45,6 +46,7 @@ class Player extends Component {
 
 Player.propTypes = {
   queue: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+  handleNext: PropTypes.func.isRequired,
 };
 
 export default Player;

@@ -34,6 +34,7 @@ class App extends Component {
 
     this.handleSearchSubmit = this.handleSearchSubmit.bind(this);
     this.handleAddTune = this.handleAddTune.bind(this);
+    this.handleNextTune = this.handleNextTune.bind(this);
   }
 
   handleSearchSubmit(state) {
@@ -43,6 +44,12 @@ class App extends Component {
   handleAddTune(tune) {
     this.setState({
       queue: [tune, ...this.state.queue],
+    });
+  }
+
+  handleNextTune() {
+    this.setState({
+      queue: this.state.queue.slice(1),
     });
   }
 
@@ -69,7 +76,7 @@ class App extends Component {
               <Anime {...props} handleAddTune={this.handleAddTune} />
             )}
           />
-          <Player queue={this.state.queue} />
+          <Player queue={this.state.queue} handleNext={this.handleNextTune} />
           <Footer />
         </div>
       </Router>

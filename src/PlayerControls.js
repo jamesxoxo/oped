@@ -14,6 +14,7 @@ class PlayerControls extends Component {
         <PlayerButtons
           handlePlay={this.props.handlePlay}
           handlePause={this.props.handlePause}
+          handleNext={this.props.handleNext}
         />
       </div>
     );
@@ -23,6 +24,7 @@ class PlayerControls extends Component {
 PlayerControls.propTypes = {
   handlePlay: PropTypes.func.isRequired,
   handlePause: PropTypes.func.isRequired,
+  handleNext: PropTypes.func.isRequired,
 };
 
 export default PlayerControls;
