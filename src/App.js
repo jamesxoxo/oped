@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Header from './Header';
+import Footer from './Footer';
 import Search from './Search';
 import Results from './Results';
 import Anime from './Anime';
@@ -28,7 +29,7 @@ class App extends Component {
           <Header />
           <Search onSearchSubmit={this.handleSearchSubmit} />
           <Route
-            path="/results/:search"
+            path="/results"
             render={props => (
               <Results
                 {...props}
@@ -39,6 +40,7 @@ class App extends Component {
             )}
           />
           <Route path="/anime/:mal_id" component={Anime} />
+          <Footer />
         </div>
       </Router>
     );

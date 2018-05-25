@@ -10,6 +10,8 @@ class Search extends Component {
   }
 
   handleSearchSubmit(value) {
+    if (!value.trim()) return;
+
     this.props.onSearchSubmit({
       loading: true,
     });
@@ -18,7 +20,10 @@ class Search extends Component {
       .then(res => res.json())
       .then(
         result => {
-          let state;
+          let state = {
+            loading: false,
+            items: result.result,
+          };
 
           if ('error' in result) {
             state = {
@@ -28,11 +33,6 @@ class Search extends Component {
               },
             };
           }
-
-          state = {
-            loading: false,
-            items: result.result,
-          };
 
           this.props.onSearchSubmit(state);
         },

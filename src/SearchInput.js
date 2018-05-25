@@ -6,11 +6,15 @@ class SearchInput extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: '',
+      value: decodeURI(this.props.location.search.replace('?search=', '')),
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  componentDidMount() {
+    this.props.onSearchSubmit(this.state.value);
   }
 
   handleChange(event) {
@@ -19,14 +23,9 @@ class SearchInput extends Component {
 
   handleSubmit(event) {
     const { value } = this.state;
-    const target = `/results/${value}`;
 
     this.props.onSearchSubmit(value);
-
-    if (this.props.location.pathname !== target) {
-      this.props.history.push(target);
-    }
-
+    this.props.history.push(`/results?search=${value}`);
     event.preventDefault();
   }
 
