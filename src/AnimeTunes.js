@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import unescape from './unescape';
 import AnimeTune from './AnimeTune';
 
-function AnimeTunes({ type, tunes, anime, handleAddTune }) {
+function AnimeTunes({ type, tunes, anime, image, handleAddTune }) {
   if (tunes.length) {
     return (
       <ul>
@@ -24,6 +24,7 @@ function AnimeTunes({ type, tunes, anime, handleAddTune }) {
                 number={index + 1}
                 title={title}
                 anime={anime}
+                image={image}
                 handleAddTune={handleAddTune}
               />
             </li>
@@ -40,6 +41,7 @@ AnimeTunes.propTypes = {
   type: PropTypes.string.isRequired,
   tunes: PropTypes.arrayOf(PropTypes.string).isRequired,
   anime: PropTypes.shape().isRequired,
+  image: PropTypes.string.isRequired,
   handleAddTune: PropTypes.func.isRequired,
 };
 

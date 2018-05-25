@@ -11,6 +11,7 @@ function AnimeInfo({ anime, error, handleAddTune }) {
 
     return (
       <article>
+        <img src={anime.image_url} alt={unescape(anime.title)} />
         <h2>{unescape(anime.title)}</h2>
         <h3>{unescape(anime.title_japanese)}</h3>
         <div>
@@ -19,12 +20,14 @@ function AnimeInfo({ anime, error, handleAddTune }) {
             type="OP"
             tunes={anime.opening_theme}
             anime={{ english: anime.title, japanese: anime.title_japanese }}
+            image={anime.image_url}
             handleAddTune={handleAddTune}
           />
           <AnimeTunes
             type="ED"
             tunes={anime.ending_theme}
             anime={{ english: anime.title, japanese: anime.title_japanese }}
+            image={anime.image_url}
             handleAddTune={handleAddTune}
           />
         </div>

@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import youtubeSearch from 'youtube-search-promise';
 
@@ -61,7 +61,12 @@ class AnimeTune extends Component {
   }
 
   handleAddTune() {
-    this.props.handleAddTune(this.state.tune.id);
+    this.props.handleAddTune({
+      id: this.state.tune.id,
+      image: this.props.image,
+      anime: this.props.anime.english,
+      title: this.props.title,
+    });
   }
 
   render() {
@@ -72,11 +77,11 @@ class AnimeTune extends Component {
     }
 
     return (
-      <Fragment>
+      <div>
         <span>{text}</span>
-        <button>Play</button>
+        {/* <button>Play</button> */}
         <button onClick={this.handleAddTune}>Add</button>
-      </Fragment>
+      </div>
     );
   }
 }
@@ -86,6 +91,7 @@ AnimeTune.propTypes = {
   number: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   anime: PropTypes.shape().isRequired,
+  image: PropTypes.string.isRequired,
   handleAddTune: PropTypes.func.isRequired,
 };
 
