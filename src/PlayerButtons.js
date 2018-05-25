@@ -26,7 +26,7 @@ class PlayerButtons extends Component {
   render() {
     return (
       <div>
-        <button>Previous</button>
+        {/* Todo: <button>Previous</button> */}
         <button onClick={this.handleClickPlay}>Play</button>
         <button onClick={this.handleClickPause}>Pause</button>
         <button onClick={this.handleClickNext}>Next</button>

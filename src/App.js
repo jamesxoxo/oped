@@ -34,6 +34,7 @@ class App extends Component {
 
     this.handleSearchSubmit = this.handleSearchSubmit.bind(this);
     this.handleAddTune = this.handleAddTune.bind(this);
+    this.handleRemoveTune = this.handleRemoveTune.bind(this);
     this.handleNextTune = this.handleNextTune.bind(this);
   }
 
@@ -43,7 +44,13 @@ class App extends Component {
 
   handleAddTune(tune) {
     this.setState({
-      queue: [tune, ...this.state.queue],
+      queue: [...this.state.queue, tune],
+    });
+  }
+
+  handleRemoveTune(id) {
+    this.setState({
+      queue: this.state.queue.filter(tune => tune.id !== id),
     });
   }
 
@@ -76,7 +83,11 @@ class App extends Component {
               <Anime {...props} handleAddTune={this.handleAddTune} />
             )}
           />
-          <Player queue={this.state.queue} handleNext={this.handleNextTune} />
+          <Player
+            queue={this.state.queue}
+            handleRemove={this.handleRemoveTune}
+            handleNext={this.handleNextTune}
+          />
           <Footer />
         </div>
       </Router>

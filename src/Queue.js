@@ -2,12 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import QueueItem from './QueueItem';
 
-function Queue({ queue }) {
+function Queue({ queue, handleRemove }) {
   return (
     <ul>
       {queue.map(tune => (
         <li key={tune.id}>
-          <QueueItem tune={tune} />
+          <QueueItem tune={tune} controls handleRemove={handleRemove} />
         </li>
       ))}
     </ul>
@@ -16,6 +16,7 @@ function Queue({ queue }) {
 
 Queue.propTypes = {
   queue: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+  handleRemove: PropTypes.func.isRequired,
 };
 
 export default Queue;

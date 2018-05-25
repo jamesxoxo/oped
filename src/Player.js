@@ -46,7 +46,10 @@ class Player extends Component {
           handleNext={this.props.handleNext}
         />
         <QueueItem tune={tune} />
-        <Queue queue={this.props.queue} />
+        <Queue
+          queue={this.props.queue}
+          handleRemove={this.props.handleRemove}
+        />
       </div>
     );
   }
@@ -54,6 +57,7 @@ class Player extends Component {
 
 Player.propTypes = {
   queue: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+  handleRemove: PropTypes.func.isRequired,
   handleNext: PropTypes.func.isRequired,
 };
 
