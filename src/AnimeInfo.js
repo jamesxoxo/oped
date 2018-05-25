@@ -7,8 +7,10 @@ function AnimeInfo({ anime, error }) {
   if (error) {
     return <div>Error: {error.message}</div>;
   } else if (anime) {
+    const dateToLocaleDate = date => new Date(date).toLocaleDateString('en-GB');
+
     return (
-      <div>
+      <article>
         <h2>{unescape(anime.title)}</h2>
         <h3>{unescape(anime.title_japanese)}</h3>
         <div>
@@ -24,7 +26,9 @@ function AnimeInfo({ anime, error }) {
             anime={{ english: anime.title, japanese: anime.title_japanese }}
           />
         </div>
-        <p>{unescape(anime.synopsis)}</p>
+        <p>
+          {unescape(anime.synopsis).replace('[Written by MAL Rewrite]', '')}
+        </p>
         <dl>
           <dt>type</dt>
           <dd>{anime.type}</dd>
@@ -35,13 +39,13 @@ function AnimeInfo({ anime, error }) {
           <dt>aired</dt>
           <dd>
             {anime.aired.from !== anime.aired.to
-              ? `${anime.aired.from} - ${anime.aired.to}`
-              : anime.aired.from}
+              ? `${dateToLocaleDate(anime.aired.from)} - ${dateToLocaleDate(
+                  anime.aired.to,
+                )}`
+              : dateToLocaleDate(anime.aired.from)}
           </dd>
-          <dt>duration</dt>
-          <dd>{anime.duration}</dd>
         </dl>
-      </div>
+      </article>
     );
   }
 
