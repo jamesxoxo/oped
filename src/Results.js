@@ -1,4 +1,5 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import ResultsList from './ResultsList';
 
@@ -7,9 +8,11 @@ function Results({ error, loading, items }) {
     return <div>Loading...</div>;
   } else if (error) {
     return <div>Error: {error.message}</div>;
+  } else if (items.length) {
+    return <ResultsList items={items} />;
   }
 
-  return <ResultsList items={items} />;
+  return <Redirect to="/" />;
 }
 
 Results.propTypes = {
