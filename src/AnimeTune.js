@@ -13,6 +13,7 @@ class AnimeTune extends Component {
     };
 
     this.handleAddTune = this.handleAddTune.bind(this);
+    this.handleAddAndPlayTune = this.handleAddAndPlayTune.bind(this);
   }
 
   componentDidMount() {
@@ -69,6 +70,18 @@ class AnimeTune extends Component {
     });
   }
 
+  handleAddAndPlayTune() {
+    this.props.handleAddTune(
+      {
+        id: this.state.tune.id,
+        image: this.props.image,
+        anime: this.props.anime.english,
+        title: this.props.title,
+      },
+      true,
+    );
+  }
+
   render() {
     const text = `${this.props.type}${this.props.number}: ${this.props.title}`;
 
@@ -79,7 +92,7 @@ class AnimeTune extends Component {
     return (
       <div>
         <span>{text}</span>
-        {/* <button>Play</button> */}
+        <button onClick={this.handleAddAndPlayTune}>Play</button>
         <button onClick={this.handleAddTune}>Add</button>
       </div>
     );

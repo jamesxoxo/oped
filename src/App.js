@@ -54,10 +54,17 @@ class App extends Component {
     this.setState(state);
   }
 
-  handleAddTune(tune) {
-    this.setState({
-      queue: [...this.state.queue, tune],
-    });
+  handleAddTune(tune, play) {
+    if (play) {
+      this.setState({
+        queue: [tune, ...this.state.queue],
+        playing: true,
+      });
+    } else {
+      this.setState({
+        queue: [...this.state.queue, tune],
+      });
+    }
   }
 
   handleRemoveTune(id) {
@@ -86,6 +93,7 @@ class App extends Component {
 
     this.setState({
       queue: this.state.queue.filter((tune, i) => i >= index),
+      playing: true,
     });
   }
 

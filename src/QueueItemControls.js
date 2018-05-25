@@ -21,7 +21,7 @@ class QueueItemControls extends Component {
   render() {
     return (
       <div>
-        <button onClick={this.handleClickSkip}>Skip</button>
+        <button onClick={this.handleClickSkip}>Play</button>
         <button onClick={this.handleClickRemove}>Remove</button>
       </div>
     );
