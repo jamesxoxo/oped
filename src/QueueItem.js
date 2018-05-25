@@ -7,8 +7,6 @@ function QueueItem({ tune }) {
       <img src={tune.image} alt={tune.anime} />
       <div>{tune.anime}</div>
       <div>{tune.title}</div>
-      {/* tune.id */}
-      <button>Play</button>
     </div>
   );
 }
