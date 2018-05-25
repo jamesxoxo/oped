@@ -8,24 +8,7 @@ import QueueItem from './QueueItem';
 class Player extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      playing: false,
-    };
-
-    this.handlePlay = this.handlePlay.bind(this);
-    this.handlePause = this.handlePause.bind(this);
-  }
-
-  handlePlay() {
-    this.setState({
-      playing: true,
-    });
-  }
-
-  handlePause() {
-    this.setState({
-      playing: false,
-    });
+    this.state = {};
   }
 
   render() {
@@ -36,19 +19,21 @@ class Player extends Component {
         {tune && (
           <PlayerAudio
             tune={tune}
-            playing={this.state.playing}
-            handlePause={this.handlePause}
+            playing={this.props.playing}
+            handlePause={this.props.handlePause}
+            handleNext={this.props.handleNext}
           />
         )}
         <PlayerControls
-          handlePlay={this.handlePlay}
-          handlePause={this.handlePause}
+          handlePlay={this.props.handlePlay}
+          handlePause={this.props.handlePause}
           handleNext={this.props.handleNext}
         />
         <QueueItem tune={tune} />
         <Queue
           queue={this.props.queue}
           handleRemove={this.props.handleRemove}
+          handleSkipTo={this.props.handleSkipTo}
         />
       </div>
     );
@@ -57,7 +42,11 @@ class Player extends Component {
 
 Player.propTypes = {
   queue: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+  playing: PropTypes.bool.isRequired,
   handleRemove: PropTypes.func.isRequired,
+  handlePlay: PropTypes.func.isRequired,
+  handlePause: PropTypes.func.isRequired,
+  handleSkipTo: PropTypes.func.isRequired,
   handleNext: PropTypes.func.isRequired,
 };
 

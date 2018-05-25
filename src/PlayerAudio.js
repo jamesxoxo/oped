@@ -29,7 +29,7 @@ class PlayerAudio extends Component {
   }
 
   handleEnd() {
-    this.props.handlePause();
+    this.props.handleNext();
   }
 
   render() {
@@ -55,7 +55,7 @@ class PlayerAudio extends Component {
 PlayerAudio.propTypes = {
   tune: PropTypes.shape().isRequired,
   playing: PropTypes.bool.isRequired,
-  handlePause: PropTypes.func.isRequired,
+  handleNext: PropTypes.func.isRequired,
 };
 
 export default PlayerAudio;

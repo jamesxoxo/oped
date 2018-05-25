@@ -30,12 +30,24 @@ class App extends Component {
             '"Nimensei☆Ura Omote Life! (にめんせい☆ウラオモテライフ！)" by Umaru Doma (Aimi Tanaka)',
         },
       ],
+      playing: false,
     };
 
     this.handleSearchSubmit = this.handleSearchSubmit.bind(this);
     this.handleAddTune = this.handleAddTune.bind(this);
     this.handleRemoveTune = this.handleRemoveTune.bind(this);
+    this.handlePlayTune = this.handlePlayTune.bind(this);
+    this.handlePauseTune = this.handlePauseTune.bind(this);
+    this.handleSkipToTune = this.handleSkipToTune.bind(this);
     this.handleNextTune = this.handleNextTune.bind(this);
+  }
+
+  handleIfEndReached() {
+    if (!this.state.queue.length) {
+      this.setState({
+        playing: false,
+      });
+    }
   }
 
   handleSearchSubmit(state) {
@@ -49,15 +61,41 @@ class App extends Component {
   }
 
   handleRemoveTune(id) {
+    this.setState(
+      {
+        queue: this.state.queue.filter(tune => tune.id !== id),
+      },
+      this.handleIfEndReached,
+    );
+  }
+
+  handlePlayTune() {
     this.setState({
-      queue: this.state.queue.filter(tune => tune.id !== id),
+      playing: true,
+    });
+  }
+
+  handlePauseTune() {
+    this.setState({
+      playing: false,
+    });
+  }
+
+  handleSkipToTune(id) {
+    const index = this.state.queue.findIndex(tune => tune.id === id);
+
+    this.setState({
+      queue: this.state.queue.filter((tune, i) => i >= index),
     });
   }
 
   handleNextTune() {
-    this.setState({
-      queue: this.state.queue.slice(1),
-    });
+    this.setState(
+      {
+        queue: this.state.queue.slice(1),
+      },
+      this.handleIfEndReached,
+    );
   }
 
   render() {
@@ -85,7 +123,11 @@ class App extends Component {
           />
           <Player
             queue={this.state.queue}
+            playing={this.state.playing}
             handleRemove={this.handleRemoveTune}
+            handlePlay={this.handlePlayTune}
+            handlePause={this.handlePauseTune}
+            handleSkipTo={this.handleSkipToTune}
             handleNext={this.handleNextTune}
           />
           <Footer />

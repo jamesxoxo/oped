@@ -2,14 +2,18 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import QueueItemControls from './QueueItemControls';
 
-function QueueItem({ tune, controls, handleRemove }) {
+function QueueItem({ tune, controls, handleRemove, handleSkipTo }) {
   return (
     <div>
       <img src={tune.image} alt={tune.anime} />
       <div>{tune.anime}</div>
       <div>{tune.title}</div>
       {controls && (
-        <QueueItemControls id={tune.id} handleRemove={handleRemove} />
+        <QueueItemControls
+          id={tune.id}
+          handleRemove={handleRemove}
+          handleSkipTo={handleSkipTo}
+        />
       )}
     </div>
   );
@@ -19,6 +23,7 @@ QueueItem.propTypes = {
   tune: PropTypes.shape(),
   controls: PropTypes.bool,
   handleRemove: PropTypes.func,
+  handleSkipTo: PropTypes.func,
 };
 
 QueueItem.defaultProps = {
@@ -29,6 +34,7 @@ QueueItem.defaultProps = {
   },
   controls: false,
   handleRemove: null,
+  handleSkipTo: null,
 };
 
 export default QueueItem;

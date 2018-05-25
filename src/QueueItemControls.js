@@ -6,12 +6,12 @@ class QueueItemControls extends Component {
     super(props);
     this.state = {};
 
-    this.handleClickPlay = this.handleClickPlay.bind(this);
+    this.handleClickSkip = this.handleClickSkip.bind(this);
     this.handleClickRemove = this.handleClickRemove.bind(this);
   }
 
-  handleClickPlay() {
-    // this.props.handlePlay();
+  handleClickSkip() {
+    this.props.handleSkipTo(this.props.id);
   }
 
   handleClickRemove() {
@@ -21,7 +21,7 @@ class QueueItemControls extends Component {
   render() {
     return (
       <div>
-        <button onClick={this.handleClickPlay}>Play</button>
+        <button onClick={this.handleClickSkip}>Skip</button>
         <button onClick={this.handleClickRemove}>Remove</button>
       </div>
     );
@@ -31,6 +31,7 @@ class QueueItemControls extends Component {
 QueueItemControls.propTypes = {
   id: PropTypes.string.isRequired,
   handleRemove: PropTypes.func.isRequired,
+  handleSkipTo: PropTypes.func.isRequired,
 };
 
 export default QueueItemControls;
