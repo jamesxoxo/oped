@@ -12,7 +12,15 @@ function QueueItem({ tune }) {
 }
 
 QueueItem.propTypes = {
-  tune: PropTypes.shape().isRequired,
+  tune: PropTypes.shape(),
+};
+
+QueueItem.defaultProps = {
+  tune: {
+    image: 'http://via.placeholder.com/225x321',
+    anime: 'Nothing playing',
+    title: 'Nothing playing',
+  },
 };
 
 export default QueueItem;

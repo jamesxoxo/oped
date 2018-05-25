@@ -10,9 +10,11 @@ class PlayerAudio extends Component {
     };
 
     this.handleReady = this.handleReady.bind(this);
+    this.handleEnd = this.handleEnd.bind(this);
   }
 
   componentDidUpdate() {
+    // Todo: Check against prevProps
     if (this.props.playing) {
       this.state.player.playVideo();
     } else {
@@ -26,10 +28,25 @@ class PlayerAudio extends Component {
     });
   }
 
+  handleEnd() {
+    this.props.handlePause();
+  }
+
   render() {
+    const options = {
+      playerVars: {
+        autoplay: this.props.playing ? 1 : 0,
+      },
+    };
+
     return (
       <div style={{ display: 'block' }}>
-        <YouTube videoId={this.props.tune.id} onReady={this.handleReady} />
+        <YouTube
+          videoId={this.props.tune.id}
+          opts={options}
+          onReady={this.handleReady}
+          onEnd={this.handleEnd}
+        />
       </div>
     );
   }
@@ -38,6 +55,7 @@ class PlayerAudio extends Component {
 PlayerAudio.propTypes = {
   tune: PropTypes.shape().isRequired,
   playing: PropTypes.bool.isRequired,
+  handlePause: PropTypes.func.isRequired,
 };
 
 export default PlayerAudio;

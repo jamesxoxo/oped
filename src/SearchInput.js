@@ -22,10 +22,8 @@ class SearchInput extends Component {
   }
 
   handleSubmit(event) {
-    const { value } = this.state;
-
-    this.props.handleSearchSubmit(value);
-    this.props.history.push(`/results?search=${value}`);
+    this.props.handleSearchSubmit(this.state.value);
+    this.props.history.push(`/results?search=${this.state.value}`);
     event.preventDefault();
   }
 

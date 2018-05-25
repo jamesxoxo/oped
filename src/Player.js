@@ -29,15 +29,23 @@ class Player extends Component {
   }
 
   render() {
+    const tune = this.props.queue[0];
+
     return (
       <div>
-        <PlayerAudio tune={this.props.queue[0]} playing={this.state.playing} />
+        {tune && (
+          <PlayerAudio
+            tune={tune}
+            playing={this.state.playing}
+            handlePause={this.handlePause}
+          />
+        )}
         <PlayerControls
           handlePlay={this.handlePlay}
           handlePause={this.handlePause}
           handleNext={this.props.handleNext}
         />
-        <QueueItem tune={this.props.queue[0]} />
+        <QueueItem tune={tune} />
         <Queue queue={this.props.queue} />
       </div>
     );
