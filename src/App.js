@@ -42,7 +42,7 @@ class App extends Component {
 
   handleAddTune(tune) {
     this.setState({
-      queue: [...this.state.queue, tune],
+      queue: [tune, ...this.state.queue],
     });
   }
 
