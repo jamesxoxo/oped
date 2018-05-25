@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import unescape from './unescape';
 import AnimeTunes from './AnimeTunes';
 
-function AnimeInfo({ anime, error }) {
+function AnimeInfo({ anime, error, handleAddTune }) {
   if (error) {
     return <div>Error: {error.message}</div>;
   } else if (anime) {
@@ -19,15 +19,19 @@ function AnimeInfo({ anime, error }) {
             type="OP"
             tunes={anime.opening_theme}
             anime={{ english: anime.title, japanese: anime.title_japanese }}
+            handleAddTune={handleAddTune}
           />
           <AnimeTunes
             type="ED"
             tunes={anime.ending_theme}
             anime={{ english: anime.title, japanese: anime.title_japanese }}
+            handleAddTune={handleAddTune}
           />
         </div>
         <p>
-          {unescape(anime.synopsis).replace('[Written by MAL Rewrite]', '')}
+          {unescape(anime.synopsis)
+            .replace('[Written by MAL Rewrite]', '')
+            .trim()}
         </p>
         <dl>
           <dt>type</dt>
@@ -55,6 +59,7 @@ function AnimeInfo({ anime, error }) {
 AnimeInfo.propTypes = {
   error: PropTypes.shape(),
   anime: PropTypes.shape(),
+  handleAddTune: PropTypes.func.isRequired,
 };
 
 AnimeInfo.defaultProps = {

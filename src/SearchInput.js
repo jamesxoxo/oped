@@ -14,7 +14,7 @@ class SearchInput extends Component {
   }
 
   componentDidMount() {
-    this.props.onSearchSubmit(this.state.value);
+    this.props.handleSearchSubmit(this.state.value);
   }
 
   handleChange(event) {
@@ -24,7 +24,7 @@ class SearchInput extends Component {
   handleSubmit(event) {
     const { value } = this.state;
 
-    this.props.onSearchSubmit(value);
+    this.props.handleSearchSubmit(value);
     this.props.history.push(`/results?search=${value}`);
     event.preventDefault();
   }
@@ -48,7 +48,7 @@ class SearchInput extends Component {
 }
 
 SearchInput.propTypes = {
-  onSearchSubmit: PropTypes.func.isRequired,
+  handleSearchSubmit: PropTypes.func.isRequired,
   history: PropTypes.shape().isRequired,
   location: PropTypes.shape().isRequired,
 };

@@ -37,12 +37,19 @@ class Anime extends Component {
   }
 
   render() {
-    return <AnimeInfo anime={this.state.anime} error={this.state.error} />;
+    return (
+      <AnimeInfo
+        anime={this.state.anime}
+        error={this.state.error}
+        handleAddTune={this.props.handleAddTune}
+      />
+    );
   }
 }
 
 Anime.propTypes = {
   match: PropTypes.shape().isRequired,
+  handleAddTune: PropTypes.func.isRequired,
 };
 
 export default Anime;

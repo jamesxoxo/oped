@@ -3,13 +3,13 @@ import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import ResultsList from './ResultsList';
 
-function Results({ error, loading, items }) {
+function Results({ error, loading, results }) {
   if (loading) {
     return <div>Loading...</div>;
   } else if (error) {
     return <div>Error: {error.message}</div>;
-  } else if (items.length) {
-    return <ResultsList items={items} />;
+  } else if (results.length) {
+    return <ResultsList results={results} />;
   }
 
   return <Redirect to="/" />;
@@ -18,7 +18,7 @@ function Results({ error, loading, items }) {
 Results.propTypes = {
   error: PropTypes.shape(),
   loading: PropTypes.bool.isRequired,
-  items: PropTypes.arrayOf(PropTypes.object).isRequired,
+  results: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 Results.defaultProps = {

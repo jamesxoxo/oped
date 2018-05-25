@@ -12,14 +12,22 @@ class App extends Component {
     this.state = {
       error: null,
       loading: false,
-      items: [],
+      results: [],
+      queue: [],
     };
 
     this.handleSearchSubmit = this.handleSearchSubmit.bind(this);
+    this.handleAddTune = this.handleAddTune.bind(this);
   }
 
   handleSearchSubmit(state) {
     this.setState(state);
+  }
+
+  handleAddTune(tune) {
+    this.setState({
+      queue: [...this.state.queue, tune],
+    });
   }
 
   render() {
@@ -27,7 +35,7 @@ class App extends Component {
       <Router>
         <div className="App">
           <Header />
-          <Search onSearchSubmit={this.handleSearchSubmit} />
+          <Search handleSearchSubmit={this.handleSearchSubmit} />
           <Route
             path="/results"
             render={props => (
@@ -35,11 +43,16 @@ class App extends Component {
                 {...props}
                 error={this.state.error}
                 loading={this.state.loading}
-                items={this.state.items}
+                results={this.state.results}
               />
             )}
           />
-          <Route path="/anime/:mal_id" component={Anime} />
+          <Route
+            path="/anime/:mal_id"
+            render={props => (
+              <Anime {...props} handleAddTune={this.handleAddTune} />
+            )}
+          />
           <Footer />
         </div>
       </Router>

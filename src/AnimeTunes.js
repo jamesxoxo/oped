@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import unescape from './unescape';
 import AnimeTune from './AnimeTune';
 
-function AnimeTunes({ type, tunes, anime }) {
+function AnimeTunes({ type, tunes, anime, handleAddTune }) {
   if (tunes.length) {
     return (
       <ul>
@@ -13,7 +13,8 @@ function AnimeTunes({ type, tunes, anime }) {
               .replace(/#[0-9]+:? /, '')
               .replace(/\(TV Broadcast[:;]?.*?\)/i, '')
               .replace(/\(((TV|BD\/DVD): )?eps? .*?\)/i, '')
-              .replace(/\(Japanese version.*\)/i, ''),
+              .replace(/\(Japanese version.*\)/i, '')
+              .trim(),
           );
 
           return (
@@ -23,6 +24,7 @@ function AnimeTunes({ type, tunes, anime }) {
                 number={index + 1}
                 title={title}
                 anime={anime}
+                handleAddTune={handleAddTune}
               />
             </li>
           );
@@ -38,6 +40,7 @@ AnimeTunes.propTypes = {
   type: PropTypes.string.isRequired,
   tunes: PropTypes.arrayOf(PropTypes.string).isRequired,
   anime: PropTypes.shape().isRequired,
+  handleAddTune: PropTypes.func.isRequired,
 };
 
 export default AnimeTunes;

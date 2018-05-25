@@ -12,7 +12,7 @@ class Search extends Component {
   handleSearchSubmit(value) {
     if (!value.trim()) return;
 
-    this.props.onSearchSubmit({
+    this.props.handleSearchSubmit({
       loading: true,
     });
 
@@ -22,7 +22,7 @@ class Search extends Component {
         result => {
           let state = {
             loading: false,
-            items: result.result,
+            results: result.result,
           };
 
           if ('error' in result) {
@@ -34,10 +34,10 @@ class Search extends Component {
             };
           }
 
-          this.props.onSearchSubmit(state);
+          this.props.handleSearchSubmit(state);
         },
         error => {
-          this.props.onSearchSubmit({
+          this.props.handleSearchSubmit({
             loading: false,
             error,
           });
@@ -46,12 +46,12 @@ class Search extends Component {
   }
 
   render() {
-    return <SearchInput onSearchSubmit={this.handleSearchSubmit} />;
+    return <SearchInput handleSearchSubmit={this.handleSearchSubmit} />;
   }
 }
 
 Search.propTypes = {
-  onSearchSubmit: PropTypes.func.isRequired,
+  handleSearchSubmit: PropTypes.func.isRequired,
 };
 
 export default Search;
