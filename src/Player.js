@@ -35,6 +35,7 @@ class Player extends Component {
           <PlayerAudio
             tune={tune}
             playing={this.props.playing}
+            volume={this.state.volume}
             handlePause={this.props.handlePause}
             handleNext={this.props.handleNext}
           />

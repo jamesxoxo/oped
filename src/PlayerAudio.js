@@ -14,13 +14,16 @@ class PlayerAudio extends Component {
   }
 
   componentDidUpdate() {
-    // Todo: Check against prevProps, maybe. And also that we actually have a
-    // player
+    // Todo: Check against prevProps, maybe
+    if (!this.prop.playing) return;
+
     if (this.props.playing) {
       this.state.player.playVideo();
     } else {
       this.state.player.pauseVideo();
     }
+
+    this.state.player.setVolume(this.props.volume);
   }
 
   handleReady(event) {
@@ -56,6 +59,7 @@ class PlayerAudio extends Component {
 PlayerAudio.propTypes = {
   tune: PropTypes.shape().isRequired,
   playing: PropTypes.bool.isRequired,
+  volume: PropTypes.number.isRequired,
   handleNext: PropTypes.func.isRequired,
 };
 
