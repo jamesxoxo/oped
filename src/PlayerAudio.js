@@ -14,7 +14,8 @@ class PlayerAudio extends Component {
   }
 
   componentDidUpdate() {
-    // Todo: Check against prevProps, maybe
+    // Todo: Check against prevProps, maybe. And also that we actually have a
+    // player
     if (this.props.playing) {
       this.state.player.playVideo();
     } else {

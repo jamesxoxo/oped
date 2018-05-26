@@ -29,6 +29,7 @@ class SearchInput extends Component {
 
   render() {
     return (
+      // Todo: Maybe have a way to load in your anime list
       <form onSubmit={this.handleSubmit}>
         <label htmlFor="search">
           Search
