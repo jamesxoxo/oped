@@ -11,6 +11,7 @@ class PlayerAudio extends Component {
 
     this.handleReady = this.handleReady.bind(this);
     this.handleEnd = this.handleEnd.bind(this);
+    this.handleStateChange = this.handleStateChange.bind(this);
   }
   componentDidUpdate() {
     // @Todo: Maybe want to check against some prevProps in here
@@ -40,8 +41,16 @@ class PlayerAudio extends Component {
       player: event.target,
     });
 
-    this.props.handleReady(event.target.getDuration());
+    this.props.handleReady();
     this.timer = setInterval(() => this.tick(), 1000);
+  }
+
+  handleStateChange(event) {
+    // On new video loaded
+    if (event.data === -1) {
+      this.props.handleReady();
+    }
+    this.props.handleChange(event.target.getDuration());
   }
 
   handleEnd() {
@@ -73,6 +82,7 @@ class PlayerAudio extends Component {
           opts={options}
           onReady={this.handleReady}
           onEnd={this.handleEnd}
+          onStateChange={this.handleStateChange}
         />
       </div>
     );
@@ -81,11 +91,15 @@ class PlayerAudio extends Component {
 
 PlayerAudio.propTypes = {
   tune: PropTypes.shape().isRequired,
-  progress: PropTypes.shape().isRequired,
+  progress: PropTypes.shape({
+    timePassed: PropTypes.number.isRequired,
+    seek: PropTypes.bool.isRequired,
+  }).isRequired,
   playing: PropTypes.bool.isRequired,
   volume: PropTypes.number.isRequired,
   handleNext: PropTypes.func.isRequired,
   handleReady: PropTypes.func.isRequired,
+  handleChange: PropTypes.func.isRequired,
   handleProgressChange: PropTypes.func.isRequired,
 };
 

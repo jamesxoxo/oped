@@ -16,20 +16,30 @@ class PlayerTimeline extends Component {
   }
 
   render() {
+    const formatTime = time =>
+      new Date(time * 1000).toISOString().substr(14, 5);
+
     return (
-      <input
-        type="range"
-        value={this.props.progress.timePassed}
-        min="0"
-        max={this.props.duration}
-        onChange={this.handleProgressChange}
-      />
+      <div>
+        <span>{formatTime(this.props.progress.timePassed)}</span>
+        <input
+          type="range"
+          value={this.props.progress.timePassed}
+          min="0"
+          max={this.props.duration}
+          onChange={this.handleProgressChange}
+        />
+        <span>{formatTime(this.props.duration)}</span>
+      </div>
     );
   }
 }
 
 PlayerTimeline.propTypes = {
-  progress: PropTypes.shape().isRequired,
+  progress: PropTypes.shape({
+    timePassed: PropTypes.number.isRequired,
+    seek: PropTypes.bool.isRequired,
+  }).isRequired,
   duration: PropTypes.number,
   handleProgressChange: PropTypes.func.isRequired,
 };

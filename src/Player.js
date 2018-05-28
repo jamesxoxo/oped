@@ -21,16 +21,22 @@ class Player extends Component {
     };
 
     this.handleAudioReady = this.handleAudioReady.bind(this);
+    this.handleAudioChange = this.handleAudioChange.bind(this);
     this.handleProgressChange = this.handleProgressChange.bind(this);
     this.handleVolumeChange = this.handleVolumeChange.bind(this);
   }
 
-  handleAudioReady(duration) {
+  handleAudioReady() {
     this.setState({
       progress: {
         timePassed: 0,
         seek: false,
       },
+    });
+  }
+
+  handleAudioChange(duration) {
+    this.setState({
       duration,
     });
   }
@@ -67,6 +73,7 @@ class Player extends Component {
             handlePause={this.props.handlePause}
             handleNext={this.props.handleNext}
             handleReady={this.handleAudioReady}
+            handleChange={this.handleAudioChange}
             handleProgressChange={this.handleProgressChange}
           />
         )}
