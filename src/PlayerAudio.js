@@ -13,6 +13,7 @@ class PlayerAudio extends Component {
     this.handleEnd = this.handleEnd.bind(this);
     this.handleStateChange = this.handleStateChange.bind(this);
   }
+
   componentDidUpdate() {
     // @Todo: Maybe want to check against some prevProps in here
     const { player } = this.state;
@@ -46,6 +47,9 @@ class PlayerAudio extends Component {
   }
 
   handleStateChange(event) {
+    // @Todo: This whole method might be handled better in a different way.
+    // Perhaps by using onReady and remounting the player
+
     // On new video loaded
     if (event.data === -1) {
       this.props.handleReady();
