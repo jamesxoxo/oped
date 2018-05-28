@@ -12,28 +12,51 @@ class PlayerAudio extends Component {
     this.handleReady = this.handleReady.bind(this);
     this.handleEnd = this.handleEnd.bind(this);
   }
-
   componentDidUpdate() {
-    // Todo: Check against prevProps, maybe
-    if (!this.prop.playing) return;
+    // @Todo: Maybe want to check against some prevProps in here
+    const { player } = this.state;
+
+    if (!player) return;
 
     if (this.props.playing) {
-      this.state.player.playVideo();
+      player.playVideo();
     } else {
-      this.state.player.pauseVideo();
+      player.pauseVideo();
     }
 
-    this.state.player.setVolume(this.props.volume);
+    if (this.props.progress.seek) {
+      player.seekTo(this.props.progress.timePassed);
+    }
+
+    player.setVolume(this.props.volume);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timer);
   }
 
   handleReady(event) {
     this.setState({
       player: event.target,
     });
+
+    this.props.handleReady(event.target.getDuration());
+    this.timer = setInterval(() => this.tick(), 1000);
   }
 
   handleEnd() {
+    // @Todo: Probs want tune to stay in queue (but at final duration) if last
+    // if last tune in queue.
     this.props.handleNext();
+  }
+
+  tick() {
+    if (this.props.playing) {
+      this.props.handleProgressChange(
+        this.state.player.getCurrentTime(),
+        false,
+      );
+    }
   }
 
   render() {
@@ -58,9 +81,12 @@ class PlayerAudio extends Component {
 
 PlayerAudio.propTypes = {
   tune: PropTypes.shape().isRequired,
+  progress: PropTypes.shape().isRequired,
   playing: PropTypes.bool.isRequired,
   volume: PropTypes.number.isRequired,
   handleNext: PropTypes.func.isRequired,
+  handleReady: PropTypes.func.isRequired,
+  handleProgressChange: PropTypes.func.isRequired,
 };
 
 export default PlayerAudio;

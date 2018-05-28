@@ -129,15 +129,17 @@ class App extends Component {
               <Anime {...props} handleAddTune={this.handleAddTune} />
             )}
           />
-          <Player
-            queue={this.state.queue}
-            playing={this.state.playing}
-            handleRemove={this.handleRemoveTune}
-            handlePlay={this.handlePlayTune}
-            handlePause={this.handlePauseTune}
-            handleSkipTo={this.handleSkipToTune}
-            handleNext={this.handleNextTune}
-          />
+          {this.state.queue.length > 0 && (
+            <Player
+              queue={this.state.queue}
+              playing={this.state.playing}
+              handleRemove={this.handleRemoveTune}
+              handlePlay={this.handlePlayTune}
+              handlePause={this.handlePauseTune}
+              handleSkipTo={this.handleSkipToTune}
+              handleNext={this.handleNextTune}
+            />
+          )}
           <Footer />
         </div>
       </Router>

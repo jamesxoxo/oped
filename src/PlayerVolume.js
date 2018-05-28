@@ -42,7 +42,6 @@ PlayerVolume.propTypes = {
   prevVolume: PropTypes.number,
   handleVolumeChange: PropTypes.func.isRequired,
 };
-
 PlayerVolume.defaultProps = {
   prevVolume: null,
 };

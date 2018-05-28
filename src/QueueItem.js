@@ -25,7 +25,6 @@ QueueItem.propTypes = {
   handleRemove: PropTypes.func,
   handleSkipTo: PropTypes.func,
 };
-
 QueueItem.defaultProps = {
   tune: {
     image: 'http://via.placeholder.com/225x321',

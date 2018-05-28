@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import PlayerAudio from './PlayerAudio';
 import PlayerControls from './PlayerControls';
+import PlayerTimeline from './PlayerTimeline';
 import PlayerVolume from './PlayerVolume';
 import Queue from './Queue';
 import QueueItem from './QueueItem';
@@ -10,11 +11,37 @@ class Player extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      progress: {
+        timePassed: 0,
+        seek: false,
+      },
+      duration: null,
       volume: 100,
       prevVolume: null,
     };
 
+    this.handleAudioReady = this.handleAudioReady.bind(this);
+    this.handleProgressChange = this.handleProgressChange.bind(this);
     this.handleVolumeChange = this.handleVolumeChange.bind(this);
+  }
+
+  handleAudioReady(duration) {
+    this.setState({
+      progress: {
+        timePassed: 0,
+        seek: false,
+      },
+      duration,
+    });
+  }
+
+  handleProgressChange(timePassed, seek) {
+    this.setState({
+      progress: {
+        timePassed,
+        seek,
+      },
+    });
   }
 
   handleVolumeChange(volume) {
@@ -34,16 +61,25 @@ class Player extends Component {
         {tune && (
           <PlayerAudio
             tune={tune}
-            playing={this.props.playing}
+            progress={this.state.progress}
             volume={this.state.volume}
+            playing={this.props.playing}
             handlePause={this.props.handlePause}
             handleNext={this.props.handleNext}
+            handleReady={this.handleAudioReady}
+            handleProgressChange={this.handleProgressChange}
           />
         )}
         <PlayerControls
           handlePlay={this.props.handlePlay}
           handlePause={this.props.handlePause}
           handleNext={this.props.handleNext}
+        />
+        <PlayerTimeline
+          progress={this.state.progress}
+          duration={this.state.duration}
+          playing={this.props.playing}
+          handleProgressChange={this.handleProgressChange}
         />
         <PlayerVolume
           volume={this.state.volume}

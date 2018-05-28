@@ -64,7 +64,6 @@ AnimeInfo.propTypes = {
   anime: PropTypes.shape(),
   handleAddTune: PropTypes.func.isRequired,
 };
-
 AnimeInfo.defaultProps = {
   error: null,
   anime: null,

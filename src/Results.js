@@ -20,7 +20,6 @@ Results.propTypes = {
   loading: PropTypes.bool.isRequired,
   results: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
-
 Results.defaultProps = {
   error: null,
 };
