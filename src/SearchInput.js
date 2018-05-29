@@ -37,6 +37,7 @@ class SearchInput extends Component {
             id="search"
             type="text"
             value={this.state.value}
+            placeholder="Name of anime"
             onChange={this.handleChange}
           />
         </label>
