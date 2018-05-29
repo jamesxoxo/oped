@@ -1,41 +1,24 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
-class PlayerButtons extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-
-    this.handleClickPlay = this.handleClickPlay.bind(this);
-    this.handleClickPause = this.handleClickPause.bind(this);
-    this.handleClickNext = this.handleClickNext.bind(this);
-  }
-
-  handleClickPlay() {
-    this.props.handlePlay();
-  }
-
-  handleClickPause() {
-    this.props.handlePause();
-  }
-
-  handleClickNext() {
-    this.props.handleNext();
-  }
-
-  render() {
-    return (
-      <div>
-        <button>Previous</button>
-        <button onClick={this.handleClickPlay}>Play</button>
-        <button onClick={this.handleClickPause}>Pause</button>
-        <button onClick={this.handleClickNext}>Next</button>
-      </div>
-    );
-  }
+function PlayerButtons({
+  handlePrevious,
+  handlePlay,
+  handlePause,
+  handleNext,
+}) {
+  return (
+    <div>
+      <button onClick={handlePrevious}>Previous</button>
+      <button onClick={handlePlay}>Play</button>
+      <button onClick={handlePause}>Pause</button>
+      <button onClick={handleNext}>Next</button>
+    </div>
+  );
 }
 
 PlayerButtons.propTypes = {
+  handlePrevious: PropTypes.func.isRequired,
   handlePlay: PropTypes.func.isRequired,
   handlePause: PropTypes.func.isRequired,
   handleNext: PropTypes.func.isRequired,

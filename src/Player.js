@@ -24,6 +24,7 @@ class Player extends Component {
     this.handleAudioChange = this.handleAudioChange.bind(this);
     this.handleProgressChange = this.handleProgressChange.bind(this);
     this.handleVolumeChange = this.handleVolumeChange.bind(this);
+    this.handleRewind = this.handleRewind.bind(this);
   }
 
   handleAudioReady() {
@@ -59,6 +60,19 @@ class Player extends Component {
     });
   }
 
+  handleRewind() {
+    if (this.state.progress.timePassed > 5 || !this.props.history.length) {
+      this.setState({
+        progress: {
+          timePassed: 0,
+          seek: true,
+        },
+      });
+    } else {
+      this.props.handlePrevious();
+    }
+  }
+
   render() {
     const tune = this.props.queue[0];
 
@@ -78,6 +92,9 @@ class Player extends Component {
           />
         )}
         <PlayerButtons
+          progress={this.state.progress}
+          handleAudioReady={this.handleAudioReady}
+          handlePrevious={this.handleRewind}
           handlePlay={this.props.handlePlay}
           handlePause={this.props.handlePause}
           handleNext={this.props.handleNext}
@@ -106,10 +123,12 @@ class Player extends Component {
 Player.propTypes = {
   queue: PropTypes.arrayOf(PropTypes.shape()).isRequired,
   playing: PropTypes.bool.isRequired,
+  history: PropTypes.arrayOf(PropTypes.shape()).isRequired,
   handleRemove: PropTypes.func.isRequired,
   handlePlay: PropTypes.func.isRequired,
   handlePause: PropTypes.func.isRequired,
   handleSkipTo: PropTypes.func.isRequired,
+  handlePrevious: PropTypes.func.isRequired,
   handleNext: PropTypes.func.isRequired,
 };
 

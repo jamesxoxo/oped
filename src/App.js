@@ -25,6 +25,7 @@ class App extends Component {
     this.handlePlayTune = this.handlePlayTune.bind(this);
     this.handlePauseTune = this.handlePauseTune.bind(this);
     this.handleSkipToTune = this.handleSkipToTune.bind(this);
+    this.handlePreviousTune = this.handlePreviousTune.bind(this);
     this.handleNextTune = this.handleNextTune.bind(this);
   }
 
@@ -74,6 +75,13 @@ class App extends Component {
     });
   }
 
+  handlePreviousTune() {
+    this.setState({
+      queue: [this.state.history[0], ...this.state.queue],
+      history: this.state.history.slice(1),
+    });
+  }
+
   handleNextTune() {
     this.setState({
       queue: this.state.queue.slice(1),
@@ -109,10 +117,12 @@ class App extends Component {
             <Player
               queue={this.state.queue}
               playing={this.state.playing}
+              history={this.state.history}
               handleRemove={this.handleRemoveTune}
               handlePlay={this.handlePlayTune}
               handlePause={this.handlePauseTune}
               handleSkipTo={this.handleSkipToTune}
+              handlePrevious={this.handlePreviousTune}
               handleNext={this.handleNextTune}
             />
           )}
