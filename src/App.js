@@ -15,21 +15,6 @@ class App extends Component {
       loading: false,
       results: [],
       queue: [],
-      // queue: [
-      //   {
-      //     anime: 'Bakemonogatari',
-      //     id: 'vMMu7wfBNEA',
-      //     image: 'https://myanimelist.cdn-dena.com/images/anime/11/75274.jpg',
-      //     title: '"Sugar Sweet Nightmare" by Yui Horie',
-      //   },
-      //   {
-      //     anime: 'Himouto! Umaru-chan R',
-      //     id: 'kIBPIyxWGwg',
-      //     image: 'https://myanimelist.cdn-dena.com/images/anime/10/89671.jpg',
-      //     title:
-      //       '"Nimensei☆Ura Omote Life! (にめんせい☆ウラオモテライフ！)" by Umaru Doma (Aimi Tanaka)',
-      //   },
-      // ],
       playing: false,
     };
 
@@ -40,14 +25,6 @@ class App extends Component {
     this.handlePauseTune = this.handlePauseTune.bind(this);
     this.handleSkipToTune = this.handleSkipToTune.bind(this);
     this.handleNextTune = this.handleNextTune.bind(this);
-  }
-
-  handleIfEndReached() {
-    if (!this.state.queue.length) {
-      this.setState({
-        playing: false,
-      });
-    }
   }
 
   handleSearchSubmit(state) {
@@ -104,6 +81,14 @@ class App extends Component {
       },
       this.handleIfEndReached,
     );
+  }
+
+  handleIfEndReached() {
+    if (!this.state.queue.length) {
+      this.setState({
+        playing: false,
+      });
+    }
   }
 
   render() {

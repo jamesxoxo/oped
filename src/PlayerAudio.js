@@ -47,9 +47,6 @@ class PlayerAudio extends Component {
   }
 
   handleStateChange(event) {
-    // @Todo: This whole method might be handled better in a different way.
-    // Perhaps by using onReady and remounting the player
-
     // On new video loaded
     if (event.data === -1) {
       this.props.handleReady();
@@ -58,8 +55,6 @@ class PlayerAudio extends Component {
   }
 
   handleEnd() {
-    // @Todo: Probs want tune to stay in queue (but at final duration) if last
-    // if last tune in queue.
     this.props.handleNext();
   }
 
