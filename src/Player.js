@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import PlayerAudio from './PlayerAudio';
-import PlayerControls from './PlayerControls';
+import PlayerButtons from './PlayerButtons';
 import PlayerTimeline from './PlayerTimeline';
 import PlayerVolume from './PlayerVolume';
 import Queue from './Queue';
@@ -77,7 +77,7 @@ class Player extends Component {
             handleProgressChange={this.handleProgressChange}
           />
         )}
-        <PlayerControls
+        <PlayerButtons
           handlePlay={this.props.handlePlay}
           handlePause={this.props.handlePause}
           handleNext={this.props.handleNext}
