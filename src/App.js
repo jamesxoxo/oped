@@ -16,6 +16,7 @@ class App extends Component {
       results: [],
       queue: [],
       playing: false,
+      history: [],
     };
 
     this.handleSearchSubmit = this.handleSearchSubmit.bind(this);
@@ -45,12 +46,10 @@ class App extends Component {
   }
 
   handleRemoveTune(id) {
-    this.setState(
-      {
-        queue: this.state.queue.filter(tune => tune.id !== id),
-      },
-      this.handleIfEndReached,
-    );
+    this.setState({
+      queue: this.state.queue.filter(tune => tune.id !== id),
+      playing: this.state.queue.length === 1 ? false : this.state.playing,
+    });
   }
 
   handlePlayTune() {
@@ -71,24 +70,16 @@ class App extends Component {
     this.setState({
       queue: this.state.queue.filter((tune, i) => i >= index),
       playing: true,
+      history: [this.state.queue[0], ...this.state.history],
     });
   }
 
   handleNextTune() {
-    this.setState(
-      {
-        queue: this.state.queue.slice(1),
-      },
-      this.handleIfEndReached,
-    );
-  }
-
-  handleIfEndReached() {
-    if (!this.state.queue.length) {
-      this.setState({
-        playing: false,
-      });
-    }
+    this.setState({
+      queue: this.state.queue.slice(1),
+      playing: this.state.queue.length === 1 ? false : this.state.playing,
+      history: [this.state.queue[0], ...this.state.history],
+    });
   }
 
   render() {
