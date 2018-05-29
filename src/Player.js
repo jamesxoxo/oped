@@ -85,7 +85,6 @@ class Player extends Component {
         <PlayerTimeline
           progress={this.state.progress}
           duration={this.state.duration}
-          playing={this.props.playing}
           handleProgressChange={this.handleProgressChange}
         />
         <PlayerVolume
