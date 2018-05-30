@@ -9,7 +9,9 @@ import Anime from './Anime';
 import Player from './Player';
 
 const theme = {
-  primary: 'purple',
+  black: '#212529',
+  primary: '#cd5c5c',
+  secondary: '#b0c4de',
 };
 
 class App extends Component {

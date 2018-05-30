@@ -24,7 +24,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint:css": "stylelint './src/**/*.js'"
   },
   "devDependencies": {
     "eslint": "^4.9.0",
@@ -34,6 +35,10 @@
     "eslint-plugin-react": "^7.4.0",
     "husky": "^0.14.3",
     "lint-staged": "^7.1.2",
-    "prettier": "1.12.1"
+    "prettier": "1.12.1",
+    "stylelint": "^9.2.1",
+    "stylelint-config-standard": "^18.2.0",
+    "stylelint-config-styled-components": "^0.1.1",
+    "stylelint-processor-styled-components": "^1.3.1"
   }
 }
