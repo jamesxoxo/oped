@@ -8,7 +8,7 @@ const NavBar = styled.header`
   left: 0;
   padding: 1rem;
   background-color: #fff;
-  border-bottom: 1px solid purple;
+  border-bottom: 1px solid ${props => props.theme.primary};
 `;
 
 const Logo = styled.h1`

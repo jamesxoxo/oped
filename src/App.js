@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { ThemeProvider } from 'styled-components';
 import Header from './Header';
 import Footer from './Footer';
 import Search from './Search';
 import Results from './Results';
 import Anime from './Anime';
 import Player from './Player';
+
+const theme = {
+  primary: 'purple',
+};
 
 class App extends Component {
   constructor(props) {
@@ -93,41 +98,43 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <div className="App">
-          <Header />
-          <Search handleSearchSubmit={this.handleSearchSubmit} />
-          <Route
-            path="/results"
-            render={props => (
-              <Results
-                {...props}
-                error={this.state.error}
-                loading={this.state.loading}
-                results={this.state.results}
+        <ThemeProvider theme={theme}>
+          <div className="App">
+            <Header />
+            <Search handleSearchSubmit={this.handleSearchSubmit} />
+            <Route
+              path="/results"
+              render={props => (
+                <Results
+                  {...props}
+                  error={this.state.error}
+                  loading={this.state.loading}
+                  results={this.state.results}
+                />
+              )}
+            />
+            <Route
+              path="/anime/:mal_id"
+              render={props => (
+                <Anime {...props} handleAddTune={this.handleAddTune} />
+              )}
+            />
+            {this.state.queue.length > 0 && (
+              <Player
+                queue={this.state.queue}
+                playing={this.state.playing}
+                history={this.state.history}
+                handleRemove={this.handleRemoveTune}
+                handlePlay={this.handlePlayTune}
+                handlePause={this.handlePauseTune}
+                handleSkipTo={this.handleSkipToTune}
+                handlePrevious={this.handlePreviousTune}
+                handleNext={this.handleNextTune}
               />
             )}
-          />
-          <Route
-            path="/anime/:mal_id"
-            render={props => (
-              <Anime {...props} handleAddTune={this.handleAddTune} />
-            )}
-          />
-          {this.state.queue.length > 0 && (
-            <Player
-              queue={this.state.queue}
-              playing={this.state.playing}
-              history={this.state.history}
-              handleRemove={this.handleRemoveTune}
-              handlePlay={this.handlePlayTune}
-              handlePause={this.handlePauseTune}
-              handleSkipTo={this.handleSkipToTune}
-              handlePrevious={this.handlePreviousTune}
-              handleNext={this.handleNextTune}
-            />
-          )}
-          <Footer />
-        </div>
+            <Footer />
+          </div>
+        </ThemeProvider>
       </Router>
     );
   }

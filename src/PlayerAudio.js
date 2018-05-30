@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import YouTube from 'react-youtube';
+
+const Hidden = styled.div`
+  display: none;
+`;
 
 class PlayerAudio extends Component {
   constructor(props) {
@@ -75,7 +80,7 @@ class PlayerAudio extends Component {
     };
 
     return (
-      <div style={{ display: 'block' }}>
+      <Hidden>
         <YouTube
           videoId={this.props.tune.id}
           opts={options}
@@ -83,7 +88,7 @@ class PlayerAudio extends Component {
           onEnd={this.handleEnd}
           onStateChange={this.handleStateChange}
         />
-      </div>
+      </Hidden>
     );
   }
 }
