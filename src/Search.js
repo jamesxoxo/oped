@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import SearchInput from './SearchInput';
+import SearchForm from './SearchForm';
 
 class Search extends Component {
   constructor(props) {
@@ -46,7 +46,7 @@ class Search extends Component {
   }
 
   render() {
-    return <SearchInput handleSearchSubmit={this.handleSearchSubmit} />;
+    return <SearchForm handleSearchSubmit={this.handleSearchSubmit} />;
   }
 }
 

@@ -1,11 +1,15 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import Search from './Search';
 
-const NavBar = styled.header`
+const SiteHeader = styled.header`
   position: sticky;
   top: 0;
   right: 0;
   left: 0;
+  display: flex;
+  align-items: center;
   padding: 1rem;
   background-color: #fff;
   border-bottom: 1px solid ${props => props.theme.primary};
@@ -13,14 +17,20 @@ const NavBar = styled.header`
 
 const Logo = styled.h1`
   margin: 0;
+  font-size: 1rem;
 `;
 
-function Header() {
+function Header({ handleSearchSubmit }) {
   return (
-    <NavBar>
+    <SiteHeader>
       <Logo>op-ed</Logo>
-    </NavBar>
+      <Search handleSearchSubmit={handleSearchSubmit} />
+    </SiteHeader>
   );
 }
+
+Header.propTypes = {
+  handleSearchSubmit: PropTypes.func.isRequired,
+};
 
 export default Header;

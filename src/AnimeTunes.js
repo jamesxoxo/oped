@@ -1,12 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import unescape from './unescape';
+import styled from 'styled-components';
+import unescape from './util/unescape';
 import AnimeTune from './AnimeTune';
+
+const List = styled.ul`
+  padding-left: 0;
+  margin-bottom: 0.5rem;
+  list-style: none;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+`;
 
 function AnimeTunes({ type, tunes, anime, image, handleAddTune }) {
   if (tunes.length) {
     return (
-      <ul>
+      <List>
         {tunes.map((tune, index) => {
           const title = unescape(
             tune
@@ -30,7 +41,7 @@ function AnimeTunes({ type, tunes, anime, image, handleAddTune }) {
             </li>
           );
         })}
-      </ul>
+      </List>
     );
   }
 

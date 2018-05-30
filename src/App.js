@@ -1,18 +1,30 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import { ThemeProvider } from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
 import Header from './Header';
 import Footer from './Footer';
-import Search from './Search';
 import Results from './Results';
 import Anime from './Anime';
 import Player from './Player';
 
 const theme = {
   black: '#212529',
-  primary: '#cd5c5c',
-  secondary: '#b0c4de',
+  primary: '#b0c4de',
+  inputPaddingY: '.375rem',
+  inputPaddingX: '.75rem',
 };
+
+const Wrap = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  min-height: 100%;
+`;
+
+const Main = styled.section`
+  flex-grow: 1;
+  padding: 1rem;
+`;
 
 class App extends Component {
   constructor(props) {
@@ -101,41 +113,42 @@ class App extends Component {
     return (
       <Router>
         <ThemeProvider theme={theme}>
-          <div className="App">
-            <Header />
-            <Search handleSearchSubmit={this.handleSearchSubmit} />
-            <Route
-              path="/results"
-              render={props => (
-                <Results
-                  {...props}
-                  error={this.state.error}
-                  loading={this.state.loading}
-                  results={this.state.results}
+          <Wrap className="App">
+            <Header handleSearchSubmit={this.handleSearchSubmit} />
+            <Main>
+              <Route
+                path="/results"
+                render={props => (
+                  <Results
+                    {...props}
+                    error={this.state.error}
+                    loading={this.state.loading}
+                    results={this.state.results}
+                  />
+                )}
+              />
+              <Route
+                path="/anime/:mal_id"
+                render={props => (
+                  <Anime {...props} handleAddTune={this.handleAddTune} />
+                )}
+              />
+              {this.state.queue.length > 0 && (
+                <Player
+                  queue={this.state.queue}
+                  playing={this.state.playing}
+                  history={this.state.history}
+                  handleRemove={this.handleRemoveTune}
+                  handlePlay={this.handlePlayTune}
+                  handlePause={this.handlePauseTune}
+                  handleSkipTo={this.handleSkipToTune}
+                  handlePrevious={this.handlePreviousTune}
+                  handleNext={this.handleNextTune}
                 />
               )}
-            />
-            <Route
-              path="/anime/:mal_id"
-              render={props => (
-                <Anime {...props} handleAddTune={this.handleAddTune} />
-              )}
-            />
-            {this.state.queue.length > 0 && (
-              <Player
-                queue={this.state.queue}
-                playing={this.state.playing}
-                history={this.state.history}
-                handleRemove={this.handleRemoveTune}
-                handlePlay={this.handlePlayTune}
-                handlePause={this.handlePauseTune}
-                handleSkipTo={this.handleSkipToTune}
-                handlePrevious={this.handlePreviousTune}
-                handleNext={this.handleNextTune}
-              />
-            )}
+            </Main>
             <Footer />
-          </div>
+          </Wrap>
         </ThemeProvider>
       </Router>
     );
