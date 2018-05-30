@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import youtubeSearch from 'youtube-search-promise';
+import FontAwesomeIcon from '@fortawesome/react-fontawesome';
+import faPlay from '@fortawesome/fontawesome-free-solid/faPlay';
+import faPlus from '@fortawesome/fontawesome-free-solid/faPlus';
+import Button from './theme/Button';
 
 const API_KEY = 'AIzaSyDNS7Q_55JVp_k2lS85S36OIN1WuawqY84';
 
@@ -91,9 +95,13 @@ class AnimeTune extends Component {
 
     return (
       <div>
-        <span title={this.state.tune.title}>{text}</span>
-        <button onClick={this.handleAddAndPlayTune}>Play</button>
-        <button onClick={this.handleAddTune}>Add</button>
+        <span title={this.state.tune.title}>{text}</span>{' '}
+        <Button aria-label="Play" onClick={this.handleAddAndPlayTune}>
+          <FontAwesomeIcon icon={faPlay} />
+        </Button>{' '}
+        <Button onClick={this.handleAddTune}>
+          <FontAwesomeIcon icon={faPlus} />
+        </Button>
       </div>
     );
   }
