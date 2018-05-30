@@ -1,11 +1,24 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import PlayerAudio from './PlayerAudio';
 import PlayerButtons from './PlayerButtons';
 import PlayerTimeline from './PlayerTimeline';
 import PlayerVolume from './PlayerVolume';
 import Queue from './Queue';
 import QueueItem from './QueueItem';
+
+const PlayerControls = styled.div`
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  background-color: #fff;
+  border-top: 1px solid ${props => props.theme.primary};
+`;
 
 class Player extends Component {
   constructor(props) {
@@ -77,7 +90,7 @@ class Player extends Component {
     const tune = this.props.queue[0];
 
     return (
-      <div>
+      <PlayerControls>
         {tune && (
           <PlayerAudio
             tune={tune}
@@ -92,6 +105,7 @@ class Player extends Component {
           />
         )}
         <PlayerButtons
+          playing={this.props.playing}
           progress={this.state.progress}
           handleAudioReady={this.handleAudioReady}
           handlePrevious={this.handleRewind}
@@ -115,7 +129,7 @@ class Player extends Component {
           handleRemove={this.props.handleRemove}
           handleSkipTo={this.props.handleSkipTo}
         />
-      </div>
+      </PlayerControls>
     );
   }
 }

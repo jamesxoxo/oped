@@ -1,11 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
 import YouTube from 'react-youtube';
-
-const Hidden = styled.div`
-  display: none;
-`;
+import Hidden from './theme/Hidden';
 
 class PlayerAudio extends Component {
   constructor(props) {

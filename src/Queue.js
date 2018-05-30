@@ -4,7 +4,7 @@ import QueueItem from './QueueItem';
 
 function Queue({ queue, handleRemove, handleSkipTo }) {
   return (
-    <ul>
+    <ul style={{ display: 'none' }}>
       {queue.map(tune => (
         // Todo: Sort out better ids that actually work
         <li key={tune.id}>

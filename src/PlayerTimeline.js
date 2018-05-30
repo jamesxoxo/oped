@@ -1,5 +1,28 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
+
+const Timeline = styled.div`
+  display: flex;
+  flex-grow: 1;
+  margin-right: 1rem;
+`;
+
+const Time = styled.span`
+  font-size: 0.8rem;
+
+  &:first-child {
+    margin-right: 0.5rem;
+  }
+
+  &:last-child {
+    margin-left: 0.5rem;
+  }
+`;
+
+const Range = styled.input`
+  flex-grow: 1;
+`;
 
 class PlayerTimeline extends Component {
   constructor(props) {
@@ -20,17 +43,17 @@ class PlayerTimeline extends Component {
       new Date(time * 1000).toISOString().substr(14, 5);
 
     return (
-      <div>
-        <span>{formatTime(this.props.progress.timePassed)}</span>
-        <input
+      <Timeline>
+        <Time>{formatTime(this.props.progress.timePassed)}</Time>
+        <Range
           type="range"
           value={this.props.progress.timePassed}
           min="0"
           max={this.props.duration}
           onChange={this.handleProgressChange}
         />
-        <span>{formatTime(this.props.duration)}</span>
-      </div>
+        <Time>{formatTime(this.props.duration)}</Time>
+      </Timeline>
     );
   }
 }

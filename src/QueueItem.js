@@ -4,7 +4,7 @@ import QueueItemControls from './QueueItemControls';
 
 function QueueItem({ tune, controls, handleRemove, handleSkipTo }) {
   return (
-    <div>
+    <div style={{ display: 'none' }}>
       <img src={tune.image} alt={tune.anime} />
       <div>{tune.anime}</div>
       <div>{tune.title}</div>
