@@ -19,6 +19,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: stretch;
+  min-width: 810px;
   min-height: 100%;
   padding-bottom: ${props => (props.controlsOpen ? '71px' : '0')};
 `;
