@@ -52,6 +52,7 @@ class PlayerTimeline extends Component {
           max={this.props.duration}
           onChange={this.handleProgressChange}
         />
+        {/* @Todo: Check unusual behaviour with this on audio load */}
         <Time>{formatTime(this.props.duration)}</Time>
       </Timeline>
     );
