@@ -20,6 +20,7 @@ injectGlobal([
   }
 
   body {
+    overflow-y: scroll;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
     font-size: 1rem;
     line-height: 1.5;
@@ -56,6 +57,15 @@ injectGlobal([
   dd {
     margin-bottom: .5rem;
     margin-left: 0;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
 
   img {

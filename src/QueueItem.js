@@ -1,13 +1,42 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
+import unescape from './util/unescape';
 import QueueItemControls from './QueueItemControls';
+
+const Item = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const Image = styled.img`
+  width: 38px;
+  height: 38px;
+  margin-right: 0.5rem;
+  object-fit: cover;
+`;
+
+const Text = styled.div`
+  max-width: 240px;
+  overflow: hidden;
+  font-size: 0.8rem;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+`;
 
 function QueueItem({ tune, controls, handleRemove, handleSkipTo }) {
   return (
-    <div style={{ display: 'none' }}>
-      <img src={tune.image} alt={tune.anime} />
-      <div>{tune.anime}</div>
-      <div>{tune.title}</div>
+    <Item>
+      <Image src={tune.image} alt={tune.anime} />
+      <div>
+        <Text>
+          <Link title={unescape(tune.anime)} to={`/anime/${tune.malId}`}>
+            {unescape(tune.anime)}
+          </Link>
+        </Text>
+        <Text title={unescape(tune.title)}>{unescape(tune.title)}</Text>
+      </div>
       {controls && (
         <QueueItemControls
           id={tune.id}
@@ -15,7 +44,7 @@ function QueueItem({ tune, controls, handleRemove, handleSkipTo }) {
           handleSkipTo={handleSkipTo}
         />
       )}
-    </div>
+    </Item>
   );
 }
 

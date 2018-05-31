@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import FontAwesomeIcon from '@fortawesome/react-fontawesome';
+import faPlay from '@fortawesome/fontawesome-free-solid/faPlay';
+import faTrash from '@fortawesome/fontawesome-free-solid/faTrash';
+import Button from './theme/Button';
 
 class QueueItemControls extends Component {
   constructor(props) {
@@ -21,8 +25,12 @@ class QueueItemControls extends Component {
   render() {
     return (
       <div>
-        <button onClick={this.handleClickSkip}>Play</button>
-        <button onClick={this.handleClickRemove}>Remove</button>
+        <Button aria-label="Play" onClick={this.handleClickSkip}>
+          <FontAwesomeIcon icon={faPlay} />
+        </Button>
+        <Button aria-label="Remove" onClick={this.handleClickRemove}>
+          <FontAwesomeIcon icon={faTrash} />
+        </Button>
       </div>
     );
   }

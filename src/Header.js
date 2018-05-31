@@ -1,7 +1,7 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import StyledHomeLink from './HeaderHomeLink';
 import Search from './Search';
 
 const SiteHeader = styled.header`
@@ -24,9 +24,9 @@ const Logo = styled.h1`
 function Header({ handleSearchSubmit }) {
   return (
     <SiteHeader>
-      <StyledHomeLink>
+      <Link to="/">
         <Logo>op-ed</Logo>
-      </StyledHomeLink>
+      </Link>
       <Search handleSearchSubmit={handleSearchSubmit} />
     </SiteHeader>
   );

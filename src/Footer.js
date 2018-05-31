@@ -10,27 +10,18 @@ const Paragraph = styled.p`
   text-align: right;
 `;
 
-const Link = styled.a`
-  color: inherit;
-  text-decoration: none;
-
-  &:hover {
-    text-decoration: underline;
-  }
-`;
-
 function Footer() {
   return (
     <SiteFooter>
       <Paragraph>
         &copy;{' '}
-        <Link
+        <a
           href="https://github.com/jamesxoxo/"
           target="_blank"
           rel="noopener noreferrer"
         >
           James Coventry
-        </Link>
+        </a>
       </Paragraph>
     </SiteFooter>
   );

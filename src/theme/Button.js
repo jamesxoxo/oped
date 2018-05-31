@@ -10,6 +10,10 @@ const Button = styled.button`
   user-select: none;
   border: 1px solid ${props => props.theme.primary};
 
+  & + & {
+    border-left: 0;
+  }
+
   &:hover {
     background-color: #f5f5f5;
   }

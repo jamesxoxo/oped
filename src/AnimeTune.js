@@ -68,6 +68,7 @@ class AnimeTune extends Component {
   handleAddTune() {
     this.props.handleAddTune({
       id: this.state.tune.id,
+      malId: this.props.malId,
       image: this.props.image,
       anime: this.props.anime.english,
       title: this.props.title,
@@ -78,6 +79,7 @@ class AnimeTune extends Component {
     this.props.handleAddTune(
       {
         id: this.state.tune.id,
+        malId: this.props.malId,
         image: this.props.image,
         anime: this.props.anime.english,
         title: this.props.title,
@@ -98,7 +100,7 @@ class AnimeTune extends Component {
         <span title={this.state.tune.title}>{text}</span>{' '}
         <Button aria-label="Play" onClick={this.handleAddAndPlayTune}>
           <FontAwesomeIcon icon={faPlay} />
-        </Button>{' '}
+        </Button>
         <Button onClick={this.handleAddTune}>
           <FontAwesomeIcon icon={faPlus} />
         </Button>
@@ -113,6 +115,7 @@ AnimeTune.propTypes = {
   title: PropTypes.string.isRequired,
   anime: PropTypes.shape().isRequired,
   image: PropTypes.string.isRequired,
+  malId: PropTypes.number.isRequired,
   handleAddTune: PropTypes.func.isRequired,
 };
 

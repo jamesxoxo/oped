@@ -14,11 +14,12 @@ const theme = {
   inputPaddingX: '.75rem',
 };
 
-const Wrap = styled.div`
+const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: stretch;
   min-height: 100%;
+  padding-bottom: ${props => (props.controlsOpen ? '71px' : '0')};
 `;
 
 const Main = styled.section`
@@ -113,7 +114,7 @@ class App extends Component {
     return (
       <Router>
         <ThemeProvider theme={theme}>
-          <Wrap className="App">
+          <Container className="App" controlsOpen={this.state.queue.length > 0}>
             <Header handleSearchSubmit={this.handleSearchSubmit} />
             <Main>
               <Route
@@ -148,7 +149,7 @@ class App extends Component {
               )}
             </Main>
             <Footer />
-          </Wrap>
+          </Container>
         </ThemeProvider>
       </Router>
     );

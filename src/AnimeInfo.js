@@ -63,6 +63,7 @@ function AnimeInfo({ anime, error, handleAddTune }) {
               tunes={anime.opening_theme}
               anime={{ english: anime.title, japanese: anime.title_japanese }}
               image={anime.image_url}
+              malId={anime.mal_id}
               handleAddTune={handleAddTune}
             />
             <AnimeTunes
@@ -70,6 +71,7 @@ function AnimeInfo({ anime, error, handleAddTune }) {
               tunes={anime.ending_theme}
               anime={{ english: anime.title, japanese: anime.title_japanese }}
               image={anime.image_url}
+              malId={anime.mal_id}
               handleAddTune={handleAddTune}
             />
           </Tunes>

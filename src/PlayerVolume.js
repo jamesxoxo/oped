@@ -11,6 +11,7 @@ const VolumeControls = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
+  margin-right: 1rem;
 `;
 
 const VolumeSliderPanel = styled.div`
