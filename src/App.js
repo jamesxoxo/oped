@@ -10,7 +10,7 @@ import Player from './Player';
 
 const theme = {
   black: '#212529',
-  primary: '#b0c4de',
+  primary: '#e48d9c',
   inputPaddingY: '.375rem',
   inputPaddingX: '.75rem',
 };
@@ -35,7 +35,22 @@ class App extends Component {
       error: null,
       loading: false,
       results: [],
-      queue: [],
+      // queue: [],
+      queue: [
+        {
+          anime: 'Bakemonogatari',
+          id: 'vMMu7wfBNEA',
+          image: 'https://myanimelist.cdn-dena.com/images/anime/11/75274.jpg',
+          title: '"Sugar Sweet Nightmare" by Yui Horie',
+        },
+        {
+          anime: 'Himouto! Umaru-chan R',
+          id: 'kIBPIyxWGwg',
+          image: 'https://myanimelist.cdn-dena.com/images/anime/10/89671.jpg',
+          title:
+            '"Nimensei☆Ura Omote Life! (にめんせい☆ウラオモテライフ！)" by Umaru Doma (Aimi Tanaka)',
+        },
+      ],
       playing: false,
       history: [],
     };
