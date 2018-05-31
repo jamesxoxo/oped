@@ -10,7 +10,7 @@ const Container = styled.div`
 `;
 
 const List = styled.ul`
-  position: fixed
+  position: fixed;
   right: 0;
   bottom: 71px;
   z-index: -1;
