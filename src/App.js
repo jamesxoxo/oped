@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import styled, { ThemeProvider } from 'styled-components';
 import Header from './Header';
 import Footer from './Footer';
+import Home from './Home';
 import Results from './Results';
 import Anime from './Anime';
 import Player from './Player';
@@ -117,6 +118,7 @@ class App extends Component {
           <Container className="App" controlsOpen={this.state.queue.length > 0}>
             <Header handleSearchSubmit={this.handleSearchSubmit} />
             <Main>
+              <Route exact path="/" component={Home} />
               <Route
                 path="/results"
                 render={props => (

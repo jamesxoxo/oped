@@ -28,7 +28,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "lint:css": "stylelint './src/**/*.js'"
+    "lint:css": "stylelint './src/**/*.js'",
+    "lint:js":
+      "eslint --ignore-pattern 'registerServiceWorker.js' './src/**/*.js'"
   },
   "devDependencies": {
     "eslint": "^4.9.0",
