@@ -20,7 +20,7 @@ function Home() {
         the search box above to get started.
       </p>
       <p>
-        <Video autoPlay loop muted>
+        <Video width="500" height="280" autoPlay loop muted>
           <source src={mp4} type="video/mp4" />
           <source src={webm} type="video/webm" />
         </Video>
