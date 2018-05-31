@@ -35,7 +35,12 @@ function AnimeInfo({ anime, error, handleAddTune }) {
     return (
       <Article>
         <Data>
-          <Image src={anime.image_url} alt={unescape(anime.title)} />
+          <Image
+            src={anime.image_url}
+            alt={unescape(anime.title)}
+            width="225"
+            height="311"
+          />
           <dl>
             <dt>Type</dt>
             <dd>{anime.type}</dd>

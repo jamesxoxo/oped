@@ -28,7 +28,7 @@ const Text = styled.div`
 function QueueItem({ tune, controls, handleRemove, handleSkipTo }) {
   return (
     <Item>
-      <Image src={tune.image} alt={tune.anime} />
+      <Image src={tune.image} alt={tune.anime} width="38" height="38" />
       <div>
         <Text>
           <Link title={unescape(tune.anime)} to={`/anime/${tune.malId}`}>
