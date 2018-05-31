@@ -14,7 +14,7 @@ const List = styled.ul`
   right: 0;
   bottom: 71px;
   z-index: -1;
-  display: ${props => (props.open ? 'block' : 'none')}
+  display: ${props => (props.open ? 'block' : 'none')};
   padding: 0;
   margin-bottom: 0;
   list-style: none;
