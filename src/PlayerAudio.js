@@ -7,7 +7,7 @@ class PlayerAudio extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      player: null,
+      audio: null,
     };
 
     this.handleReady = this.handleReady.bind(this);
@@ -17,21 +17,21 @@ class PlayerAudio extends Component {
 
   componentDidUpdate() {
     // @Todo: Maybe want to check against some prevProps in here
-    const { player } = this.state;
+    const { audio } = this.state;
 
-    if (!player) return;
+    if (!audio) return;
 
     if (this.props.playing) {
-      player.playVideo();
+      audio.playVideo();
     } else {
-      player.pauseVideo();
+      audio.pauseVideo();
     }
 
     if (this.props.progress.seek) {
-      player.seekTo(this.props.progress.timePassed);
+      audio.seekTo(this.props.progress.timePassed);
     }
 
-    player.setVolume(this.props.volume);
+    audio.setVolume(this.props.volume);
   }
 
   componentWillUnmount() {
@@ -39,21 +39,24 @@ class PlayerAudio extends Component {
   }
 
   handleReady(event) {
+    const audio = event.target;
+
     this.setState({
-      player: event.target,
+      audio,
     });
 
     this.timer = setInterval(() => this.tick(), 100);
   }
 
   handleStateChange(event) {
-    const duration = event.target.getDuration();
+    const audio = event.target;
+    const duration = audio.getDuration();
 
     if (event.data === -1) {
       this.props.setProgress(0);
 
       if (duration) {
-        this.props.setDuration(event.target.getDuration());
+        this.props.setDuration(audio.getDuration());
       }
     }
   }
@@ -64,7 +67,7 @@ class PlayerAudio extends Component {
 
   tick() {
     if (this.props.playing) {
-      this.props.setProgress(this.state.player.getCurrentTime(), false);
+      this.props.setProgress(this.state.audio.getCurrentTime(), false);
     }
   }
 
