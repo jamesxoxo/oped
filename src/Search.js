@@ -12,22 +12,16 @@ class Search extends Component {
   searchSubmit(value) {
     if (!value.trim()) return;
 
-    this.props.searchSubmit({
-      loading: true,
-    });
-
     fetch(`https://api.jikan.moe/search/anime/${value}/1`)
       .then(res => res.json())
       .then(
         result => {
           let state = {
-            loading: false,
             results: result.result,
           };
 
           if ('error' in result) {
             state = {
-              loading: false,
               error: {
                 message: result.error,
               },
@@ -38,7 +32,6 @@ class Search extends Component {
         },
         error => {
           this.props.searchSubmit({
-            loading: false,
             error,
           });
         },

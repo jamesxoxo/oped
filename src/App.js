@@ -35,7 +35,6 @@ class App extends Component {
     super(props);
     this.state = {
       error: null,
-      loading: false,
       results: [],
       // queue: [],
       queue: [
@@ -142,7 +141,6 @@ class App extends Component {
                   <Results
                     {...props}
                     error={this.state.error}
-                    loading={this.state.loading}
                     results={this.state.results}
                   />
                 )}

@@ -52,6 +52,10 @@ class PlayerAudio extends Component {
     if (event.data === -1) {
       this.props.audioReady();
     }
+
+    console.log(event.data);
+
+    // @Todo: Check this jumping back to 00:00
     this.props.audioChange(event.target.getDuration());
   }
 
