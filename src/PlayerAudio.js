@@ -43,20 +43,19 @@ class PlayerAudio extends Component {
       player: event.target,
     });
 
-    this.props.audioReady();
-    this.timer = setInterval(() => this.tick(), 1000);
+    this.timer = setInterval(() => this.tick(), 100);
   }
 
   handleStateChange(event) {
-    // On new video loaded
+    const duration = event.target.getDuration();
+
     if (event.data === -1) {
-      this.props.audioReady();
+      this.props.setProgress(0);
+
+      if (duration) {
+        this.props.setDuration(event.target.getDuration());
+      }
     }
-
-    console.log(event.data);
-
-    // @Todo: Check this jumping back to 00:00
-    this.props.audioChange(event.target.getDuration());
   }
 
   handleEnd() {
@@ -65,7 +64,7 @@ class PlayerAudio extends Component {
 
   tick() {
     if (this.props.playing) {
-      this.props.progressChange(this.state.player.getCurrentTime(), false);
+      this.props.setProgress(this.state.player.getCurrentTime(), false);
     }
   }
 
@@ -99,9 +98,8 @@ PlayerAudio.propTypes = {
   playing: PropTypes.bool.isRequired,
   volume: PropTypes.number.isRequired,
   nextTune: PropTypes.func.isRequired,
-  audioReady: PropTypes.func.isRequired,
-  audioChange: PropTypes.func.isRequired,
-  progressChange: PropTypes.func.isRequired,
+  setDuration: PropTypes.func.isRequired,
+  setProgress: PropTypes.func.isRequired,
 };
 
 export default PlayerAudio;

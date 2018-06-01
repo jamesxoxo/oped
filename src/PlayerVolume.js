@@ -64,14 +64,14 @@ class PlayerVolume extends Component {
   }
 
   handleChange(event) {
-    this.props.volumeChange(parseInt(event.target.value, 10));
+    this.props.setVolume(parseInt(event.target.value, 10));
   }
 
   handleClick() {
     if (this.props.volume > 0) {
-      this.props.volumeChange(0);
+      this.props.setVolume(0);
     } else {
-      this.props.volumeChange(this.props.prevVolume);
+      this.props.setVolume(this.props.prevVolume);
     }
   }
 
@@ -111,7 +111,7 @@ class PlayerVolume extends Component {
 PlayerVolume.propTypes = {
   volume: PropTypes.number.isRequired,
   prevVolume: PropTypes.number,
-  volumeChange: PropTypes.func.isRequired,
+  setVolume: PropTypes.func.isRequired,
 };
 PlayerVolume.defaultProps = {
   prevVolume: null,

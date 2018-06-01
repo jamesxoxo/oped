@@ -9,7 +9,9 @@ const Timeline = styled.div`
 `;
 
 const Time = styled.span`
+  width: 37px;
   font-size: 0.8rem;
+  text-align: center;
 
   &:first-child {
     margin-right: 0.5rem;
@@ -35,7 +37,7 @@ class PlayerTimeline extends Component {
     // @Todo: This seems a bit glitchy when the tune is currently playing. It
     // sometimes jumps back to its prevState timePassed value before then
     // jumping to where the user selected
-    this.props.progressChange(parseInt(event.target.value, 10), true);
+    this.props.setProgress(parseInt(event.target.value, 10), true);
   }
 
   render() {
@@ -64,7 +66,7 @@ PlayerTimeline.propTypes = {
     seek: PropTypes.bool.isRequired,
   }).isRequired,
   duration: PropTypes.number,
-  progressChange: PropTypes.func.isRequired,
+  setProgress: PropTypes.func.isRequired,
 };
 PlayerTimeline.defaultProps = {
   duration: null,

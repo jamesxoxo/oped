@@ -33,29 +33,19 @@ class Player extends Component {
       prevVolume: null,
     };
 
-    this.audioReady = this.audioReady.bind(this);
-    this.audioChange = this.audioChange.bind(this);
-    this.progressChange = this.progressChange.bind(this);
-    this.volumeChange = this.volumeChange.bind(this);
+    this.setDuration = this.setDuration.bind(this);
+    this.setProgress = this.setProgress.bind(this);
+    this.setVolume = this.setVolume.bind(this);
     this.rewind = this.rewind.bind(this);
   }
 
-  audioReady() {
-    this.setState({
-      progress: {
-        timePassed: 0,
-        seek: false,
-      },
-    });
-  }
-
-  audioChange(duration) {
+  setDuration(duration) {
     this.setState({
       duration,
     });
   }
 
-  progressChange(timePassed, seek) {
+  setProgress(timePassed = 0, seek = false) {
     this.setState({
       progress: {
         timePassed,
@@ -64,7 +54,7 @@ class Player extends Component {
     });
   }
 
-  volumeChange(volume) {
+  setVolume(volume) {
     this.setState({
       prevVolume: this.state.volume,
     });
@@ -100,8 +90,8 @@ class Player extends Component {
             pauseTune={this.props.pauseTune}
             nextTune={this.props.nextTune}
             audioReady={this.audioReady}
-            audioChange={this.audioChange}
-            progressChange={this.progressChange}
+            setDuration={this.setDuration}
+            setProgress={this.setProgress}
           />
         )}
         <PlayerButtons
@@ -116,12 +106,12 @@ class Player extends Component {
         <PlayerTimeline
           progress={this.state.progress}
           duration={this.state.duration}
-          progressChange={this.progressChange}
+          setProgress={this.setProgress}
         />
         <PlayerVolume
           volume={this.state.volume}
           prevVolume={this.state.prevVolume}
-          volumeChange={this.volumeChange}
+          setVolume={this.setVolume}
         />
         <QueueItem tune={tune} />
         <Queue
