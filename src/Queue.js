@@ -38,10 +38,10 @@ class Queue extends Component {
       open: false,
     };
 
-    this.handleButtonClick = this.handleButtonClick.bind(this);
+    this.buttonClick = this.buttonClick.bind(this);
   }
 
-  handleButtonClick() {
+  buttonClick() {
     this.setState({
       open: !this.state.open,
     });
@@ -50,10 +50,7 @@ class Queue extends Component {
   render() {
     return (
       <Container>
-        <QueueButton
-          open={this.state.open}
-          handleClick={this.handleButtonClick}
-        />
+        <QueueButton open={this.state.open} buttonClick={this.buttonClick} />
         <List open={this.state.open}>
           {this.props.queue.map(tune => (
             // Todo: Sort out better ids that actually work
@@ -61,8 +58,8 @@ class Queue extends Component {
               <QueueItem
                 tune={tune}
                 controls
-                handleRemove={this.props.handleRemove}
-                handleSkipTo={this.props.handleSkipTo}
+                removeTune={this.props.removeTune}
+                skipToTune={this.props.skipToTune}
               />
             </Item>
           ))}
@@ -74,8 +71,8 @@ class Queue extends Component {
 
 Queue.propTypes = {
   queue: PropTypes.arrayOf(PropTypes.shape()).isRequired,
-  handleRemove: PropTypes.func.isRequired,
-  handleSkipTo: PropTypes.func.isRequired,
+  removeTune: PropTypes.func.isRequired,
+  skipToTune: PropTypes.func.isRequired,
 };
 
 export default Queue;

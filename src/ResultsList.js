@@ -4,7 +4,7 @@ import ResultsListItem from './ResultsListItem';
 
 function ResultsList({ results }) {
   // Todo: Maybe return null if no results. Although it's possible that the
-  // loading/error cases already handle this
+  // loading/error cases already  this
   return (
     <ul>
       {results.map(result => (

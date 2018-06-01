@@ -12,7 +12,7 @@ class QueueButton extends Component {
   }
 
   handleClick() {
-    this.props.handleClick();
+    this.props.buttonClick();
   }
 
   render() {
@@ -29,7 +29,7 @@ class QueueButton extends Component {
 
 QueueButton.propTypes = {
   open: PropTypes.bool.isRequired,
-  handleClick: PropTypes.func.isRequired,
+  buttonClick: PropTypes.func.isRequired,
 };
 
 export default QueueButton;

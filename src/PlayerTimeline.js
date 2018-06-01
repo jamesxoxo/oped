@@ -28,14 +28,14 @@ class PlayerTimeline extends Component {
   constructor(props) {
     super(props);
 
-    this.handleProgressChange = this.handleProgressChange.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
-  handleProgressChange(event) {
+  handleChange(event) {
     // @Todo: This seems a bit glitchy when the tune is currently playing. It
     // sometimes jumps back to its prevState timePassed value before then
     // jumping to where the user selected
-    this.props.handleProgressChange(parseInt(event.target.value, 10), true);
+    this.props.progressChange(parseInt(event.target.value, 10), true);
   }
 
   render() {
@@ -50,7 +50,7 @@ class PlayerTimeline extends Component {
           value={this.props.progress.timePassed}
           min="0"
           max={this.props.duration}
-          onChange={this.handleProgressChange}
+          onChange={this.handleChange}
         />
         {/* @Todo: Check unusual behaviour with this on audio load */}
         <Time>{formatTime(this.props.duration)}</Time>
@@ -65,7 +65,7 @@ PlayerTimeline.propTypes = {
     seek: PropTypes.bool.isRequired,
   }).isRequired,
   duration: PropTypes.number,
-  handleProgressChange: PropTypes.func.isRequired,
+  progressChange: PropTypes.func.isRequired,
 };
 PlayerTimeline.defaultProps = {
   duration: null,

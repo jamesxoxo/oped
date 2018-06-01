@@ -16,8 +16,8 @@ class AnimeTune extends Component {
       tune: null,
     };
 
-    this.handleAddTune = this.handleAddTune.bind(this);
-    this.handleAddAndPlayTune = this.handleAddAndPlayTune.bind(this);
+    this.handleAddClick = this.handleAddClick.bind(this);
+    this.handlePlayClick = this.handlePlayClick.bind(this);
   }
 
   componentDidMount() {
@@ -65,18 +65,8 @@ class AnimeTune extends Component {
       });
   }
 
-  handleAddTune() {
-    this.props.handleAddTune({
-      id: this.state.tune.id,
-      malId: this.props.malId,
-      image: this.props.image,
-      anime: this.props.anime.english,
-      title: this.props.title,
-    });
-  }
-
-  handleAddAndPlayTune() {
-    this.props.handleAddTune(
+  handlePlayClick() {
+    this.props.addTune(
       {
         id: this.state.tune.id,
         malId: this.props.malId,
@@ -86,6 +76,16 @@ class AnimeTune extends Component {
       },
       true,
     );
+  }
+
+  handleAddClick() {
+    this.props.addTune({
+      id: this.state.tune.id,
+      malId: this.props.malId,
+      image: this.props.image,
+      anime: this.props.anime.english,
+      title: this.props.title,
+    });
   }
 
   render() {
@@ -99,10 +99,10 @@ class AnimeTune extends Component {
       <div>
         <span title={this.state.tune.title}>{text}</span>{' '}
         {/* @Todo: Wrap controls */}
-        <Button aria-label="Play" onClick={this.handleAddAndPlayTune}>
+        <Button aria-label="Play" onClick={this.handlePlayClick}>
           <FontAwesomeIcon icon={faPlay} />
         </Button>
-        <Button onClick={this.handleAddTune}>
+        <Button onClick={this.handleAddClick}>
           <FontAwesomeIcon icon={faPlus} />
         </Button>
       </div>
@@ -117,7 +117,7 @@ AnimeTune.propTypes = {
   anime: PropTypes.shape().isRequired,
   image: PropTypes.string.isRequired,
   malId: PropTypes.number.isRequired,
-  handleAddTune: PropTypes.func.isRequired,
+  addTune: PropTypes.func.isRequired,
 };
 
 export default AnimeTune;

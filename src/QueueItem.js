@@ -25,7 +25,7 @@ const Text = styled.div`
   text-overflow: ellipsis;
 `;
 
-function QueueItem({ tune, controls, handleRemove, handleSkipTo }) {
+function QueueItem({ tune, controls, removeTune, skipToTune }) {
   return (
     <Item>
       <Image src={tune.image} alt={tune.anime} width="38" height="38" />
@@ -40,8 +40,8 @@ function QueueItem({ tune, controls, handleRemove, handleSkipTo }) {
       {controls && (
         <QueueItemControls
           id={tune.id}
-          handleRemove={handleRemove}
-          handleSkipTo={handleSkipTo}
+          removeTune={removeTune}
+          skipToTune={skipToTune}
         />
       )}
     </Item>
@@ -51,8 +51,8 @@ function QueueItem({ tune, controls, handleRemove, handleSkipTo }) {
 QueueItem.propTypes = {
   tune: PropTypes.shape(),
   controls: PropTypes.bool,
-  handleRemove: PropTypes.func,
-  handleSkipTo: PropTypes.func,
+  removeTune: PropTypes.func,
+  skipToTune: PropTypes.func,
 };
 QueueItem.defaultProps = {
   tune: {
@@ -61,8 +61,8 @@ QueueItem.defaultProps = {
     title: 'Nothing playing',
   },
   controls: false,
-  handleRemove: null,
-  handleSkipTo: null,
+  removeTune: null,
+  skipToTune: null,
 };
 
 export default QueueItem;

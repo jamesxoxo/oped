@@ -47,8 +47,8 @@ class PlayerVolume extends Component {
 
     this.handleMouseEnter = this.handleMouseEnter.bind(this);
     this.handleMouseLeave = this.handleMouseLeave.bind(this);
-    this.handleVolumeChange = this.handleVolumeChange.bind(this);
-    this.handleMuteClick = this.handleMuteClick.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   handleMouseEnter() {
@@ -63,15 +63,15 @@ class PlayerVolume extends Component {
     });
   }
 
-  handleVolumeChange(event) {
-    this.props.handleVolumeChange(parseInt(event.target.value, 10));
+  handleChange(event) {
+    this.props.volumeChange(parseInt(event.target.value, 10));
   }
 
-  handleMuteClick() {
+  handleClick() {
     if (this.props.volume > 0) {
-      this.props.handleVolumeChange(0);
+      this.props.volumeChange(0);
     } else {
-      this.props.handleVolumeChange(this.props.prevVolume);
+      this.props.volumeChange(this.props.prevVolume);
     }
   }
 
@@ -97,10 +97,10 @@ class PlayerVolume extends Component {
             value={this.props.volume}
             min="0"
             max="100"
-            onChange={this.handleVolumeChange}
+            onChange={this.handleChange}
           />
         </VolumeSliderPanel>
-        <VolumeButton onClick={this.handleMuteClick}>
+        <VolumeButton onClick={this.handleClick}>
           <FontAwesomeIcon icon={icon} />
         </VolumeButton>
       </VolumeControls>
@@ -111,7 +111,7 @@ class PlayerVolume extends Component {
 PlayerVolume.propTypes = {
   volume: PropTypes.number.isRequired,
   prevVolume: PropTypes.number,
-  handleVolumeChange: PropTypes.func.isRequired,
+  volumeChange: PropTypes.func.isRequired,
 };
 PlayerVolume.defaultProps = {
   prevVolume: null,

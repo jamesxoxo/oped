@@ -6,13 +6,13 @@ class Search extends Component {
   constructor(props) {
     super(props);
 
-    this.handleSearchSubmit = this.handleSearchSubmit.bind(this);
+    this.searchSubmit = this.searchSubmit.bind(this);
   }
 
-  handleSearchSubmit(value) {
+  searchSubmit(value) {
     if (!value.trim()) return;
 
-    this.props.handleSearchSubmit({
+    this.props.searchSubmit({
       loading: true,
     });
 
@@ -34,10 +34,10 @@ class Search extends Component {
             };
           }
 
-          this.props.handleSearchSubmit(state);
+          this.props.searchSubmit(state);
         },
         error => {
-          this.props.handleSearchSubmit({
+          this.props.searchSubmit({
             loading: false,
             error,
           });
@@ -46,12 +46,12 @@ class Search extends Component {
   }
 
   render() {
-    return <SearchForm handleSearchSubmit={this.handleSearchSubmit} />;
+    return <SearchForm searchSubmit={this.searchSubmit} />;
   }
 }
 
 Search.propTypes = {
-  handleSearchSubmit: PropTypes.func.isRequired,
+  searchSubmit: PropTypes.func.isRequired,
 };
 
 export default Search;

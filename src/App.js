@@ -55,21 +55,21 @@ class App extends Component {
       history: [],
     };
 
-    this.handleSearchSubmit = this.handleSearchSubmit.bind(this);
-    this.handleAddTune = this.handleAddTune.bind(this);
-    this.handleRemoveTune = this.handleRemoveTune.bind(this);
-    this.handlePlayTune = this.handlePlayTune.bind(this);
-    this.handlePauseTune = this.handlePauseTune.bind(this);
-    this.handleSkipToTune = this.handleSkipToTune.bind(this);
-    this.handlePreviousTune = this.handlePreviousTune.bind(this);
-    this.handleNextTune = this.handleNextTune.bind(this);
+    this.searchSubmit = this.searchSubmit.bind(this);
+    this.addTune = this.addTune.bind(this);
+    this.removeTune = this.removeTune.bind(this);
+    this.playTune = this.playTune.bind(this);
+    this.pauseTune = this.pauseTune.bind(this);
+    this.skipToTune = this.skipToTune.bind(this);
+    this.previousTune = this.previousTune.bind(this);
+    this.nextTune = this.nextTune.bind(this);
   }
 
-  handleSearchSubmit(state) {
+  searchSubmit(state) {
     this.setState(state);
   }
 
-  handleAddTune(tune, play) {
+  addTune(tune, play) {
     if (play) {
       this.setState({
         queue: [tune, ...this.state.queue],
@@ -82,26 +82,26 @@ class App extends Component {
     }
   }
 
-  handleRemoveTune(id) {
+  removeTune(id) {
     this.setState({
       queue: this.state.queue.filter(tune => tune.id !== id),
       playing: this.state.queue.length === 1 ? false : this.state.playing,
     });
   }
 
-  handlePlayTune() {
+  playTune() {
     this.setState({
       playing: true,
     });
   }
 
-  handlePauseTune() {
+  pauseTune() {
     this.setState({
       playing: false,
     });
   }
 
-  handleSkipToTune(id) {
+  skipToTune(id) {
     const index = this.state.queue.findIndex(tune => tune.id === id);
 
     this.setState({
@@ -111,14 +111,14 @@ class App extends Component {
     });
   }
 
-  handlePreviousTune() {
+  previousTune() {
     this.setState({
       queue: [this.state.history[0], ...this.state.queue],
       history: this.state.history.slice(1),
     });
   }
 
-  handleNextTune() {
+  nextTune() {
     this.setState({
       queue: this.state.queue.slice(1),
       playing: this.state.queue.length === 1 ? false : this.state.playing,
@@ -131,7 +131,7 @@ class App extends Component {
       <Router>
         <ThemeProvider theme={theme}>
           <Container className="App" controlsOpen={this.state.queue.length > 0}>
-            <Header handleSearchSubmit={this.handleSearchSubmit} />
+            <Header searchSubmit={this.searchSubmit} />
             <Main>
               <Route exact path="/" component={Home} />
               <Route
@@ -147,21 +147,19 @@ class App extends Component {
               />
               <Route
                 path="/anime/:mal_id"
-                render={props => (
-                  <Anime {...props} handleAddTune={this.handleAddTune} />
-                )}
+                render={props => <Anime {...props} addTune={this.addTune} />}
               />
               {this.state.queue.length > 0 && (
                 <Player
                   queue={this.state.queue}
                   playing={this.state.playing}
                   history={this.state.history}
-                  handleRemove={this.handleRemoveTune}
-                  handlePlay={this.handlePlayTune}
-                  handlePause={this.handlePauseTune}
-                  handleSkipTo={this.handleSkipToTune}
-                  handlePrevious={this.handlePreviousTune}
-                  handleNext={this.handleNextTune}
+                  removeTune={this.removeTune}
+                  playTune={this.playTune}
+                  pauseTune={this.pauseTune}
+                  skipToTune={this.skipToTune}
+                  previousTune={this.previousTune}
+                  nextTune={this.nextTune}
                 />
               )}
             </Main>

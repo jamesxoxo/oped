@@ -14,7 +14,7 @@ const List = styled.ul`
   }
 `;
 
-function AnimeTunes({ type, tunes, anime, image, malId, handleAddTune }) {
+function AnimeTunes({ type, tunes, anime, image, malId, addTune }) {
   if (tunes.length) {
     return (
       <List>
@@ -37,7 +37,7 @@ function AnimeTunes({ type, tunes, anime, image, malId, handleAddTune }) {
                 anime={anime}
                 image={image}
                 malId={malId}
-                handleAddTune={handleAddTune}
+                addTune={addTune}
               />
             </li>
           );
@@ -55,7 +55,7 @@ AnimeTunes.propTypes = {
   anime: PropTypes.shape().isRequired,
   image: PropTypes.string.isRequired,
   malId: PropTypes.number.isRequired,
-  handleAddTune: PropTypes.func.isRequired,
+  addTune: PropTypes.func.isRequired,
 };
 
 export default AnimeTunes;

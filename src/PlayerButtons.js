@@ -14,22 +14,22 @@ const Buttons = styled.div`
 
 function PlayerButtons({
   playing,
-  handlePrevious,
-  handlePlay,
-  handlePause,
-  handleNext,
+  previousTune,
+  playTune,
+  pauseTune,
+  nextTune,
 }) {
   return (
     <Buttons>
-      <Button onClick={handlePrevious}>
+      <Button onClick={previousTune}>
         <FontAwesomeIcon icon={faStepBackward} />
       </Button>
       <PlayerPlayPauseButton
         playing={playing}
-        handlePlay={handlePlay}
-        handlePause={handlePause}
+        playTune={playTune}
+        pauseTune={pauseTune}
       />
-      <Button onClick={handleNext}>
+      <Button onClick={nextTune}>
         <FontAwesomeIcon icon={faStepForward} />
       </Button>
     </Buttons>
@@ -38,10 +38,10 @@ function PlayerButtons({
 
 PlayerButtons.propTypes = {
   playing: PropTypes.bool.isRequired,
-  handlePrevious: PropTypes.func.isRequired,
-  handlePlay: PropTypes.func.isRequired,
-  handlePause: PropTypes.func.isRequired,
-  handleNext: PropTypes.func.isRequired,
+  previousTune: PropTypes.func.isRequired,
+  playTune: PropTypes.func.isRequired,
+  pauseTune: PropTypes.func.isRequired,
+  nextTune: PropTypes.func.isRequired,
 };
 
 export default PlayerButtons;

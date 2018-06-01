@@ -10,25 +10,25 @@ class QueueItemControls extends Component {
     super(props);
     this.state = {};
 
-    this.handleClickSkip = this.handleClickSkip.bind(this);
-    this.handleClickRemove = this.handleClickRemove.bind(this);
+    this.handleSkipClick = this.handleSkipClick.bind(this);
+    this.handleRemoveClick = this.handleRemoveClick.bind(this);
   }
 
-  handleClickSkip() {
-    this.props.handleSkipTo(this.props.id);
+  handleSkipClick() {
+    this.props.skipToTune(this.props.id);
   }
 
-  handleClickRemove() {
-    this.props.handleRemove(this.props.id);
+  handleRemoveClick() {
+    this.props.removeTune(this.props.id);
   }
 
   render() {
     return (
       <div>
-        <Button aria-label="Play" onClick={this.handleClickSkip}>
+        <Button aria-label="Play" onClick={this.handleSkipClick}>
           <FontAwesomeIcon icon={faPlay} />
         </Button>
-        <Button aria-label="Remove" onClick={this.handleClickRemove}>
+        <Button aria-label="Remove" onClick={this.handleRemoveClick}>
           <FontAwesomeIcon icon={faTrash} />
         </Button>
       </div>
@@ -38,8 +38,8 @@ class QueueItemControls extends Component {
 
 QueueItemControls.propTypes = {
   id: PropTypes.string.isRequired,
-  handleRemove: PropTypes.func.isRequired,
-  handleSkipTo: PropTypes.func.isRequired,
+  removeTune: PropTypes.func.isRequired,
+  skipToTune: PropTypes.func.isRequired,
 };
 
 export default QueueItemControls;

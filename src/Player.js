@@ -33,14 +33,14 @@ class Player extends Component {
       prevVolume: null,
     };
 
-    this.handleAudioReady = this.handleAudioReady.bind(this);
-    this.handleAudioChange = this.handleAudioChange.bind(this);
-    this.handleProgressChange = this.handleProgressChange.bind(this);
-    this.handleVolumeChange = this.handleVolumeChange.bind(this);
-    this.handleRewind = this.handleRewind.bind(this);
+    this.audioReady = this.audioReady.bind(this);
+    this.audioChange = this.audioChange.bind(this);
+    this.progressChange = this.progressChange.bind(this);
+    this.volumeChange = this.volumeChange.bind(this);
+    this.rewind = this.rewind.bind(this);
   }
 
-  handleAudioReady() {
+  audioReady() {
     this.setState({
       progress: {
         timePassed: 0,
@@ -49,13 +49,13 @@ class Player extends Component {
     });
   }
 
-  handleAudioChange(duration) {
+  audioChange(duration) {
     this.setState({
       duration,
     });
   }
 
-  handleProgressChange(timePassed, seek) {
+  progressChange(timePassed, seek) {
     this.setState({
       progress: {
         timePassed,
@@ -64,7 +64,7 @@ class Player extends Component {
     });
   }
 
-  handleVolumeChange(volume) {
+  volumeChange(volume) {
     this.setState({
       prevVolume: this.state.volume,
     });
@@ -73,7 +73,7 @@ class Player extends Component {
     });
   }
 
-  handleRewind() {
+  rewind() {
     if (this.state.progress.timePassed > 5 || !this.props.history.length) {
       this.setState({
         progress: {
@@ -82,7 +82,7 @@ class Player extends Component {
         },
       });
     } else {
-      this.props.handlePrevious();
+      this.props.previousTune();
     }
   }
 
@@ -97,37 +97,37 @@ class Player extends Component {
             progress={this.state.progress}
             volume={this.state.volume}
             playing={this.props.playing}
-            handlePause={this.props.handlePause}
-            handleNext={this.props.handleNext}
-            handleReady={this.handleAudioReady}
-            handleChange={this.handleAudioChange}
-            handleProgressChange={this.handleProgressChange}
+            pauseTune={this.props.pauseTune}
+            nextTune={this.props.nextTune}
+            audioReady={this.audioReady}
+            audioChange={this.audioChange}
+            progressChange={this.progressChange}
           />
         )}
         <PlayerButtons
           playing={this.props.playing}
           progress={this.state.progress}
-          handleAudioReady={this.handleAudioReady}
-          handlePrevious={this.handleRewind}
-          handlePlay={this.props.handlePlay}
-          handlePause={this.props.handlePause}
-          handleNext={this.props.handleNext}
+          audioReady={this.audioReady}
+          previousTune={this.rewind}
+          playTune={this.props.playTune}
+          pauseTune={this.props.pauseTune}
+          nextTune={this.props.nextTune}
         />
         <PlayerTimeline
           progress={this.state.progress}
           duration={this.state.duration}
-          handleProgressChange={this.handleProgressChange}
+          progressChange={this.progressChange}
         />
         <PlayerVolume
           volume={this.state.volume}
           prevVolume={this.state.prevVolume}
-          handleVolumeChange={this.handleVolumeChange}
+          volumeChange={this.volumeChange}
         />
         <QueueItem tune={tune} />
         <Queue
           queue={this.props.queue}
-          handleRemove={this.props.handleRemove}
-          handleSkipTo={this.props.handleSkipTo}
+          removeTune={this.props.removeTune}
+          skipToTune={this.props.skipToTune}
         />
       </PlayerControls>
     );
@@ -138,12 +138,12 @@ Player.propTypes = {
   queue: PropTypes.arrayOf(PropTypes.shape()).isRequired,
   playing: PropTypes.bool.isRequired,
   history: PropTypes.arrayOf(PropTypes.shape()).isRequired,
-  handleRemove: PropTypes.func.isRequired,
-  handlePlay: PropTypes.func.isRequired,
-  handlePause: PropTypes.func.isRequired,
-  handleSkipTo: PropTypes.func.isRequired,
-  handlePrevious: PropTypes.func.isRequired,
-  handleNext: PropTypes.func.isRequired,
+  removeTune: PropTypes.func.isRequired,
+  playTune: PropTypes.func.isRequired,
+  pauseTune: PropTypes.func.isRequired,
+  skipToTune: PropTypes.func.isRequired,
+  previousTune: PropTypes.func.isRequired,
+  nextTune: PropTypes.func.isRequired,
 };
 
 export default Player;

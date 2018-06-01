@@ -26,7 +26,7 @@ const Tunes = styled.div`
   margin: 1rem 0;
 `;
 
-function AnimeInfo({ anime, error, handleAddTune }) {
+function AnimeInfo({ anime, error, addTune }) {
   if (error) {
     return <div>Error: {error.message}</div>;
   } else if (anime) {
@@ -69,7 +69,7 @@ function AnimeInfo({ anime, error, handleAddTune }) {
               anime={{ english: anime.title, japanese: anime.title_japanese }}
               image={anime.image_url}
               malId={anime.mal_id}
-              handleAddTune={handleAddTune}
+              addTune={addTune}
             />
             <AnimeTunes
               type="ED"
@@ -77,7 +77,7 @@ function AnimeInfo({ anime, error, handleAddTune }) {
               anime={{ english: anime.title, japanese: anime.title_japanese }}
               image={anime.image_url}
               malId={anime.mal_id}
-              handleAddTune={handleAddTune}
+              addTune={addTune}
             />
           </Tunes>
           <p>
@@ -96,7 +96,7 @@ function AnimeInfo({ anime, error, handleAddTune }) {
 AnimeInfo.propTypes = {
   error: PropTypes.shape(),
   anime: PropTypes.shape(),
-  handleAddTune: PropTypes.func.isRequired,
+  addTune: PropTypes.func.isRequired,
 };
 AnimeInfo.defaultProps = {
   error: null,

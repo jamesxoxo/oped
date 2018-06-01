@@ -14,9 +14,9 @@ class PlayerPlayPauseButton extends Component {
 
   handleClick() {
     if (this.props.playing) {
-      this.props.handlePause();
+      this.props.pauseTune();
     } else {
-      this.props.handlePlay();
+      this.props.playTune();
     }
   }
 
@@ -34,8 +34,8 @@ class PlayerPlayPauseButton extends Component {
 
 PlayerPlayPauseButton.propTypes = {
   playing: PropTypes.bool.isRequired,
-  handlePlay: PropTypes.func.isRequired,
-  handlePause: PropTypes.func.isRequired,
+  playTune: PropTypes.func.isRequired,
+  pauseTune: PropTypes.func.isRequired,
 };
 
 export default PlayerPlayPauseButton;

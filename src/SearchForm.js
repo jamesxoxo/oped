@@ -33,7 +33,7 @@ class SearchForm extends Component {
   }
 
   componentDidMount() {
-    this.props.handleSearchSubmit(this.state.value);
+    this.props.searchSubmit(this.state.value);
   }
 
   handleChange(event) {
@@ -41,7 +41,7 @@ class SearchForm extends Component {
   }
 
   handleSubmit(event) {
-    this.props.handleSearchSubmit(this.state.value);
+    this.props.searchSubmit(this.state.value);
     this.props.history.push(`/results?search=${this.state.value}`);
     event.preventDefault();
   }
@@ -67,9 +67,9 @@ class SearchForm extends Component {
 }
 
 SearchForm.propTypes = {
-  handleSearchSubmit: PropTypes.func.isRequired,
   history: PropTypes.shape().isRequired,
   location: PropTypes.shape().isRequired,
+  searchSubmit: PropTypes.func.isRequired,
 };
 
 export default withRouter(SearchForm);
