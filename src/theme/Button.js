@@ -8,7 +8,7 @@ const Button = styled.button`
   padding-left: ${props => props.theme.inputPaddingX};
   cursor: pointer;
   user-select: none;
-  border: 1px solid ${props => props.theme.primary};
+  border: 1px solid ${props => props.theme.grey};
 
   & + & {
     border-left: 0;

@@ -7,7 +7,7 @@ const FormControl = styled.input`
   padding-right: ${props => props.theme.inputPaddingX};
   padding-bottom: ${props => props.theme.inputPaddingY};
   padding-left: ${props => props.theme.inputPaddingX};
-  border: 1px solid #d2d2d2;
+  border: 1px solid ${props => props.theme.grey};
 `;
 
 export default FormControl;
