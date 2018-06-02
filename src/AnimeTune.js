@@ -98,7 +98,6 @@ class AnimeTune extends Component {
     return (
       <div>
         <span title={this.state.tune.title}>{text}</span>{' '}
-        {/* @Todo: Wrap controls */}
         <span>
           <Button aria-label="Play" onClick={this.handlePlayClick}>
             <FontAwesomeIcon icon={faPlay} />
