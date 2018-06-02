@@ -8,9 +8,11 @@ class PlayerAudio extends Component {
     super(props);
     this.state = {
       audio: null,
+      loaded: false,
     };
 
     this.handleReady = this.handleReady.bind(this);
+    this.handlePlay = this.handlePlay.bind(this);
     this.handleEnd = this.handleEnd.bind(this);
     this.handleStateChange = this.handleStateChange.bind(this);
   }
@@ -45,19 +47,15 @@ class PlayerAudio extends Component {
       audio,
     });
 
+    this.load();
+
     this.timer = setInterval(() => this.tick(), 100);
   }
 
-  handleStateChange(event) {
-    const audio = event.target;
-    const duration = audio.getDuration();
-
-    if (event.data === -1) {
-      this.props.setProgress(0);
-
-      if (duration) {
-        this.props.setDuration(audio.getDuration());
-      }
+  handlePlay() {
+    if (!this.state.loaded) {
+      this.props.setProgress(0, true);
+      this.setState({ loaded: true });
     }
   }
 
@@ -65,10 +63,27 @@ class PlayerAudio extends Component {
     this.props.nextTune();
   }
 
+  handleStateChange(event) {
+    const duration = event.target.getDuration();
+
+    if (event.data === -1 || event.data === 5) {
+      this.load();
+    }
+
+    if (duration) {
+      this.props.setDuration(duration);
+    }
+  }
+
   tick() {
     if (this.props.playing) {
       this.props.setProgress(this.state.audio.getCurrentTime(), false);
     }
+  }
+
+  load() {
+    this.setState({ loaded: false });
+    this.state.audio.playVideo();
   }
 
   render() {
@@ -84,6 +99,7 @@ class PlayerAudio extends Component {
           videoId={this.props.tune.id}
           opts={options}
           onReady={this.handleReady}
+          onPlay={this.handlePlay}
           onEnd={this.handleEnd}
           onStateChange={this.handleStateChange}
         />

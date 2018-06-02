@@ -45,7 +45,7 @@ class Player extends Component {
     });
   }
 
-  setProgress(timePassed = 0, seek = false) {
+  setProgress(timePassed = 0, seek) {
     this.setState({
       progress: {
         timePassed,
@@ -87,7 +87,6 @@ class Player extends Component {
             progress={this.state.progress}
             volume={this.state.volume}
             playing={this.props.playing}
-            pauseTune={this.props.pauseTune}
             nextTune={this.props.nextTune}
             audioReady={this.audioReady}
             setDuration={this.setDuration}

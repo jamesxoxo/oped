@@ -18,7 +18,7 @@ const Image = styled.img`
 `;
 
 const Text = styled.div`
-  max-width: 240px;
+  width: 240px;
   overflow: hidden;
   font-size: 0.8rem;
   white-space: nowrap;
