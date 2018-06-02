@@ -48,7 +48,7 @@ class SearchForm extends Component {
 
   render() {
     return (
-      // Todo: Maybe have a way to load in your anime list
+      // @Todo: Maybe have a way to load in your anime list
       <Form onSubmit={this.handleSubmit}>
         <Label htmlFor="search">
           <ScreenReader>Search</ScreenReader>

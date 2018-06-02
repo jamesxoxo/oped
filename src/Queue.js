@@ -53,7 +53,7 @@ class Queue extends Component {
         <QueueButton open={this.state.open} buttonClick={this.buttonClick} />
         <List open={this.state.open}>
           {this.props.queue.map(tune => (
-            // Todo: Sort out better ids that actually work
+            // @Todo: Sort out better ids that actually work
             <Item key={tune.id}>
               <QueueItem
                 tune={tune}
