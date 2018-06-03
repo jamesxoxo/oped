@@ -15,8 +15,10 @@ const List = styled.ul`
   bottom: 71px;
   z-index: -1;
   display: ${props => (props.open ? 'block' : 'none')};
+  height: 239px;
   padding: 0;
   margin-bottom: 0;
+  overflow-y: scroll;
   list-style: none;
   background-color: #fff;
   border: 1px solid ${props => props.theme.primary};
