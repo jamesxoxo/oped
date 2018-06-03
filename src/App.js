@@ -9,7 +9,6 @@ import Anime from './Anime';
 import Player from './Player';
 
 const theme = {
-  white: '#fff',
   grey: '#d2d2d2',
   black: '#212529',
   primary: '#e48d9c',
