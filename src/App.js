@@ -55,13 +55,11 @@ class App extends Component {
 
   componentDidMount() {
     this.hydrateState();
-
     window.addEventListener('beforeunload', this.saveState);
   }
 
   componentWillUnmount() {
     window.removeEventListener('beforeunload', this.saveState);
-
     this.saveState();
   }
 
@@ -78,7 +76,10 @@ class App extends Component {
 
   saveState() {
     localStorage.setItem('queue', JSON.stringify(this.state.queue));
-    localStorage.setItem('history', JSON.stringify(this.state.history));
+    localStorage.setItem(
+      'history',
+      JSON.stringify(this.state.history.slice(0, 20)),
+    );
   }
 
   addTune(tune, play) {
