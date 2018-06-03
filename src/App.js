@@ -39,6 +39,7 @@ class App extends Component {
       queue: [],
       playing: false,
       history: [],
+      inputFocused: false,
     };
 
     this.updateState = this.updateState.bind(this);
@@ -139,6 +140,7 @@ class App extends Component {
                   queue={this.state.queue}
                   playing={this.state.playing}
                   history={this.state.history}
+                  inputFocused={this.state.inputFocused}
                   removeTune={this.removeTune}
                   playTune={this.playTune}
                   pauseTune={this.pauseTune}

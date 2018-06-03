@@ -68,11 +68,7 @@ class PlayerVolume extends Component {
   }
 
   handleClick() {
-    if (this.props.volume > 0) {
-      this.props.setVolume(0);
-    } else {
-      this.props.setVolume(this.props.prevVolume);
-    }
+    this.props.toggleMute();
   }
 
   render() {
@@ -110,11 +106,8 @@ class PlayerVolume extends Component {
 
 PlayerVolume.propTypes = {
   volume: PropTypes.number.isRequired,
-  prevVolume: PropTypes.number,
   setVolume: PropTypes.func.isRequired,
-};
-PlayerVolume.defaultProps = {
-  prevVolume: null,
+  toggleMute: PropTypes.func.isRequired,
 };
 
 export default PlayerVolume;

@@ -29,6 +29,8 @@ class SearchForm extends Component {
     };
 
     this.handleChange = this.handleChange.bind(this);
+    this.handleFocus = this.handleFocus.bind(this);
+    this.handleBlur = this.handleBlur.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -39,6 +41,18 @@ class SearchForm extends Component {
   handleChange(event) {
     this.setState({
       value: event.target.value,
+    });
+  }
+
+  handleFocus() {
+    this.props.updateState({
+      inputFocused: true,
+    });
+  }
+
+  handleBlur() {
+    this.props.updateState({
+      inputFocused: false,
     });
   }
 
@@ -59,6 +73,8 @@ class SearchForm extends Component {
             value={this.state.value}
             placeholder="Name of anime"
             onChange={this.handleChange}
+            onFocus={this.handleFocus}
+            onBlur={this.handleBlur}
           />
         </Label>
         <Button type="submit">Submit</Button>
@@ -70,6 +86,7 @@ class SearchForm extends Component {
 SearchForm.propTypes = {
   location: PropTypes.shape().isRequired,
   search: PropTypes.func.isRequired,
+  updateState: PropTypes.func.isRequired,
 };
 
 export default withRouter(SearchForm);

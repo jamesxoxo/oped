@@ -33,10 +33,21 @@ class Player extends Component {
       prevVolume: null,
     };
 
+    this.handleKeyPress = this.handleKeyPress.bind(this);
     this.setDuration = this.setDuration.bind(this);
     this.setProgress = this.setProgress.bind(this);
     this.setVolume = this.setVolume.bind(this);
+    this.togglePlay = this.togglePlay.bind(this);
+    this.toggleMute = this.toggleMute.bind(this);
     this.rewind = this.rewind.bind(this);
+  }
+
+  componentDidMount() {
+    document.addEventListener('keypress', this.handleKeyPress);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('keypress', this.handleKeyPress);
   }
 
   setDuration(duration) {
@@ -61,6 +72,34 @@ class Player extends Component {
     this.setState({
       volume,
     });
+  }
+
+  togglePlay() {
+    if (this.props.playing) {
+      this.props.pauseTune();
+    } else {
+      this.props.playTune();
+    }
+  }
+
+  toggleMute() {
+    if (this.state.volume > 0) {
+      this.setVolume(0);
+    } else {
+      this.setVolume(this.state.prevVolume);
+    }
+  }
+
+  handleKeyPress(event) {
+    if (this.props.inputFocused) return;
+
+    if (event.code === 'Space' || event.code === 'KeyK') {
+      this.togglePlay();
+      event.preventDefault();
+    } else if (event.code === 'KeyM') {
+      this.toggleMute();
+      event.preventDefault();
+    }
   }
 
   rewind() {
@@ -98,8 +137,7 @@ class Player extends Component {
           progress={this.state.progress}
           audioReady={this.audioReady}
           previousTune={this.rewind}
-          playTune={this.props.playTune}
-          pauseTune={this.props.pauseTune}
+          togglePlay={this.togglePlay}
           nextTune={this.props.nextTune}
         />
         <PlayerTimeline
@@ -111,6 +149,7 @@ class Player extends Component {
           volume={this.state.volume}
           prevVolume={this.state.prevVolume}
           setVolume={this.setVolume}
+          toggleMute={this.toggleMute}
         />
         <QueueItem tune={tune} />
         <Queue
@@ -127,6 +166,7 @@ Player.propTypes = {
   queue: PropTypes.arrayOf(PropTypes.shape()).isRequired,
   playing: PropTypes.bool.isRequired,
   history: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+  inputFocused: PropTypes.bool.isRequired,
   removeTune: PropTypes.func.isRequired,
   playTune: PropTypes.func.isRequired,
   pauseTune: PropTypes.func.isRequired,

@@ -54,7 +54,9 @@ class Search extends Component {
   }
 
   render() {
-    return <SearchForm search={this.search} />;
+    return (
+      <SearchForm search={this.search} updateState={this.props.updateState} />
+    );
   }
 }
 

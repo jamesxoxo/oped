@@ -37,9 +37,8 @@ class AnimeTune extends Component {
 
     // Search for the specific track title with artist
     youtubeSearch(title, options)
-      .then(result => result.results)
       .then(result => {
-        if (result.length) {
+        if (result.results.length) {
           return result;
         }
 
@@ -48,6 +47,7 @@ class AnimeTune extends Component {
         // Search for OP/ED
         return youtubeSearch(`"${anime.english}" ${type} ${number}`, options);
       })
+      .then(result => result.results)
       .then(result => {
         if (!strict) {
           // Find video titles that contain the name of the specific anime

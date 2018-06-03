@@ -12,23 +12,13 @@ const Buttons = styled.div`
   margin-right: 1rem;
 `;
 
-function PlayerButtons({
-  playing,
-  previousTune,
-  playTune,
-  pauseTune,
-  nextTune,
-}) {
+function PlayerButtons({ playing, previousTune, togglePlay, nextTune }) {
   return (
     <Buttons>
       <Button onClick={previousTune}>
         <FontAwesomeIcon icon={faStepBackward} />
       </Button>
-      <PlayerPlayPauseButton
-        playing={playing}
-        playTune={playTune}
-        pauseTune={pauseTune}
-      />
+      <PlayerPlayPauseButton playing={playing} togglePlay={togglePlay} />
       <Button onClick={nextTune}>
         <FontAwesomeIcon icon={faStepForward} />
       </Button>
@@ -39,8 +29,7 @@ function PlayerButtons({
 PlayerButtons.propTypes = {
   playing: PropTypes.bool.isRequired,
   previousTune: PropTypes.func.isRequired,
-  playTune: PropTypes.func.isRequired,
-  pauseTune: PropTypes.func.isRequired,
+  togglePlay: PropTypes.func.isRequired,
   nextTune: PropTypes.func.isRequired,
 };
 
