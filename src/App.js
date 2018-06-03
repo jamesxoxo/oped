@@ -36,12 +36,14 @@ class App extends Component {
       error: null,
       results: [],
       queue: [],
-      playing: false,
       history: [],
+      playing: false,
       inputFocused: false,
     };
 
+    this.hydrateState = this.hydrateState.bind(this);
     this.updateState = this.updateState.bind(this);
+    this.saveState = this.saveState.bind(this);
     this.addTune = this.addTune.bind(this);
     this.removeTune = this.removeTune.bind(this);
     this.playTune = this.playTune.bind(this);
@@ -51,8 +53,32 @@ class App extends Component {
     this.nextTune = this.nextTune.bind(this);
   }
 
+  componentDidMount() {
+    this.hydrateState();
+
+    window.addEventListener('beforeunload', this.saveState);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('beforeunload', this.saveState);
+
+    this.saveState();
+  }
+
+  hydrateState() {
+    this.setState({
+      queue: JSON.parse(localStorage.getItem('queue')),
+      history: JSON.parse(localStorage.getItem('history')),
+    });
+  }
+
   updateState(state) {
     this.setState(state);
+  }
+
+  saveState() {
+    localStorage.setItem('queue', JSON.stringify(this.state.queue));
+    localStorage.setItem('history', JSON.stringify(this.state.history));
   }
 
   addTune(tune, play) {
@@ -137,8 +163,8 @@ class App extends Component {
               {this.state.queue.length > 0 && (
                 <Player
                   queue={this.state.queue}
-                  playing={this.state.playing}
                   history={this.state.history}
+                  playing={this.state.playing}
                   inputFocused={this.state.inputFocused}
                   removeTune={this.removeTune}
                   playTune={this.playTune}

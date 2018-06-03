@@ -165,8 +165,8 @@ class Player extends Component {
 
 Player.propTypes = {
   queue: PropTypes.arrayOf(PropTypes.shape()).isRequired,
-  playing: PropTypes.bool.isRequired,
   history: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+  playing: PropTypes.bool.isRequired,
   inputFocused: PropTypes.bool.isRequired,
   removeTune: PropTypes.func.isRequired,
   playTune: PropTypes.func.isRequired,
