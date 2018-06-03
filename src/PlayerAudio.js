@@ -8,7 +8,6 @@ class PlayerAudio extends Component {
     super(props);
     this.state = {
       audio: null,
-      loaded: false,
     };
 
     this.handleReady = this.handleReady.bind(this);
@@ -53,9 +52,11 @@ class PlayerAudio extends Component {
   }
 
   handlePlay() {
-    if (!this.state.loaded) {
+    if (!this.props.loaded) {
       this.props.setProgress(0, true);
-      this.setState({ loaded: true });
+      this.props.updateState({
+        loaded: true,
+      });
     }
   }
 
@@ -71,7 +72,9 @@ class PlayerAudio extends Component {
     }
 
     if (duration) {
-      this.props.setDuration(duration);
+      this.props.updateState({
+        duration,
+      });
     }
   }
 
@@ -82,7 +85,7 @@ class PlayerAudio extends Component {
   }
 
   load() {
-    this.setState({
+    this.props.updateState({
       loaded: false,
     });
     this.state.audio.playVideo();
@@ -118,8 +121,9 @@ PlayerAudio.propTypes = {
   }).isRequired,
   playing: PropTypes.bool.isRequired,
   volume: PropTypes.number.isRequired,
+  loaded: PropTypes.bool.isRequired,
   nextTune: PropTypes.func.isRequired,
-  setDuration: PropTypes.func.isRequired,
+  updateState: PropTypes.func.isRequired,
   setProgress: PropTypes.func.isRequired,
 };
 

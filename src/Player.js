@@ -31,10 +31,11 @@ class Player extends Component {
       duration: null,
       volume: 100,
       prevVolume: null,
+      loaded: false,
     };
 
     this.handleKeyPress = this.handleKeyPress.bind(this);
-    this.setDuration = this.setDuration.bind(this);
+    this.updateState = this.updateState.bind(this);
     this.setProgress = this.setProgress.bind(this);
     this.setVolume = this.setVolume.bind(this);
     this.togglePlay = this.togglePlay.bind(this);
@@ -48,12 +49,6 @@ class Player extends Component {
 
   componentWillUnmount() {
     document.removeEventListener('keypress', this.handleKeyPress);
-  }
-
-  setDuration(duration) {
-    this.setState({
-      duration,
-    });
   }
 
   setProgress(timePassed = 0, seek) {
@@ -72,6 +67,10 @@ class Player extends Component {
     this.setState({
       volume,
     });
+  }
+
+  updateState(state) {
+    this.setState(state);
   }
 
   togglePlay() {
@@ -125,10 +124,11 @@ class Player extends Component {
             tune={tune}
             progress={this.state.progress}
             volume={this.state.volume}
+            loaded={this.state.loaded}
             playing={this.props.playing}
             nextTune={this.props.nextTune}
             audioReady={this.audioReady}
-            setDuration={this.setDuration}
+            updateState={this.updateState}
             setProgress={this.setProgress}
           />
         )}
@@ -143,6 +143,7 @@ class Player extends Component {
         <PlayerTimeline
           progress={this.state.progress}
           duration={this.state.duration}
+          loaded={this.state.loaded}
           setProgress={this.setProgress}
         />
         <PlayerVolume

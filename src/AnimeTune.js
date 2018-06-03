@@ -67,6 +67,7 @@ class AnimeTune extends Component {
         return result;
       })
       .then(result => {
+        // @Todo: Check that these words aren't actually in the anime title
         const banned = ['remix', 'cover'];
 
         return result.filter(

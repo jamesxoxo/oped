@@ -52,6 +52,7 @@ class PlayerTimeline extends Component {
           value={this.props.progress.timePassed}
           min="0"
           max={this.props.duration}
+          disabled={!this.props.loaded}
           onChange={this.handleChange}
         />
         <Time>{formatTime(this.props.duration)}</Time>
@@ -66,6 +67,7 @@ PlayerTimeline.propTypes = {
     seek: PropTypes.bool.isRequired,
   }).isRequired,
   duration: PropTypes.number,
+  loaded: PropTypes.bool.isRequired,
   setProgress: PropTypes.func.isRequired,
 };
 PlayerTimeline.defaultProps = {
