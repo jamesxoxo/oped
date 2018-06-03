@@ -18,9 +18,7 @@ class Anime extends Component {
         result => {
           if ('error' in result) {
             this.setState({
-              error: {
-                message: result.error,
-              },
+              ...result,
             });
           } else {
             this.setState({

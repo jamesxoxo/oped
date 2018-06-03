@@ -36,9 +36,7 @@ class Search extends Component {
 
           if ('error' in result) {
             state = {
-              error: {
-                message: result.error,
-              },
+              ...result,
             };
           }
 
