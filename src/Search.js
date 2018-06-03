@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import SearchForm from './SearchForm';
 
@@ -10,7 +11,21 @@ class Search extends Component {
   }
 
   search(value) {
-    fetch(`https://api.jikan.moe/search/anime/${value}/1`)
+    const query = value.trim();
+
+    if (!query) return;
+
+    if (query.length < 3) {
+      this.props.updateState({
+        error: {
+          message: 'Search must be more than three characters.',
+        },
+      });
+
+      return;
+    }
+
+    fetch(`https://api.jikan.moe/search/anime/${query}/1`)
       .then(res => res.json())
       .then(
         result => {
@@ -34,6 +49,7 @@ class Search extends Component {
           });
         },
       );
+    this.props.history.push(`/results?search=${query}`);
   }
 
   render() {
@@ -42,7 +58,8 @@ class Search extends Component {
 }
 
 Search.propTypes = {
+  history: PropTypes.shape().isRequired,
   updateState: PropTypes.func.isRequired,
 };
 
-export default Search;
+export default withRouter(Search);

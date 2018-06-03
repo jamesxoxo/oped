@@ -41,11 +41,7 @@ class SearchForm extends Component {
   }
 
   handleSubmit(event) {
-    if (this.state.value.trim()) {
-      this.props.search(this.state.value);
-      this.props.history.push(`/results?search=${this.state.value}`);
-    }
-
+    this.props.search(this.state.value);
     event.preventDefault();
   }
 
@@ -70,7 +66,6 @@ class SearchForm extends Component {
 }
 
 SearchForm.propTypes = {
-  history: PropTypes.shape().isRequired,
   location: PropTypes.shape().isRequired,
   search: PropTypes.func.isRequired,
 };
