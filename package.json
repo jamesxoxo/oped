@@ -14,7 +14,7 @@
     "react-scripts": "1.1.4",
     "react-youtube": "^7.6.0",
     "styled-components": "^3.3.0",
-    "youtube-search-promise": "^1.0.3"
+    "youtube-search": "^1.1.1"
   },
   "lint-staged": {
     "src/**/*.{js,jsx,json,css}": [

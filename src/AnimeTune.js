@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import youtubeSearch from 'youtube-search-promise';
+import youtubeSearch from 'youtube-search';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import faPlay from '@fortawesome/fontawesome-free-solid/faPlay';
 import faPlus from '@fortawesome/fontawesome-free-solid/faPlus';
@@ -37,6 +37,7 @@ class AnimeTune extends Component {
 
     // Search for the specific track title with artist
     youtubeSearch(title, options)
+      .then(result => result.results)
       .then(result => {
         if (result.length) {
           return result;
