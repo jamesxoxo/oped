@@ -29,10 +29,11 @@ class AnimeTune extends Component {
     const { title, anime, type, number } = this.props;
     const options = {
       key,
-      maxResults: 1,
+      maxResults: 3,
       type: 'video',
       videoEmbeddable: true,
     };
+    let strict = true;
 
     // Search for the specific track title with artist
     youtubeSearch(title, options)
@@ -41,14 +42,13 @@ class AnimeTune extends Component {
           return result;
         }
 
-        // Search for the top 3 OP/ED
-        return youtubeSearch(`"${anime.english}" ${type} ${number}`, {
-          ...options,
-          maxResults: 3,
-        });
+        strict = false;
+
+        // Search for OP/ED
+        return youtubeSearch(`"${anime.english}" ${type} ${number}`, options);
       })
       .then(result => {
-        if (result.length > 1) {
+        if (!strict) {
           // Find video titles that contain the name of the specific anime
           const matched = result.filter(
             video =>
@@ -64,6 +64,14 @@ class AnimeTune extends Component {
         }
 
         return result;
+      })
+      .then(result => {
+        const banned = ['remix', 'cover'];
+
+        return result.filter(
+          video =>
+            !banned.some(string => video.title.toLowerCase().includes(string)),
+        );
       })
       .then(result => {
         this.setState({ tune: result[0] });
