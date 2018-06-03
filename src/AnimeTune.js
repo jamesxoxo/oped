@@ -1,12 +1,17 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import youtubeSearch from 'youtube-search-promise';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import faPlay from '@fortawesome/fontawesome-free-solid/faPlay';
 import faPlus from '@fortawesome/fontawesome-free-solid/faPlus';
 import Button from './theme/Button';
 
-const API_KEY = 'AIzaSyDNS7Q_55JVp_k2lS85S36OIN1WuawqY84';
+const Buttons = styled.span`
+  display: inline-block;
+`;
+
+const key = 'AIzaSyDNS7Q_55JVp_k2lS85S36OIN1WuawqY84';
 
 class AnimeTune extends Component {
   constructor(props) {
@@ -23,7 +28,7 @@ class AnimeTune extends Component {
   componentDidMount() {
     const { title, anime, type, number } = this.props;
     const options = {
-      key: API_KEY,
+      key,
       maxResults: 1,
       type: 'video',
       videoEmbeddable: true,
@@ -98,14 +103,14 @@ class AnimeTune extends Component {
     return (
       <div>
         <span title={this.state.tune.title}>{text}</span>{' '}
-        <span>
+        <Buttons>
           <Button aria-label="Play" onClick={this.handlePlayClick}>
             <FontAwesomeIcon icon={faPlay} />
           </Button>
           <Button onClick={this.handleAddClick}>
             <FontAwesomeIcon icon={faPlus} />
           </Button>
-        </span>
+        </Buttons>
       </div>
     );
   }

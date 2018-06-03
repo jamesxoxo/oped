@@ -14,6 +14,12 @@ const List = styled.ul`
   }
 `;
 
+const Item = styled.li`
+  &:not(:last-child) {
+    margin-bottom: 0.5rem;
+  }
+`;
+
 function AnimeTunes({ type, tunes, anime, image, malId, addTune }) {
   if (tunes.length) {
     return (
@@ -29,7 +35,7 @@ function AnimeTunes({ type, tunes, anime, image, malId, addTune }) {
           );
 
           return (
-            <li key={tune}>
+            <Item key={tune}>
               <AnimeTune
                 type={type}
                 number={index + 1}
@@ -39,7 +45,7 @@ function AnimeTunes({ type, tunes, anime, image, malId, addTune }) {
                 malId={malId}
                 addTune={addTune}
               />
-            </li>
+            </Item>
           );
         })}
       </List>
