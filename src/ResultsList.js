@@ -15,8 +15,6 @@ const Item = styled.li`
 `;
 
 function ResultsList({ results }) {
-  // @Todo: Maybe return null if no results. Although it's possible that the
-  // loading/error cases already  this
   return (
     <List>
       {results.map(result => (

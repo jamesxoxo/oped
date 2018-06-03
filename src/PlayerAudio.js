@@ -17,10 +17,9 @@ class PlayerAudio extends Component {
   }
 
   componentDidUpdate() {
-    // @Todo: Maybe want to check against some prevProps in here
     const { audio } = this.state;
 
-    if (!audio) return;
+    if (!audio || !this.props.loaded) return;
 
     if (this.props.playing) {
       audio.playVideo();
@@ -46,13 +45,12 @@ class PlayerAudio extends Component {
       audio,
     });
 
-    this.load();
-
     this.timer = setInterval(() => this.tick(), 100);
   }
 
   handlePlay() {
     if (!this.props.loaded) {
+      this.state.audio.pauseVideo();
       this.props.setProgress(0, true);
       this.props.updateState({
         loaded: true,
@@ -68,7 +66,9 @@ class PlayerAudio extends Component {
     const duration = event.target.getDuration();
 
     if (event.data === -1 || event.data === 5) {
-      this.load();
+      this.props.updateState({
+        loaded: false,
+      });
     }
 
     if (duration) {
@@ -84,17 +84,10 @@ class PlayerAudio extends Component {
     }
   }
 
-  load() {
-    this.props.updateState({
-      loaded: false,
-    });
-    this.state.audio.playVideo();
-  }
-
   render() {
     const options = {
       playerVars: {
-        autoplay: this.props.playing ? 1 : 0,
+        autoplay: 1,
       },
     };
 
