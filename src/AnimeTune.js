@@ -75,7 +75,9 @@ class AnimeTune extends Component {
         );
       })
       .then(result => {
-        this.setState({ tune: result[0] });
+        this.setState({
+          tune: result[0],
+        });
       });
   }
 

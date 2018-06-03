@@ -82,7 +82,9 @@ class PlayerAudio extends Component {
   }
 
   load() {
-    this.setState({ loaded: false });
+    this.setState({
+      loaded: false,
+    });
     this.state.audio.playVideo();
   }
 

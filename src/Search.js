@@ -25,9 +25,7 @@ class Search extends Component {
       return;
     }
 
-    this.props.updateState({
-      results: [],
-    });
+    this.props.updateState({ results: [] });
     fetch(`https://api.jikan.moe/search/anime/${query}/1`)
       .then(res => res.json())
       .then(
