@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import uniqueId from 'lodash/uniqueId';
 import QueueButton from './QueueButton';
 import QueueItem from './QueueItem';
 
@@ -55,8 +56,7 @@ class Queue extends Component {
         <QueueButton open={this.state.open} buttonClick={this.buttonClick} />
         <List open={this.state.open}>
           {this.props.queue.map(tune => (
-            // @Todo: Sort out better ids that actually work
-            <Item key={tune.id}>
+            <Item key={uniqueId('queue')}>
               <QueueItem
                 tune={tune}
                 controls
