@@ -29,9 +29,7 @@ function QueueItem({ tune, controls, removeTune, skipToTune }) {
       <Image src={tune.image} alt={tune.anime} width="38" height="38" />
       <div>
         <Text>
-          <Link title={unescape(tune.anime)} to={`/anime/${tune.malId}`}>
-            {unescape(tune.anime)}
-          </Link>
+          <Link to={`/anime/${tune.malId}`}>{unescape(tune.anime)}</Link>
         </Text>
         <Text title={unescape(tune.title)}>{unescape(tune.title)}</Text>
       </div>
