@@ -11,8 +11,6 @@ const Item = styled.div`
 `;
 
 const Image = styled.img`
-  width: 38px;
-  height: 38px;
   margin-right: 0.5rem;
   object-fit: cover;
 `;
