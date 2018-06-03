@@ -21,19 +21,19 @@ const Logo = styled.h1`
   font-size: 1rem;
 `;
 
-function Header({ searchSubmit }) {
+function Header({ updateState }) {
   return (
     <SiteHeader>
       <Link to="/">
         <Logo>op-ed</Logo>
       </Link>
-      <Search searchSubmit={searchSubmit} />
+      <Search updateState={updateState} />
     </SiteHeader>
   );
 }
 
 Header.propTypes = {
-  searchSubmit: PropTypes.func.isRequired,
+  updateState: PropTypes.func.isRequired,
 };
 
 export default Header;

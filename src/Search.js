@@ -6,12 +6,10 @@ class Search extends Component {
   constructor(props) {
     super(props);
 
-    this.searchSubmit = this.searchSubmit.bind(this);
+    this.search = this.search.bind(this);
   }
 
-  searchSubmit(value) {
-    if (!value.trim()) return;
-
+  search(value) {
     fetch(`https://api.jikan.moe/search/anime/${value}/1`)
       .then(res => res.json())
       .then(
@@ -28,10 +26,10 @@ class Search extends Component {
             };
           }
 
-          this.props.searchSubmit(state);
+          this.props.updateState(state);
         },
         error => {
-          this.props.searchSubmit({
+          this.props.updateState({
             error,
           });
         },
@@ -39,12 +37,12 @@ class Search extends Component {
   }
 
   render() {
-    return <SearchForm searchSubmit={this.searchSubmit} />;
+    return <SearchForm search={this.search} />;
   }
 }
 
 Search.propTypes = {
-  searchSubmit: PropTypes.func.isRequired,
+  updateState: PropTypes.func.isRequired,
 };
 
 export default Search;

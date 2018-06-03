@@ -41,7 +41,7 @@ class App extends Component {
       history: [],
     };
 
-    this.searchSubmit = this.searchSubmit.bind(this);
+    this.updateState = this.updateState.bind(this);
     this.addTune = this.addTune.bind(this);
     this.removeTune = this.removeTune.bind(this);
     this.playTune = this.playTune.bind(this);
@@ -51,7 +51,7 @@ class App extends Component {
     this.nextTune = this.nextTune.bind(this);
   }
 
-  searchSubmit(state) {
+  updateState(state) {
     this.setState(state);
   }
 
@@ -117,7 +117,7 @@ class App extends Component {
       <Router>
         <ThemeProvider theme={theme}>
           <Container className="App" controlsOpen={this.state.queue.length > 0}>
-            <Header searchSubmit={this.searchSubmit} />
+            <Header updateState={this.updateState} />
             <Main>
               <Route exact path="/" component={Home} />
               <Route
