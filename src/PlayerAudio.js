@@ -45,6 +45,8 @@ class PlayerAudio extends Component {
       audio,
     });
 
+    // @Todo: Test this
+    audio.mute();
     this.timer = setInterval(() => this.tick(), 100);
   }
 
@@ -52,6 +54,7 @@ class PlayerAudio extends Component {
     if (!this.props.loaded) {
       this.state.audio.pauseVideo();
       this.props.setProgress(0, true);
+      this.state.audio.unMute();
       this.props.updateState({
         loaded: true,
       });
@@ -94,7 +97,7 @@ class PlayerAudio extends Component {
     return (
       <Hidden>
         <YouTube
-          videoId={this.props.tune.id}
+          videoId={this.props.tune.youtubeId}
           opts={options}
           onReady={this.handleReady}
           onPlay={this.handlePlay}

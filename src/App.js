@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import styled, { ThemeProvider } from 'styled-components';
+import veryUniqueId from './util/veryUniqueId';
 import Header from './Header';
 import Footer from './Footer';
 import Home from './Home';
@@ -83,14 +84,17 @@ class App extends Component {
   }
 
   addTune(tune, play) {
+    const queuedIds = this.state.queue.map(queuedTune => queuedTune.id);
+    const id = veryUniqueId(queuedIds, 'queue');
+
     if (play) {
       this.setState({
-        queue: [tune, ...this.state.queue],
+        queue: [{ ...tune, id }, ...this.state.queue],
         playing: true,
       });
     } else {
       this.setState({
-        queue: [...this.state.queue, tune],
+        queue: [...this.state.queue, { ...tune, id }],
       });
     }
   }

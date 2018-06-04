@@ -21,6 +21,7 @@ injectGlobal([
 
   body {
     min-width: 808px;
+    overflow-y: scroll;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
     font-size: 1rem;
     line-height: 1.5;

@@ -21,6 +21,7 @@ class AnimeTune extends Component {
       tune: null,
     };
 
+    this.createTuneObject = this.createTuneObject.bind(this);
     this.handleAddClick = this.handleAddClick.bind(this);
     this.handlePlayClick = this.handlePlayClick.bind(this);
   }
@@ -82,27 +83,22 @@ class AnimeTune extends Component {
       });
   }
 
-  handlePlayClick() {
-    this.props.addTune(
-      {
-        id: this.state.tune.id,
-        malId: this.props.malId,
-        image: this.props.image,
-        anime: this.props.anime.english,
-        title: this.props.title,
-      },
-      true,
-    );
-  }
-
-  handleAddClick() {
-    this.props.addTune({
-      id: this.state.tune.id,
+  createTuneObject() {
+    return {
+      youtubeId: this.state.tune.id,
       malId: this.props.malId,
       image: this.props.image,
       anime: this.props.anime.english,
       title: this.props.title,
-    });
+    };
+  }
+
+  handlePlayClick() {
+    this.props.addTune(this.createTuneObject(), true);
+  }
+
+  handleAddClick() {
+    this.props.addTune(this.createTuneObject());
   }
 
   render() {
