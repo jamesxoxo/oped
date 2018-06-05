@@ -12,13 +12,23 @@ const Buttons = styled.div`
   margin-right: 1rem;
 `;
 
-function PlayerButtons({ playing, previousTune, togglePlay, nextTune }) {
+function PlayerButtons({
+  loaded,
+  playing,
+  previousTune,
+  togglePlay,
+  nextTune,
+}) {
   return (
     <Buttons>
       <Button onClick={previousTune}>
         <FontAwesomeIcon icon={faStepBackward} />
       </Button>
-      <PlayerPlayPauseButton playing={playing} togglePlay={togglePlay} />
+      <PlayerPlayPauseButton
+        loaded={loaded}
+        playing={playing}
+        togglePlay={togglePlay}
+      />
       <Button onClick={nextTune}>
         <FontAwesomeIcon icon={faStepForward} />
       </Button>
@@ -27,6 +37,7 @@ function PlayerButtons({ playing, previousTune, togglePlay, nextTune }) {
 }
 
 PlayerButtons.propTypes = {
+  loaded: PropTypes.bool.isRequired,
   playing: PropTypes.bool.isRequired,
   previousTune: PropTypes.func.isRequired,
   togglePlay: PropTypes.func.isRequired,

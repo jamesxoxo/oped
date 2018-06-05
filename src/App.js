@@ -66,9 +66,12 @@ class App extends Component {
   }
 
   hydrateState() {
+    const queue = JSON.parse(localStorage.getItem('queue')) || [];
+    const history = JSON.parse(localStorage.getItem('history')) || [];
+
     this.setState({
-      queue: JSON.parse(localStorage.getItem('queue')),
-      history: JSON.parse(localStorage.getItem('history')),
+      queue,
+      history,
     });
   }
 
@@ -85,8 +88,9 @@ class App extends Component {
   }
 
   addTune(tune, play) {
-    const queuedIds = this.state.queue.map(queuedTune => queuedTune.id);
-    const id = veryUniqueId(queuedIds, 'queue');
+    const queueIds = this.state.queue.map(queueTune => queueTune.id);
+    const historyIds = this.state.history.map(historyTune => historyTune.id);
+    const id = veryUniqueId([...queueIds, ...historyIds], 'queue');
 
     if (play) {
       this.setState({

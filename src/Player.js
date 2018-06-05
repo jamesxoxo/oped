@@ -135,6 +135,7 @@ class Player extends Component {
               setProgress={this.setProgress}
             />
             <PlayerButtons
+              loaded={this.state.loaded}
               playing={this.props.playing}
               progress={this.state.progress}
               audioReady={this.audioReady}

@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 const Button = styled.button`
   display: inline-block;
+  min-width: 41px;
   padding-top: ${props => props.theme.inputPaddingY};
   padding-right: ${props => props.theme.inputPaddingX};
   padding-bottom: ${props => props.theme.inputPaddingY};
