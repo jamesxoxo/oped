@@ -2,8 +2,8 @@
 
 import React from 'react';
 import styled from 'styled-components';
-import mp4 from './nonon.mp4';
-import webm from './nonon.webm';
+import mp4 from './video/nonon.mp4';
+import webm from './video/nonon.webm';
 
 const Video = styled.video`
   display: block;
