@@ -93,10 +93,18 @@ class App extends Component {
     const id = veryUniqueId([...queueIds, ...historyIds], 'queue');
 
     if (play) {
-      this.setState({
-        queue: [{ ...tune, id }, ...this.state.queue],
-        playing: true,
-      });
+      if (this.state.playing) {
+        this.setState({
+          queue: [{ ...tune, id }, ...this.state.queue.slice(1)],
+          playing: true,
+          history: [this.state.queue[0], ...this.state.history],
+        });
+      } else {
+        this.setState({
+          queue: [{ ...tune, id }, ...this.state.queue],
+          playing: true,
+        });
+      }
     } else {
       this.setState({
         queue: [...this.state.queue, { ...tune, id }],
@@ -140,6 +148,7 @@ class App extends Component {
     });
   }
 
+  // @Todo: If no tune in queue then pick a tune further down the page
   nextTune() {
     this.setState({
       queue: this.state.queue.slice(1),
