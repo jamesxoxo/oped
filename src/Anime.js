@@ -9,9 +9,24 @@ class Anime extends Component {
       error: null,
       anime: null,
     };
+
+    this.loadAnime = this.loadAnime.bind(this);
   }
 
   componentDidMount() {
+    this.loadAnime();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.match.params.mal_id !== this.props.match.params.mal_id) {
+      this.loadAnime();
+    }
+  }
+
+  loadAnime() {
+    this.setState({
+      anime: null,
+    });
     fetch(`https://api.jikan.moe/anime/${this.props.match.params.mal_id}`)
       .then(res => res.json())
       .then(
