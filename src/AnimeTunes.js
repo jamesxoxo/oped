@@ -24,21 +24,19 @@ function AnimeTunes({ type, tunes, anime, image, malId, addTune }) {
   if (tunes.length) {
     return (
       <List>
-        {tunes.map((tune, index) => {
-          return (
-            <Item key={tune}>
-              <AnimeTune
-                type={type}
-                number={index + 1}
-                title={cleanTitle(tune)}
-                anime={anime}
-                image={image}
-                malId={malId}
-                addTune={addTune}
-              />
-            </Item>
-          );
-        })}
+        {tunes.map((tune, index) => (
+          <Item key={tune}>
+            <AnimeTune
+              type={type}
+              number={index + 1}
+              title={cleanTitle(tune)}
+              anime={anime}
+              image={image}
+              malId={malId}
+              addTune={addTune}
+            />
+          </Item>
+        ))}
       </List>
     );
   }
