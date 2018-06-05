@@ -11,7 +11,7 @@ import QueueItem from './QueueItem';
 const PlayerControls = styled.div`
   position: fixed;
   right: 0;
-  bottom: ${props => (props.in ? '0' : '-71px')};
+  bottom: ${props => (props.show ? '0' : '-71px')};
   left: 0;
   display: flex;
   align-items: center;
@@ -120,7 +120,7 @@ class Player extends Component {
     const tune = this.props.queue[0];
 
     return (
-      <PlayerControls in={tune}>
+      <PlayerControls show={!!tune}>
         {tune && (
           <Fragment>
             <PlayerAudio
