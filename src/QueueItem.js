@@ -6,8 +6,12 @@ import unescape from './util/unescape';
 import QueueItemControls from './QueueItemControls';
 
 const Item = styled.div`
-  display: flex;
+  display: ${props => (props.single ? 'none' : 'flex')};
   align-items: center;
+
+  @media (min-width: 823px) {
+    display: flex;
+  }
 `;
 
 const Image = styled.img`
@@ -25,7 +29,7 @@ const Text = styled.div`
 
 function QueueItem({ tune, controls, removeTune, skipToTune }) {
   return (
-    <Item>
+    <Item single={!controls}>
       <Image src={tune.image} alt={tune.anime} width="38" height="38" />
       <div>
         <Text>
