@@ -17,7 +17,6 @@ function ResultsListItem({ anime }) {
     </Link>
   );
 }
-
 ResultsListItem.propTypes = {
   anime: PropTypes.shape().isRequired,
 };

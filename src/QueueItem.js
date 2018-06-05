@@ -43,7 +43,6 @@ function QueueItem({ tune, controls, removeTune, skipToTune }) {
     </Item>
   );
 }
-
 QueueItem.propTypes = {
   tune: PropTypes.shape(),
   controls: PropTypes.bool,

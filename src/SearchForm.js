@@ -82,7 +82,6 @@ class SearchForm extends Component {
     );
   }
 }
-
 SearchForm.propTypes = {
   location: PropTypes.shape().isRequired,
   search: PropTypes.func.isRequired,

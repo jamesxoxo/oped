@@ -123,7 +123,6 @@ class AnimeTune extends Component {
     );
   }
 }
-
 AnimeTune.propTypes = {
   type: PropTypes.string.isRequired,
   number: PropTypes.number.isRequired,

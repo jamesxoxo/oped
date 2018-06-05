@@ -69,7 +69,6 @@ class Queue extends Component {
     );
   }
 }
-
 Queue.propTypes = {
   queue: PropTypes.arrayOf(PropTypes.shape()).isRequired,
   removeTune: PropTypes.func.isRequired,

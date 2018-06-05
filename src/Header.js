@@ -31,7 +31,6 @@ function Header({ updateState }) {
     </SiteHeader>
   );
 }
-
 Header.propTypes = {
   updateState: PropTypes.func.isRequired,
 };

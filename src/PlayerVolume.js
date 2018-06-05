@@ -103,7 +103,6 @@ class PlayerVolume extends Component {
     );
   }
 }
-
 PlayerVolume.propTypes = {
   volume: PropTypes.number.isRequired,
   setVolume: PropTypes.func.isRequired,

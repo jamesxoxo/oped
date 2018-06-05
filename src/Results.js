@@ -14,7 +14,6 @@ function Results({ error, results, location }) {
 
   return <div>Loading...</div>;
 }
-
 Results.propTypes = {
   error: PropTypes.shape(),
   results: PropTypes.arrayOf(PropTypes.object).isRequired,

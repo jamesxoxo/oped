@@ -26,7 +26,6 @@ class QueueButton extends Component {
     );
   }
 }
-
 QueueButton.propTypes = {
   open: PropTypes.bool.isRequired,
   buttonClick: PropTypes.func.isRequired,

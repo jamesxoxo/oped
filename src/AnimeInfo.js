@@ -92,7 +92,6 @@ function AnimeInfo({ anime, error, addTune }) {
 
   return <div>Loading...</div>;
 }
-
 AnimeInfo.propTypes = {
   error: PropTypes.shape(),
   anime: PropTypes.shape(),

@@ -27,7 +27,6 @@ class PlayerPlayPauseButton extends Component {
     );
   }
 }
-
 PlayerPlayPauseButton.propTypes = {
   playing: PropTypes.bool.isRequired,
   togglePlay: PropTypes.func.isRequired,

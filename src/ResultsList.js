@@ -25,7 +25,6 @@ function ResultsList({ results }) {
     </List>
   );
 }
-
 ResultsList.propTypes = {
   results: PropTypes.arrayOf(PropTypes.object).isRequired,
 };

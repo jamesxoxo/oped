@@ -60,7 +60,6 @@ class PlayerTimeline extends Component {
     );
   }
 }
-
 PlayerTimeline.propTypes = {
   progress: PropTypes.shape({
     timePassed: PropTypes.number.isRequired,

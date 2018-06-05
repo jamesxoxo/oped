@@ -162,7 +162,6 @@ class Player extends Component {
     );
   }
 }
-
 Player.propTypes = {
   queue: PropTypes.arrayOf(PropTypes.shape()).isRequired,
   history: PropTypes.arrayOf(PropTypes.shape()).isRequired,

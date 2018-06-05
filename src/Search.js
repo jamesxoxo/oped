@@ -57,7 +57,6 @@ class Search extends Component {
     );
   }
 }
-
 Search.propTypes = {
   history: PropTypes.shape().isRequired,
   updateState: PropTypes.func.isRequired,

@@ -108,7 +108,6 @@ class PlayerAudio extends Component {
     );
   }
 }
-
 PlayerAudio.propTypes = {
   tune: PropTypes.shape().isRequired,
   progress: PropTypes.shape({

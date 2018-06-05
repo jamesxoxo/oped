@@ -44,7 +44,6 @@ class Anime extends Component {
     );
   }
 }
-
 Anime.propTypes = {
   match: PropTypes.shape().isRequired,
   addTune: PropTypes.func.isRequired,

@@ -43,7 +43,6 @@ function AnimeTunes({ type, tunes, anime, image, malId, addTune }) {
 
   return <div>No {type}s found.</div>;
 }
-
 AnimeTunes.propTypes = {
   type: PropTypes.string.isRequired,
   tunes: PropTypes.arrayOf(PropTypes.string).isRequired,

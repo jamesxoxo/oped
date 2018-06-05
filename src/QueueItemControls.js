@@ -40,7 +40,6 @@ class QueueItemControls extends Component {
     );
   }
 }
-
 QueueItemControls.propTypes = {
   id: PropTypes.string.isRequired,
   removeTune: PropTypes.func.isRequired,
