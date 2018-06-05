@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import PlayerAudio from './PlayerAudio';
@@ -11,13 +11,15 @@ import QueueItem from './QueueItem';
 const PlayerControls = styled.div`
   position: fixed;
   right: 0;
-  bottom: 0;
+  bottom: ${props => (props.in ? '0' : '-71px')};
   left: 0;
   display: flex;
   align-items: center;
+  height: 71px;
   padding: 1rem;
   background-color: #fff;
   border-top: 1px solid ${props => props.theme.primary};
+  transition: bottom 0.34s ease;
 `;
 
 class Player extends Component {
@@ -118,46 +120,48 @@ class Player extends Component {
     const tune = this.props.queue[0];
 
     return (
-      <PlayerControls>
+      <PlayerControls in={tune}>
         {tune && (
-          <PlayerAudio
-            tune={tune}
-            progress={this.state.progress}
-            volume={this.state.volume}
-            loaded={this.state.loaded}
-            playing={this.props.playing}
-            nextTune={this.props.nextTune}
-            audioReady={this.audioReady}
-            updateState={this.updateState}
-            setProgress={this.setProgress}
-          />
+          <Fragment>
+            <PlayerAudio
+              tune={tune}
+              progress={this.state.progress}
+              volume={this.state.volume}
+              loaded={this.state.loaded}
+              playing={this.props.playing}
+              nextTune={this.props.nextTune}
+              audioReady={this.audioReady}
+              updateState={this.updateState}
+              setProgress={this.setProgress}
+            />
+            <PlayerButtons
+              playing={this.props.playing}
+              progress={this.state.progress}
+              audioReady={this.audioReady}
+              previousTune={this.rewind}
+              togglePlay={this.togglePlay}
+              nextTune={this.props.nextTune}
+            />
+            <PlayerTimeline
+              progress={this.state.progress}
+              duration={this.state.duration}
+              loaded={this.state.loaded}
+              setProgress={this.setProgress}
+            />
+            <PlayerVolume
+              volume={this.state.volume}
+              prevVolume={this.state.prevVolume}
+              setVolume={this.setVolume}
+              toggleMute={this.toggleMute}
+            />
+            <QueueItem tune={tune} />
+            <Queue
+              queue={this.props.queue}
+              removeTune={this.props.removeTune}
+              skipToTune={this.props.skipToTune}
+            />
+          </Fragment>
         )}
-        <PlayerButtons
-          playing={this.props.playing}
-          progress={this.state.progress}
-          audioReady={this.audioReady}
-          previousTune={this.rewind}
-          togglePlay={this.togglePlay}
-          nextTune={this.props.nextTune}
-        />
-        <PlayerTimeline
-          progress={this.state.progress}
-          duration={this.state.duration}
-          loaded={this.state.loaded}
-          setProgress={this.setProgress}
-        />
-        <PlayerVolume
-          volume={this.state.volume}
-          prevVolume={this.state.prevVolume}
-          setVolume={this.setVolume}
-          toggleMute={this.toggleMute}
-        />
-        <QueueItem tune={tune} />
-        <Queue
-          queue={this.props.queue}
-          removeTune={this.props.removeTune}
-          skipToTune={this.props.skipToTune}
-        />
       </PlayerControls>
     );
   }

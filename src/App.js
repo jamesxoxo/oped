@@ -23,6 +23,7 @@ const Container = styled.div`
   align-items: stretch;
   min-height: 100%;
   padding-bottom: ${props => (props.controlsOpen ? '71px' : '0')};
+  transition: padding-bottom 0.35s ease;
 `;
 
 const Main = styled.section`
@@ -165,20 +166,18 @@ class App extends Component {
                 path="/anime/:mal_id"
                 render={props => <Anime {...props} addTune={this.addTune} />}
               />
-              {this.state.queue.length > 0 && (
-                <Player
-                  queue={this.state.queue}
-                  history={this.state.history}
-                  playing={this.state.playing}
-                  inputFocused={this.state.inputFocused}
-                  removeTune={this.removeTune}
-                  playTune={this.playTune}
-                  pauseTune={this.pauseTune}
-                  skipToTune={this.skipToTune}
-                  previousTune={this.previousTune}
-                  nextTune={this.nextTune}
-                />
-              )}
+              <Player
+                queue={this.state.queue}
+                history={this.state.history}
+                playing={this.state.playing}
+                inputFocused={this.state.inputFocused}
+                removeTune={this.removeTune}
+                playTune={this.playTune}
+                pauseTune={this.pauseTune}
+                skipToTune={this.skipToTune}
+                previousTune={this.previousTune}
+                nextTune={this.nextTune}
+              />
             </Main>
             <Footer />
           </Container>
