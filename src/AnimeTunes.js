@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import unescape from './util/unescape';
+import cleanTitle from './util/cleanTitle';
 import AnimeTune from './AnimeTune';
 
 const List = styled.ul`
@@ -25,21 +25,12 @@ function AnimeTunes({ type, tunes, anime, image, malId, addTune }) {
     return (
       <List>
         {tunes.map((tune, index) => {
-          const title = unescape(
-            tune
-              .replace(/#[0-9]+:? /, '')
-              .replace(/\(TV Broadcast[:;]?.*?\)/i, '')
-              .replace(/\(((TV|BD\/DVD): )?eps? .*?\)/i, '')
-              .replace(/\(Japanese version.*\)/i, '')
-              .trim(),
-          );
-
           return (
             <Item key={tune}>
               <AnimeTune
                 type={type}
                 number={index + 1}
-                title={title}
+                title={cleanTitle(tune)}
                 anime={anime}
                 image={image}
                 malId={malId}
