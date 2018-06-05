@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { HashRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import styled, { ThemeProvider } from 'styled-components';
 import veryUniqueId from './util/veryUniqueId';
 import Header from './Header';

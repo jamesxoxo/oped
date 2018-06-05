@@ -30,8 +30,6 @@ function AnimeInfo({ anime, error, addTune }) {
   if (error) {
     return <div>Error: {error.message}</div>;
   } else if (anime) {
-    const dateToLocaleDate = date => new Date(date).toLocaleDateString('en-GB');
-
     return (
       <Article>
         <Data>
@@ -49,13 +47,7 @@ function AnimeInfo({ anime, error, addTune }) {
             <dt>Status</dt>
             <dd>{anime.status}</dd>
             <dt>Aired</dt>
-            <dd>
-              {anime.aired.from !== anime.aired.to
-                ? `${dateToLocaleDate(anime.aired.from)} - ${dateToLocaleDate(
-                    anime.aired.to,
-                  )}`
-                : dateToLocaleDate(anime.aired.from)}
-            </dd>
+            <dd>{anime.aired_string}</dd>
           </dl>
         </Data>
         <Info>
