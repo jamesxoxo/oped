@@ -54,11 +54,15 @@ class Queue extends Component {
       <Container>
         <QueueButton open={this.state.open} buttonClick={this.buttonClick} />
         <List open={this.state.open}>
-          {this.props.queue.map(tune => (
+          {this.props.queue.map((tune, index) => (
             <Item key={tune.id}>
               <QueueItem
-                tune={tune}
                 controls
+                tune={tune}
+                first={index === 0}
+                loaded={this.props.loaded}
+                playing={this.props.playing}
+                togglePlay={this.props.togglePlay}
                 removeTune={this.props.removeTune}
                 skipToTune={this.props.skipToTune}
               />
@@ -70,7 +74,10 @@ class Queue extends Component {
   }
 }
 Queue.propTypes = {
+  loaded: PropTypes.bool.isRequired,
   queue: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+  playing: PropTypes.bool.isRequired,
+  togglePlay: PropTypes.func.isRequired,
   removeTune: PropTypes.func.isRequired,
   skipToTune: PropTypes.func.isRequired,
 };

@@ -157,7 +157,10 @@ class Player extends Component {
             />
             <QueueItem tune={tune} />
             <Queue
+              loaded={this.state.loaded}
               queue={this.props.queue}
+              playing={this.props.playing}
+              togglePlay={this.togglePlay}
               removeTune={this.props.removeTune}
               skipToTune={this.props.skipToTune}
             />

@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import faPlay from '@fortawesome/fontawesome-free-solid/faPlay';
 import faTrash from '@fortawesome/fontawesome-free-solid/faTrash';
+import PlayerPlayPauseButton from './PlayerPlayPauseButton';
 import Button from './theme/Button';
 
 const Buttons = styled.div`
@@ -30,9 +31,17 @@ class QueueItemControls extends Component {
   render() {
     return (
       <Buttons>
-        <Button aria-label="Play" onClick={this.handleSkipClick}>
-          <FontAwesomeIcon icon={faPlay} />
-        </Button>
+        {this.props.first ? (
+          <PlayerPlayPauseButton
+            loaded={this.props.loaded}
+            playing={this.props.playing}
+            togglePlay={this.props.togglePlay}
+          />
+        ) : (
+          <Button aria-label="Play" onClick={this.handleSkipClick}>
+            <FontAwesomeIcon icon={faPlay} />
+          </Button>
+        )}
         <Button aria-label="Remove" onClick={this.handleRemoveClick}>
           <FontAwesomeIcon icon={faTrash} />
         </Button>
@@ -42,6 +51,10 @@ class QueueItemControls extends Component {
 }
 QueueItemControls.propTypes = {
   id: PropTypes.string.isRequired,
+  first: PropTypes.bool.isRequired,
+  loaded: PropTypes.bool.isRequired,
+  playing: PropTypes.bool.isRequired,
+  togglePlay: PropTypes.func.isRequired,
   removeTune: PropTypes.func.isRequired,
   skipToTune: PropTypes.func.isRequired,
 };
