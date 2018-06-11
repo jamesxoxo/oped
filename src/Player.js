@@ -147,7 +147,10 @@ class Player extends Component {
               progress={this.state.progress}
               duration={this.state.duration}
               loaded={this.state.loaded}
+              playing={this.props.playing}
               setProgress={this.setProgress}
+              playTune={this.props.playTune}
+              pauseTune={this.props.pauseTune}
             />
             <PlayerVolume
               volume={this.state.volume}

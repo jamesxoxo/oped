@@ -29,15 +29,31 @@ const Range = styled.input`
 class PlayerTimeline extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      prevPlaying: null,
+    };
 
+    this.handleMouseDown = this.handleMouseDown.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleMouseUp = this.handleMouseUp.bind(this);
+  }
+
+  handleMouseDown() {
+    this.setState({
+      prevPlaying: this.props.playing,
+    });
+
+    this.props.pauseTune();
   }
 
   handleChange(event) {
-    // @Todo: This seems a bit glitchy when the tune is currently playing. It
-    // sometimes jumps back to its prevState timePassed value before then
-    // jumping to where the user selected
     this.props.setProgress(parseInt(event.target.value, 10), true);
+  }
+
+  handleMouseUp() {
+    if (this.state.prevPlaying) {
+      this.props.playTune();
+    }
   }
 
   render() {
@@ -53,7 +69,9 @@ class PlayerTimeline extends Component {
           min="0"
           max={this.props.duration}
           disabled={!this.props.loaded}
+          onMouseDown={this.handleMouseDown}
           onChange={this.handleChange}
+          onMouseUp={this.handleMouseUp}
         />
         <Time>{formatTime(this.props.duration)}</Time>
       </Timeline>
@@ -67,7 +85,10 @@ PlayerTimeline.propTypes = {
   }).isRequired,
   duration: PropTypes.number,
   loaded: PropTypes.bool.isRequired,
+  playing: PropTypes.bool.isRequired,
   setProgress: PropTypes.func.isRequired,
+  playTune: PropTypes.func.isRequired,
+  pauseTune: PropTypes.func.isRequired,
 };
 PlayerTimeline.defaultProps = {
   duration: null,
