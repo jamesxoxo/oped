@@ -7,8 +7,19 @@ import faPlay from '@fortawesome/fontawesome-free-solid/faPlay';
 import faPlus from '@fortawesome/fontawesome-free-solid/faPlus';
 import Button from './theme/Button';
 
+const Tune = styled.div`
+  display: flex;
+  flex-wrap: none;
+  align-items: center;
+`;
+
+const Text = styled.span`
+  flex-grow: 1;
+`;
+
 const Buttons = styled.span`
-  display: inline-block;
+  display: flex;
+  margin-left: 0.5rem;
 `;
 
 const key = 'AIzaSyDNS7Q_55JVp_k2lS85S36OIN1WuawqY84';
@@ -109,8 +120,8 @@ class AnimeTune extends Component {
     }
 
     return (
-      <div>
-        <span title={this.state.tune.title}>{text}</span>{' '}
+      <Tune>
+        <Text title={this.state.tune.title}>{text}</Text>
         <Buttons>
           <Button aria-label="Play" onClick={this.handlePlayClick}>
             <FontAwesomeIcon icon={faPlay} />
@@ -119,7 +130,7 @@ class AnimeTune extends Component {
             <FontAwesomeIcon icon={faPlus} />
           </Button>
         </Buttons>
-      </div>
+      </Tune>
     );
   }
 }

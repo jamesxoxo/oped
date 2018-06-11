@@ -15,6 +15,14 @@ const List = styled.ul`
 `;
 
 const Item = styled.li`
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid ${props => props.theme.grey};
+
+  &:last-child {
+    ${props => (props.type === 'ED' ? 'padding-bottom: 0' : '')};
+    ${props => (props.type === 'ED' ? 'border-bottom: 0' : '')};
+  }
+
   &:not(:last-child) {
     margin-bottom: 0.5rem;
   }
@@ -25,7 +33,7 @@ function AnimeTunes({ type, tunes, anime, image, malId, addTune }) {
     return (
       <List>
         {tunes.map((tune, index) => (
-          <Item key={tune}>
+          <Item key={tune} type={type}>
             <AnimeTune
               type={type}
               number={index + 1}
