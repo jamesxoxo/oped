@@ -9,6 +9,7 @@ const Button = styled.button`
   padding-left: ${props => props.theme.inputPaddingX};
   cursor: pointer;
   user-select: none;
+  background: #fff;
   border: 1px solid ${props => props.theme.grey};
 
   & + & {
