@@ -40,6 +40,7 @@ class App extends Component {
       queue: [],
       history: [],
       playing: false,
+      loaded: false,
       inputFocused: false,
     };
 
@@ -50,6 +51,7 @@ class App extends Component {
     this.removeTune = this.removeTune.bind(this);
     this.playTune = this.playTune.bind(this);
     this.pauseTune = this.pauseTune.bind(this);
+    this.togglePlay = this.togglePlay.bind(this);
     this.skipToTune = this.skipToTune.bind(this);
     this.previousTune = this.previousTune.bind(this);
     this.nextTune = this.nextTune.bind(this);
@@ -131,6 +133,14 @@ class App extends Component {
     });
   }
 
+  togglePlay() {
+    if (this.state.playing) {
+      this.pauseTune();
+    } else {
+      this.playTune();
+    }
+  }
+
   skipToTune(id) {
     const index = this.state.queue.findIndex(tune => tune.id === id);
 
@@ -177,16 +187,28 @@ class App extends Component {
               />
               <Route
                 path="/anime/:mal_id"
-                render={props => <Anime {...props} addTune={this.addTune} />}
+                render={props => (
+                  <Anime
+                    {...props}
+                    queue={this.state.queue}
+                    loaded={this.state.loaded}
+                    playing={this.state.playing}
+                    togglePlay={this.togglePlay}
+                    addTune={this.addTune}
+                  />
+                )}
               />
               <Player
                 queue={this.state.queue}
                 history={this.state.history}
                 playing={this.state.playing}
+                loaded={this.state.loaded}
                 inputFocused={this.state.inputFocused}
+                updateAppState={this.updateState}
                 removeTune={this.removeTune}
                 playTune={this.playTune}
                 pauseTune={this.pauseTune}
+                togglePlay={this.togglePlay}
                 skipToTune={this.skipToTune}
                 previousTune={this.previousTune}
                 nextTune={this.nextTune}

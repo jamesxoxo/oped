@@ -55,7 +55,7 @@ class PlayerAudio extends Component {
       this.state.audio.pauseVideo();
       this.props.setProgress(0, true);
       this.state.audio.unMute();
-      this.props.updateState({
+      this.props.updateAppState({
         loaded: true,
       });
     }
@@ -69,7 +69,7 @@ class PlayerAudio extends Component {
     const duration = event.target.getDuration();
 
     if (event.data === -1 || event.data === 5) {
-      this.props.updateState({
+      this.props.updateAppState({
         loaded: false,
       });
     }
@@ -118,6 +118,7 @@ PlayerAudio.propTypes = {
   volume: PropTypes.number.isRequired,
   loaded: PropTypes.bool.isRequired,
   nextTune: PropTypes.func.isRequired,
+  updateAppState: PropTypes.func.isRequired,
   updateState: PropTypes.func.isRequired,
   setProgress: PropTypes.func.isRequired,
 };

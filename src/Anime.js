@@ -54,6 +54,10 @@ class Anime extends Component {
       <AnimeInfo
         anime={this.state.anime}
         error={this.state.error}
+        queue={this.props.queue}
+        loaded={this.props.loaded}
+        playing={this.props.playing}
+        togglePlay={this.props.togglePlay}
         addTune={this.props.addTune}
       />
     );
@@ -61,6 +65,10 @@ class Anime extends Component {
 }
 Anime.propTypes = {
   match: PropTypes.shape().isRequired,
+  queue: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+  loaded: PropTypes.bool.isRequired,
+  playing: PropTypes.bool.isRequired,
+  togglePlay: PropTypes.func.isRequired,
   addTune: PropTypes.func.isRequired,
 };
 

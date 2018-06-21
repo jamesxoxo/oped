@@ -5,6 +5,7 @@ import youtubeSearch from 'youtube-search';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import faPlay from '@fortawesome/fontawesome-free-solid/faPlay';
 import faPlus from '@fortawesome/fontawesome-free-solid/faPlus';
+import PlayerPlayPauseButton from './PlayerPlayPauseButton';
 import Button from './theme/Button';
 
 const Tune = styled.div`
@@ -123,9 +124,17 @@ class AnimeTune extends Component {
       <Tune>
         <Text title={this.state.tune.title}>{text}</Text>
         <Buttons>
-          <Button aria-label="Play" onClick={this.handlePlayClick}>
-            <FontAwesomeIcon icon={faPlay} />
-          </Button>
+          {this.props.queue[0].youtubeId === this.state.tune.id ? (
+            <PlayerPlayPauseButton
+              loaded={this.props.loaded}
+              playing={this.props.playing}
+              togglePlay={this.props.togglePlay}
+            />
+          ) : (
+            <Button aria-label="Play" onClick={this.handlePlayClick}>
+              <FontAwesomeIcon icon={faPlay} />
+            </Button>
+          )}
           <Button onClick={this.handleAddClick}>
             <FontAwesomeIcon icon={faPlus} />
           </Button>
@@ -141,6 +150,10 @@ AnimeTune.propTypes = {
   anime: PropTypes.shape().isRequired,
   image: PropTypes.string.isRequired,
   malId: PropTypes.number.isRequired,
+  queue: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+  loaded: PropTypes.bool.isRequired,
+  playing: PropTypes.bool.isRequired,
+  togglePlay: PropTypes.func.isRequired,
   addTune: PropTypes.func.isRequired,
 };
 

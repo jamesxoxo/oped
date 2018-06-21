@@ -28,7 +28,18 @@ const Item = styled.li`
   }
 `;
 
-function AnimeTunes({ type, tunes, anime, image, malId, addTune }) {
+function AnimeTunes({
+  type,
+  tunes,
+  anime,
+  image,
+  malId,
+  queue,
+  loaded,
+  playing,
+  togglePlay,
+  addTune,
+}) {
   if (tunes.length) {
     return (
       <List>
@@ -41,6 +52,10 @@ function AnimeTunes({ type, tunes, anime, image, malId, addTune }) {
               anime={anime}
               image={image}
               malId={malId}
+              queue={queue}
+              loaded={loaded}
+              playing={playing}
+              togglePlay={togglePlay}
               addTune={addTune}
             />
           </Item>
@@ -57,6 +72,10 @@ AnimeTunes.propTypes = {
   anime: PropTypes.shape().isRequired,
   image: PropTypes.string.isRequired,
   malId: PropTypes.number.isRequired,
+  queue: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+  loaded: PropTypes.bool.isRequired,
+  playing: PropTypes.bool.isRequired,
+  togglePlay: PropTypes.func.isRequired,
   addTune: PropTypes.func.isRequired,
 };
 

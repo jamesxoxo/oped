@@ -33,14 +33,12 @@ class Player extends Component {
       duration: null,
       volume: 100,
       prevVolume: null,
-      loaded: false,
     };
 
     this.handleKeyPress = this.handleKeyPress.bind(this);
     this.updateState = this.updateState.bind(this);
     this.setProgress = this.setProgress.bind(this);
     this.setVolume = this.setVolume.bind(this);
-    this.togglePlay = this.togglePlay.bind(this);
     this.toggleMute = this.toggleMute.bind(this);
     this.rewind = this.rewind.bind(this);
   }
@@ -75,14 +73,6 @@ class Player extends Component {
     this.setState(state);
   }
 
-  togglePlay() {
-    if (this.props.playing) {
-      this.props.pauseTune();
-    } else {
-      this.props.playTune();
-    }
-  }
-
   toggleMute() {
     if (this.state.volume > 0) {
       this.setVolume(0);
@@ -95,7 +85,7 @@ class Player extends Component {
     if (this.props.inputFocused) return;
 
     if (event.code === 'Space' || event.code === 'KeyK') {
-      this.togglePlay();
+      this.props.togglePlay();
       event.preventDefault();
     } else if (event.code === 'KeyM') {
       this.toggleMute();
@@ -127,26 +117,27 @@ class Player extends Component {
               tune={tune}
               progress={this.state.progress}
               volume={this.state.volume}
-              loaded={this.state.loaded}
+              loaded={this.props.loaded}
               playing={this.props.playing}
               nextTune={this.props.nextTune}
+              updateAppState={this.props.updateAppState}
               audioReady={this.audioReady}
               updateState={this.updateState}
               setProgress={this.setProgress}
             />
             <PlayerButtons
-              loaded={this.state.loaded}
+              loaded={this.props.loaded}
               playing={this.props.playing}
               progress={this.state.progress}
               audioReady={this.audioReady}
               previousTune={this.rewind}
-              togglePlay={this.togglePlay}
+              togglePlay={this.props.togglePlay}
               nextTune={this.props.nextTune}
             />
             <PlayerTimeline
               progress={this.state.progress}
               duration={this.state.duration}
-              loaded={this.state.loaded}
+              loaded={this.props.loaded}
               playing={this.props.playing}
               setProgress={this.setProgress}
               playTune={this.props.playTune}
@@ -160,10 +151,10 @@ class Player extends Component {
             />
             <QueueItem tune={tune} />
             <Queue
-              loaded={this.state.loaded}
+              loaded={this.props.loaded}
               queue={this.props.queue}
               playing={this.props.playing}
-              togglePlay={this.togglePlay}
+              togglePlay={this.props.togglePlay}
               removeTune={this.props.removeTune}
               skipToTune={this.props.skipToTune}
             />
@@ -177,10 +168,13 @@ Player.propTypes = {
   queue: PropTypes.arrayOf(PropTypes.shape()).isRequired,
   history: PropTypes.arrayOf(PropTypes.shape()).isRequired,
   playing: PropTypes.bool.isRequired,
+  loaded: PropTypes.bool.isRequired,
+  updateAppState: PropTypes.func.isRequired,
   inputFocused: PropTypes.bool.isRequired,
   removeTune: PropTypes.func.isRequired,
   playTune: PropTypes.func.isRequired,
   pauseTune: PropTypes.func.isRequired,
+  togglePlay: PropTypes.func.isRequired,
   skipToTune: PropTypes.func.isRequired,
   previousTune: PropTypes.func.isRequired,
   nextTune: PropTypes.func.isRequired,
