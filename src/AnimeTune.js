@@ -124,7 +124,8 @@ class AnimeTune extends Component {
       <Tune>
         <Text title={this.state.tune.title}>{text}</Text>
         <Buttons>
-          {this.props.queue[0].youtubeId === this.state.tune.id ? (
+          {(this.props.queue[0] && this.props.queue[0].youtubeId) ===
+          this.state.tune.id ? (
             <PlayerPlayPauseButton
               loaded={this.props.loaded}
               playing={this.props.playing}
