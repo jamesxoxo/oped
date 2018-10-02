@@ -35,7 +35,7 @@ class Player extends Component {
       prevVolume: null,
     };
 
-    this.handleKeyPress = this.handleKeyPress.bind(this);
+    this.handleKeyDown = this.handleKeyDown.bind(this);
     this.updateState = this.updateState.bind(this);
     this.setProgress = this.setProgress.bind(this);
     this.setVolume = this.setVolume.bind(this);
@@ -44,11 +44,11 @@ class Player extends Component {
   }
 
   componentDidMount() {
-    document.addEventListener('keypress', this.handleKeyPress);
+    document.addEventListener('keydown', this.handleKeyDown);
   }
 
   componentWillUnmount() {
-    document.removeEventListener('keypress', this.handleKeyPress);
+    document.removeEventListener('keydown', this.handleKeyDown);
   }
 
   setProgress(timePassed = 0, seek) {
@@ -81,7 +81,7 @@ class Player extends Component {
     }
   }
 
-  handleKeyPress(event) {
+  handleKeyDown(event) {
     if (this.props.inputFocused) return;
 
     if (event.code === 'Space' || event.code === 'KeyK') {
