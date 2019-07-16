@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import YouTube from 'react-youtube';
-import Hidden from './theme/Hidden';
+import ScreenReader from './theme/ScreenReader';
 
 class PlayerAudio extends Component {
   constructor(props) {
@@ -106,7 +106,7 @@ class PlayerAudio extends Component {
     };
 
     return (
-      <Hidden>
+      <ScreenReader>
         <YouTube
           videoId={tune.youtubeId}
           opts={options}
@@ -115,7 +115,7 @@ class PlayerAudio extends Component {
           onEnd={this.handleEnd}
           onStateChange={this.handleStateChange}
         />
-      </Hidden>
+      </ScreenReader>
     );
   }
 }
