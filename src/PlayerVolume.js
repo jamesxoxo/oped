@@ -67,21 +67,27 @@ class PlayerVolume extends Component {
   }
 
   handleChange(event) {
-    this.props.setVolume(parseInt(event.target.value, 10));
+    const { setVolume } = this.props;
+
+    setVolume(parseInt(event.target.value, 10));
   }
 
   handleClick() {
-    this.props.toggleMute();
+    const { toggleMute } = this.props;
+
+    toggleMute();
   }
 
   render() {
+    const { volume } = this.props;
+    const { hovering } = this.state;
     let icon = faVolumeUp;
 
-    if (this.props.volume < 50) {
+    if (volume < 50) {
       icon = faVolumeDown;
     }
 
-    if (this.props.volume === 0) {
+    if (volume === 0) {
       icon = faVolumeOff;
     }
 
@@ -90,10 +96,10 @@ class PlayerVolume extends Component {
         onMouseEnter={this.handleMouseEnter}
         onMouseLeave={this.handleMouseLeave}
       >
-        <VolumeSliderPanel hovering={this.state.hovering}>
+        <VolumeSliderPanel hovering={hovering}>
           <VolumeSlider
             type="range"
-            value={this.props.volume}
+            value={volume}
             min="0"
             max="100"
             onChange={this.handleChange}

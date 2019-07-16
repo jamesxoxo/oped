@@ -11,12 +11,13 @@ class Search extends Component {
   }
 
   search(value) {
+    const { updateState, history } = this.props;
     const query = value.trim();
 
     if (!query) return;
 
     if (query.length < 3) {
-      this.props.updateState({
+      updateState({
         error: {
           message: 'Search must be more than three characters.',
         },
@@ -25,7 +26,7 @@ class Search extends Component {
       return;
     }
 
-    this.props.updateState({ results: [] });
+    updateState({ results: [] });
     fetch(`https://api.jikan.moe/search/anime/${query}/1`)
       .then(res => res.json())
       .then(
@@ -40,21 +41,21 @@ class Search extends Component {
             };
           }
 
-          this.props.updateState(state);
+          updateState(state);
         },
         error => {
-          this.props.updateState({
+          updateState({
             error,
           });
         },
       );
-    this.props.history.push(`/results?search=${query}`);
+    history.push(`/results?search=${query}`);
   }
 
   render() {
-    return (
-      <SearchForm search={this.search} updateState={this.props.updateState} />
-    );
+    const { updateState } = this.props;
+
+    return <SearchForm search={this.search} updateState={updateState} />;
   }
 }
 Search.propTypes = {

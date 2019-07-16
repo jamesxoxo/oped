@@ -12,14 +12,18 @@ class QueueButton extends Component {
   }
 
   handleClick() {
-    this.props.buttonClick();
+    const { buttonClick } = this.props;
+
+    buttonClick();
   }
 
   render() {
+    const { open } = this.props;
+
     return (
       <Button
         onClick={this.handleClick}
-        aria-label={this.props.open ? 'Close queue' : 'Open queue'}
+        aria-label={open ? 'Close queue' : 'Open queue'}
       >
         <FontAwesomeIcon icon={faList} />
       </Button>

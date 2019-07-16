@@ -82,42 +82,44 @@ class App extends Component {
   }
 
   saveState() {
-    localStorage.setItem('queue', JSON.stringify(this.state.queue));
-    localStorage.setItem(
-      'history',
-      JSON.stringify(this.state.history.slice(0, 20)),
-    );
+    const { queue, history } = this.state;
+
+    localStorage.setItem('queue', JSON.stringify(queue));
+    localStorage.setItem('history', JSON.stringify(history.slice(0, 20)));
   }
 
   addTune(tune, play) {
-    const queueIds = this.state.queue.map(queueTune => queueTune.id);
-    const historyIds = this.state.history.map(historyTune => historyTune.id);
+    const { queue, history, playing } = this.state;
+    const queueIds = queue.map(queueTune => queueTune.id);
+    const historyIds = history.map(historyTune => historyTune.id);
     const id = veryUniqueId([...queueIds, ...historyIds], 'queue');
 
     if (play) {
-      if (this.state.playing) {
+      if (playing) {
         this.setState({
-          queue: [{ ...tune, id }, ...this.state.queue.slice(1)],
+          queue: [{ ...tune, id }, ...queue.slice(1)],
           playing: true,
-          history: [this.state.queue[0], ...this.state.history],
+          history: [queue[0], ...history],
         });
       } else {
         this.setState({
-          queue: [{ ...tune, id }, ...this.state.queue],
+          queue: [{ ...tune, id }, ...queue],
           playing: true,
         });
       }
     } else {
       this.setState({
-        queue: [...this.state.queue, { ...tune, id }],
+        queue: [...queue, { ...tune, id }],
       });
     }
   }
 
   removeTune(id) {
+    const { queue, playing } = this.state;
+
     this.setState({
-      queue: this.state.queue.filter(tune => tune.id !== id),
-      playing: this.state.queue.length === 1 ? false : this.state.playing,
+      queue: queue.filter(tune => tune.id !== id),
+      playing: queue.length === 1 ? false : playing,
     });
   }
 
@@ -134,7 +136,9 @@ class App extends Component {
   }
 
   togglePlay() {
-    if (this.state.playing) {
+    const { playing } = this.state;
+
+    if (playing) {
       this.pauseTune();
     } else {
       this.playTune();
@@ -142,47 +146,58 @@ class App extends Component {
   }
 
   skipToTune(id) {
-    const index = this.state.queue.findIndex(tune => tune.id === id);
+    const { queue, history } = this.state;
+    const index = queue.findIndex(tune => tune.id === id);
 
     this.setState({
-      queue: this.state.queue.filter((tune, i) => i >= index),
+      queue: queue.filter((tune, i) => i >= index),
       playing: true,
-      history: [this.state.queue[0], ...this.state.history],
+      history: [queue[0], ...history],
     });
   }
 
   previousTune() {
+    const { queue, history } = this.state;
+
     this.setState({
-      queue: [this.state.history[0], ...this.state.queue],
-      history: this.state.history.slice(1),
+      queue: [history[0], ...queue],
+      history: history.slice(1),
     });
   }
 
   // @Todo: If no tune in queue then pick a tune further down the page
   nextTune() {
+    const { queue, history, playing } = this.state;
+
     this.setState({
-      queue: this.state.queue.slice(1),
-      playing: this.state.queue.length === 1 ? false : this.state.playing,
-      history: [this.state.queue[0], ...this.state.history],
+      queue: queue.slice(1),
+      playing: queue.length === 1 ? false : playing,
+      history: [queue[0], ...history],
     });
   }
 
   render() {
+    const {
+      queue,
+      error,
+      results,
+      loaded,
+      playing,
+      history,
+      inputFocused,
+    } = this.state;
+
     return (
       <Router>
         <ThemeProvider theme={theme}>
-          <Container className="App" controlsOpen={this.state.queue.length > 0}>
+          <Container className="App" controlsOpen={queue.length > 0}>
             <Header updateState={this.updateState} />
             <Main>
               <Route exact path="/" component={Home} />
               <Route
                 path="/results"
                 render={props => (
-                  <Results
-                    {...props}
-                    error={this.state.error}
-                    results={this.state.results}
-                  />
+                  <Results {...props} error={error} results={results} />
                 )}
               />
               <Route
@@ -190,20 +205,20 @@ class App extends Component {
                 render={props => (
                   <Anime
                     {...props}
-                    queue={this.state.queue}
-                    loaded={this.state.loaded}
-                    playing={this.state.playing}
+                    queue={queue}
+                    loaded={loaded}
+                    playing={playing}
                     togglePlay={this.togglePlay}
                     addTune={this.addTune}
                   />
                 )}
               />
               <Player
-                queue={this.state.queue}
-                history={this.state.history}
-                playing={this.state.playing}
-                loaded={this.state.loaded}
-                inputFocused={this.state.inputFocused}
+                queue={queue}
+                history={history}
+                playing={playing}
+                loaded={loaded}
+                inputFocused={inputFocused}
                 updateAppState={this.updateState}
                 removeTune={this.removeTune}
                 playTune={this.playTune}

@@ -44,27 +44,39 @@ class Queue extends Component {
   }
 
   buttonClick() {
+    const { open } = this.state;
+
     this.setState({
-      open: !this.state.open,
+      open: !open,
     });
   }
 
   render() {
+    const {
+      queue,
+      loaded,
+      playing,
+      togglePlay,
+      removeTune,
+      skipToTune,
+    } = this.props;
+    const { open } = this.state;
+
     return (
       <Container>
-        <QueueButton open={this.state.open} buttonClick={this.buttonClick} />
-        <List open={this.state.open}>
-          {this.props.queue.map((tune, index) => (
+        <QueueButton open={open} buttonClick={this.buttonClick} />
+        <List open={open}>
+          {queue.map((tune, index) => (
             <Item key={tune.id}>
               <QueueItem
                 controls
                 tune={tune}
                 first={index === 0}
-                loaded={this.props.loaded}
-                playing={this.props.playing}
-                togglePlay={this.props.togglePlay}
-                removeTune={this.props.removeTune}
-                skipToTune={this.props.skipToTune}
+                loaded={loaded}
+                playing={playing}
+                togglePlay={togglePlay}
+                removeTune={removeTune}
+                skipToTune={skipToTune}
               />
             </Item>
           ))}

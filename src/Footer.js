@@ -14,7 +14,10 @@ function Footer() {
   return (
     <SiteFooter>
       <Paragraph>
-        &copy;{' '}
+        &copy;
+        {
+          // eslint-disable-next-line react/jsx-one-expression-per-line
+        }{' '}
         <a
           href="https://github.com/jamesxoxo/"
           target="_blank"

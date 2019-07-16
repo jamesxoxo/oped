@@ -39,41 +39,49 @@ class PlayerTimeline extends Component {
   }
 
   handleMouseDown() {
+    const { playing, pauseTune } = this.props;
+
     this.setState({
-      prevPlaying: this.props.playing,
+      prevPlaying: playing,
     });
 
-    this.props.pauseTune();
+    pauseTune();
   }
 
   handleChange(event) {
-    this.props.setProgress(parseInt(event.target.value, 10), true);
+    const { setProgress } = this.props;
+
+    setProgress(parseInt(event.target.value, 10), true);
   }
 
   handleMouseUp() {
-    if (this.state.prevPlaying) {
-      this.props.playTune();
+    const { playTune } = this.props;
+    const { prevPlaying } = this.state;
+
+    if (prevPlaying) {
+      playTune();
     }
   }
 
   render() {
+    const { progress, duration, loaded } = this.props;
     const formatTime = time =>
       new Date(time * 1000).toISOString().substr(14, 5);
 
     return (
       <Timeline>
-        <Time>{formatTime(this.props.progress.timePassed)}</Time>
+        <Time>{formatTime(progress.timePassed)}</Time>
         <Range
           type="range"
-          value={this.props.progress.timePassed}
+          value={progress.timePassed}
           min="0"
-          max={this.props.duration}
-          disabled={!this.props.loaded}
+          max={duration}
+          disabled={!loaded}
           onMouseDown={this.handleMouseDown}
           onChange={this.handleChange}
           onMouseUp={this.handleMouseUp}
         />
-        <Time>{formatTime(this.props.duration)}</Time>
+        <Time>{formatTime(duration)}</Time>
       </Timeline>
     );
   }

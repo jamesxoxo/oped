@@ -21,21 +21,27 @@ class QueueItemControls extends Component {
   }
 
   handleSkipClick() {
-    this.props.skipToTune(this.props.id);
+    const { skipToTune, id } = this.props;
+
+    skipToTune(id);
   }
 
   handleRemoveClick() {
-    this.props.removeTune(this.props.id);
+    const { removeTune, id } = this.props;
+
+    removeTune(id);
   }
 
   render() {
+    const { first, loaded, playing, togglePlay } = this.props;
+
     return (
       <Buttons>
-        {this.props.first ? (
+        {first ? (
           <PlayerPlayPauseButton
-            loaded={this.props.loaded}
-            playing={this.props.playing}
-            togglePlay={this.props.togglePlay}
+            loaded={loaded}
+            playing={playing}
+            togglePlay={togglePlay}
           />
         ) : (
           <Button aria-label="Play" onClick={this.handleSkipClick}>

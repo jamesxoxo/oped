@@ -18,16 +18,20 @@ class Anime extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.match.params.mal_id !== this.props.match.params.mal_id) {
+    const { match } = this.props;
+
+    if (prevProps.match.params.mal_id !== match.params.mal_id) {
       this.loadAnime();
     }
   }
 
   loadAnime() {
+    const { match } = this.props;
+
     this.setState({
       anime: null,
     });
-    fetch(`https://api.jikan.moe/anime/${this.props.match.params.mal_id}`)
+    fetch(`https://api.jikan.moe/anime/${match.params.mal_id}`)
       .then(res => res.json())
       .then(
         result => {
@@ -50,15 +54,18 @@ class Anime extends Component {
   }
 
   render() {
+    const { queue, loaded, playing, togglePlay, addTune } = this.props;
+    const { anime, error } = this.state;
+
     return (
       <AnimeInfo
-        anime={this.state.anime}
-        error={this.state.error}
-        queue={this.props.queue}
-        loaded={this.props.loaded}
-        playing={this.props.playing}
-        togglePlay={this.props.togglePlay}
-        addTune={this.props.addTune}
+        anime={anime}
+        error={error}
+        queue={queue}
+        loaded={loaded}
+        playing={playing}
+        togglePlay={togglePlay}
+        addTune={addTune}
       />
     );
   }

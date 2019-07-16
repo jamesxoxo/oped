@@ -17,21 +17,22 @@ class PlayerAudio extends Component {
   }
 
   componentDidUpdate() {
+    const { loaded, playing, progress, volume } = this.props;
     const { audio } = this.state;
 
-    if (!audio || !this.props.loaded) return;
+    if (!audio || !loaded) return;
 
-    if (this.props.playing) {
+    if (playing) {
       audio.playVideo();
     } else {
       audio.pauseVideo();
     }
 
-    if (this.props.progress.seek) {
-      audio.seekTo(this.props.progress.timePassed);
+    if (progress.seek) {
+      audio.seekTo(progress.timePassed);
     }
 
-    audio.setVolume(this.props.volume);
+    audio.setVolume(volume);
   }
 
   componentWillUnmount() {
@@ -51,43 +52,53 @@ class PlayerAudio extends Component {
   }
 
   handlePlay() {
-    if (!this.props.loaded) {
-      this.state.audio.pauseVideo();
-      this.props.setProgress(0, true);
-      this.state.audio.unMute();
-      this.props.updateAppState({
+    const { loaded, setProgress, updateAppState } = this.props;
+    const { audio } = this.state;
+
+    if (!loaded) {
+      audio.pauseVideo();
+      setProgress(0, true);
+      audio.unMute();
+      updateAppState({
         loaded: true,
       });
     }
   }
 
   handleEnd() {
-    this.props.nextTune();
+    const { nextTune } = this.props;
+
+    nextTune();
   }
 
   handleStateChange(event) {
+    const { updateAppState, updateState } = this.props;
     const duration = event.target.getDuration();
 
     if (event.data === -1 || event.data === 5) {
-      this.props.updateAppState({
+      updateAppState({
         loaded: false,
       });
     }
 
     if (duration) {
-      this.props.updateState({
+      updateState({
         duration,
       });
     }
   }
 
   tick() {
-    if (this.props.playing) {
-      this.props.setProgress(this.state.audio.getCurrentTime(), false);
+    const { playing, setProgress } = this.props;
+    const { audio } = this.state;
+
+    if (playing) {
+      setProgress(audio.getCurrentTime(), false);
     }
   }
 
   render() {
+    const { tune } = this.props;
     const options = {
       playerVars: {
         autoplay: 1,
@@ -97,7 +108,7 @@ class PlayerAudio extends Component {
     return (
       <Hidden>
         <YouTube
-          videoId={this.props.tune.youtubeId}
+          videoId={tune.youtubeId}
           opts={options}
           onReady={this.handleReady}
           onPlay={this.handlePlay}

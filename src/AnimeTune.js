@@ -96,40 +96,56 @@ class AnimeTune extends Component {
   }
 
   createTuneObject() {
+    const { malId, image, anime, title } = this.props;
+    const { tune } = this.state;
+
     return {
-      youtubeId: this.state.tune.id,
-      malId: this.props.malId,
-      image: this.props.image,
-      anime: this.props.anime.english,
-      title: this.props.title,
+      youtubeId: tune.id,
+      malId,
+      image,
+      anime: anime.english,
+      title,
     };
   }
 
   handlePlayClick() {
-    this.props.addTune(this.createTuneObject(), true);
+    const { addTune } = this.props;
+
+    addTune(this.createTuneObject(), true);
   }
 
   handleAddClick() {
-    this.props.addTune(this.createTuneObject());
+    const { addTune } = this.props;
+
+    addTune(this.createTuneObject());
   }
 
   render() {
-    const text = `${this.props.type}${this.props.number}: ${this.props.title}`;
+    const {
+      type,
+      number,
+      title,
+      queue,
+      loaded,
+      playing,
+      togglePlay,
+    } = this.props;
+    const { tune } = this.state;
+    const text = `${type}${number}: ${title}`;
 
-    if (!this.state.tune) {
+    if (!tune) {
       return text;
     }
 
     return (
       <Tune>
-        <Text title={this.state.tune.title}>{text}</Text>
+        <Text title={tune.title}>{text}</Text>
         <Buttons>
-          {(this.props.queue[0] && this.props.queue[0].youtubeId) ===
-          this.state.tune.id ? (
+          {(queue[0] && queue[0].youtubeId) === tune.id ? (
             <PlayerPlayPauseButton
-              loaded={this.props.loaded}
-              playing={this.props.playing}
-              togglePlay={this.props.togglePlay}
+              loaded={loaded}
+              playing={playing}
+              togglePlay={togglePlay}
             />
           ) : (
             <Button aria-label="Play" onClick={this.handlePlayClick}>

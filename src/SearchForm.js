@@ -24,8 +24,10 @@ const SearchInput = FormControl.extend`
 class SearchForm extends Component {
   constructor(props) {
     super(props);
+    const { location } = this.props;
+
     this.state = {
-      value: decodeURI(this.props.location.search.replace('?search=', '')),
+      value: decodeURI(location.search.replace('?search=', '')),
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -35,7 +37,10 @@ class SearchForm extends Component {
   }
 
   componentDidMount() {
-    this.props.search(this.state.value);
+    const { search } = this.props;
+    const { value } = this.state;
+
+    search(value);
   }
 
   handleChange(event) {
@@ -45,23 +50,32 @@ class SearchForm extends Component {
   }
 
   handleFocus() {
-    this.props.updateState({
+    const { updateState } = this.props;
+
+    updateState({
       inputFocused: true,
     });
   }
 
   handleBlur() {
-    this.props.updateState({
+    const { updateState } = this.props;
+
+    updateState({
       inputFocused: false,
     });
   }
 
   handleSubmit(event) {
-    this.props.search(this.state.value);
+    const { search } = this.props;
+    const { value } = this.state;
+
+    search(value);
     event.preventDefault();
   }
 
   render() {
+    const { value } = this.state;
+
     return (
       // @Todo: Maybe have a way to load in your anime list
       <Form onSubmit={this.handleSubmit}>
@@ -70,7 +84,7 @@ class SearchForm extends Component {
           <SearchInput
             id="search"
             type="text"
-            value={this.state.value}
+            value={value}
             placeholder="Name of anime"
             onChange={this.handleChange}
             onFocus={this.handleFocus}

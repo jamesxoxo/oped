@@ -14,20 +14,23 @@ class PlayerPlayPauseButton extends Component {
   }
 
   handleClick() {
-    this.props.togglePlay();
+    const { togglePlay } = this.props;
+
+    togglePlay();
   }
 
   render() {
-    let icon = this.props.playing ? faPause : faPlay;
+    const { playing, loaded } = this.props;
+    let icon = playing ? faPause : faPlay;
 
-    if (!this.props.loaded) {
+    if (!loaded) {
       icon = faSpinner;
     }
 
     return (
       <Button
         onClick={this.handleClick}
-        aria-label={this.props.playing ? 'Pause' : 'Play'}
+        aria-label={playing ? 'Pause' : 'Play'}
       >
         <FontAwesomeIcon icon={icon} pulse={icon === faSpinner} />
       </Button>
