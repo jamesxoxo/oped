@@ -36,8 +36,14 @@ function AnimeInfo({
   addTune,
 }) {
   if (error) {
-    return <div>Error: {error.message}</div>;
-  } else if (anime) {
+    return (
+      <div>
+        Error:
+        {error.message}
+      </div>
+    );
+  }
+  if (anime) {
     return (
       <Article>
         <Data>
