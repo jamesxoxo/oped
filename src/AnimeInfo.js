@@ -36,12 +36,7 @@ function AnimeInfo({
   addTune,
 }) {
   if (error) {
-    return (
-      <div>
-        Error:
-        {error.message}
-      </div>
-    );
+    return <div>{error.message}</div>;
   }
   if (anime) {
     return (
@@ -61,7 +56,7 @@ function AnimeInfo({
             <dt>Status</dt>
             <dd>{anime.status}</dd>
             <dt>Aired</dt>
-            <dd>{anime.aired_string}</dd>
+            <dd>{anime.aired.string}</dd>
           </dl>
         </Data>
         <Info>
@@ -71,7 +66,7 @@ function AnimeInfo({
             <h4>Tunes</h4>
             <AnimeTunes
               type="OP"
-              tunes={anime.opening_theme}
+              tunes={anime.opening_themes}
               anime={{ english: anime.title, japanese: anime.title_japanese }}
               image={anime.image_url}
               malId={anime.mal_id}
@@ -83,7 +78,7 @@ function AnimeInfo({
             />
             <AnimeTunes
               type="ED"
-              tunes={anime.ending_theme}
+              tunes={anime.ending_themes}
               anime={{ english: anime.title, japanese: anime.title_japanese }}
               image={anime.image_url}
               malId={anime.mal_id}

@@ -31,7 +31,7 @@ class Anime extends Component {
     this.setState({
       anime: null,
     });
-    fetch(`https://api.jikan.moe/anime/${match.params.mal_id}`)
+    fetch(`https://api.jikan.moe/v3/anime/${match.params.mal_id}`)
       .then(res => res.json())
       .then(
         result => {

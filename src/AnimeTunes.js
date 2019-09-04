@@ -64,13 +64,7 @@ function AnimeTunes({
     );
   }
 
-  return (
-    <div>
-      No
-      {type}
-      s found.
-    </div>
-  );
+  return <div>{`No ${type}s found.`}</div>;
 }
 AnimeTunes.propTypes = {
   type: PropTypes.string.isRequired,
