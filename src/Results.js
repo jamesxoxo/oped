@@ -5,12 +5,7 @@ import ResultsList from './ResultsList';
 
 function Results({ error, results, location }) {
   if (error) {
-    return (
-      <div>
-        Error:
-        {error}
-      </div>
-    );
+    return <div>{error.message}</div>;
   }
   if (results.length) {
     return <ResultsList results={results} />;

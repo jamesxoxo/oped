@@ -27,12 +27,12 @@ class Search extends Component {
     }
 
     updateState({ results: [] });
-    fetch(`https://api.jikan.moe/search/anime/${query}/1`)
+    fetch(`https://api.jikan.moe/v3/search/anime/?q=${query}`)
       .then(res => res.json())
       .then(
         result => {
           let state = {
-            results: result.result,
+            results: result.results,
           };
 
           if ('error' in result) {
