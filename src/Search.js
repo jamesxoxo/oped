@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { JIKAN_BASE_URL } from './util/constants';
 import SearchForm from './SearchForm';
 
 class Search extends Component {
@@ -27,7 +28,7 @@ class Search extends Component {
     }
 
     updateState({ results: [] });
-    fetch(`https://api.jikan.moe/v3/search/anime/?q=${query}`)
+    fetch(`${JIKAN_BASE_URL}search/anime/?q=${query}`)
       .then(res => res.json())
       .then(
         result => {

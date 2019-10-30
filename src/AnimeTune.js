@@ -5,6 +5,7 @@ import youtubeSearch from 'youtube-search';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import faPlay from '@fortawesome/fontawesome-free-solid/faPlay';
 import faPlus from '@fortawesome/fontawesome-free-solid/faPlus';
+import { YOUTUBE_KEY } from './util/constants';
 import PlayerPlayPauseButton from './PlayerPlayPauseButton';
 import Button from './theme/Button';
 
@@ -23,8 +24,6 @@ const Buttons = styled.span`
   margin-left: 0.5rem;
 `;
 
-const key = 'AIzaSyDNS7Q_55JVp_k2lS85S36OIN1WuawqY84';
-
 class AnimeTune extends Component {
   constructor(props) {
     super(props);
@@ -41,7 +40,7 @@ class AnimeTune extends Component {
   componentDidMount() {
     const { title, anime, type, number } = this.props;
     const options = {
-      key,
+      key: YOUTUBE_KEY,
       maxResults: 3,
       type: 'video',
       videoEmbeddable: true,

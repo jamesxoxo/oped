@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { JIKAN_BASE_URL } from './util/constants';
 import AnimeInfo from './AnimeInfo';
 
 class Anime extends Component {
@@ -31,7 +32,7 @@ class Anime extends Component {
     this.setState({
       anime: null,
     });
-    fetch(`https://api.jikan.moe/v3/anime/${match.params.mal_id}`)
+    fetch(`${JIKAN_BASE_URL}anime/${match.params.mal_id}`)
       .then(res => res.json())
       .then(
         result => {
