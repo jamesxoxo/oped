@@ -28,7 +28,7 @@ class Search extends Component {
     }
 
     updateState({ results: [] });
-    fetch(`${JIKAN_BASE_URL}search/anime/?q=${query}`)
+    fetch(`${JIKAN_BASE_URL}search/anime?q=${query}`)
       .then(res => res.json())
       .then(
         result => {
